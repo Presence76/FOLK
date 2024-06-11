@@ -1,0 +1,59 @@
+Namespace(dataset='scifact', hover_num_hop='two', feverous_challenge='reasoning', prompt_strategy='logic', version='V.Test', model='gpt-3.5-turbo', device_map='auto', temperature=0.7, max_token=1024)
+excuating the main function
+decompose scifact
+read dataset
+Predicates:
+Cause(Deficiency of Tetraspanin-3, impaired stem cell-renewal) ::: Verify that deficiency of Tetraspanin-3 causes impaired stem cell-renewal.
+Cause(Deficiency of Tetraspanin-3, disease propagation) ::: Verify that deficiency of Tetraspanin-3 causes disease propagation.
+
+Followup Question: What does a deficiency of Tetraspanin-3 cause?
+Followup Question: How is stem cell-renewal affected by a deficiency of Tetraspanin-3?
+Followup Question: What is the impact of a deficiency of Tetraspanin-3 on disease propagation?
+Predicates:
+Deficiency(Folate) ::: Verify a deficiency of folate.
+Decreases(Blood levels of homocysteine) ::: Verify that a deficiency of folate decreases blood levels of homocysteine.
+
+Followup Question: What happens with a deficiency of folate?
+Followup Question: What happens to blood levels of homocysteine when there is a deficiency of folate?
+Predicates:
+Prevent(KLF4, VSMCs from acquiring genetic characteristics of other cell types within atherosclerotic lesions) ::: Verify that KLF4 prevents VSMCs from acquiring genetic characteristics of other cell types within atherosclerotic lesions.
+
+Followup Question: What does KLF4 prevent VSMCs from acquiring within atherosclerotic lesions?
+Predicates:
+Effect(Serotonin receptors, depression) ::: Verify the effect of serotonin receptors on depression
+
+Followup Question: What effect do serotonin receptors have on depression?
+Predicates:
+Condition(Patients, panic anxiety) ::: Verify that patients have panic anxiety.
+CSFLevels(Patients, increased, hypocretin) ::: Verify that patients show increased CSF levels of hypocretin.
+
+Followup Question: What condition do patients have?
+Followup Question: What levels are increased in patients with panic anxiety?
+
+Predicates:
+Cause(Suboptimal nutrition, chronic disease) ::: Verify that suboptimal nutrition is a leading cause of chronic disease.
+
+Followup Question: What is a leading cause of chronic disease?
+Predicates:
+Allele(FOXO3, G) ::: Verify that the allele of FOXO3 is the minor G allele.
+Function(FOXO3, represses IL-10) ::: Verify that FOXO3 represses IL-10.
+
+Followup Question: What is the allele of FOXO3 that represses IL-10?
+Followup Question: What effect does the minor G allele of FOXO3 have on IL-10?
+Predicates:
+Uncorrelated(Cellular aging, an older appearance) ::: Verify if cellular aging is uncorrelated with an older appearance.
+
+Followup Question: Is cellular aging correlated with an older appearance?
+Predicates:
+Combine(phosphatidylinositide 3-kinase inhibitor, MEK 1/2 inhibitor) ::: Verify the combination of phosphatidylinositide 3-kinase and MEK 1/2 inhibitors.
+Effectiveness(phosphatidylinositide 3-kinase inhibitor, MEK 1/2 inhibitor, treating KRAS mutant tumors) ::: Verify the effectiveness of combining phosphatidylinositide 3-kinase and MEK 1/2 inhibitors in treating KRAS mutant tumors.
+
+Followup Question: What happens when phosphatidylinositide 3-kinase and MEK 1/2 inhibitors are combined?
+Followup Question: Is the combination of phosphatidylinositide 3-kinase and MEK 1/2 inhibitors effective in treating KRAS mutant tumors?
+Predicates:
+Deficiency(Autophagy, in the liver) ::: Verify that there is a deficiency of autophagy in the liver.
+Protects(Deficiency of autophagy in the liver, from insulin resistance) ::: Verify that a deficiency of autophagy in the liver protects from insulin resistance.
+
+Followup Question: What is the impact of autophagy deficiency in the liver?
+Followup Question: How does autophagy deficiency in the liver relate to insulin resistance?
+Finished decompose using LLM!

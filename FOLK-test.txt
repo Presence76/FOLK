@@ -1,0 +1,1 @@
+Directory 'example_directory' and files created successfully.
