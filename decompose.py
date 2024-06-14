@@ -3,15 +3,12 @@ import pandas as pd
 import json
 import re
 from tqdm import tqdm
-<<<<<<< HEAD
 
-import torch
-from transformers import AutoModelForCausalLM, LlamaTokenizer, BitsAndBytesConfig
-=======
 import sentencepiece
 import torch
 from transformers import AutoModelForCausalLM, LlamaTokenizer, BitsAndBytesConfig, LlamaForCausalLM, AutoTokenizer
->>>>>>> 6d3ca5d (results in json)
+
+
 import openai
 from args import *
 from prompt_library import *
@@ -30,18 +27,13 @@ if args.model == "llama-13b":
         model_path, torch_dtype=torch.float16, device_map=args.device_map
     )
 if args.model == "llama-30b":
-<<<<<<< HEAD
-    model_path = "decapoda-research/llama-30b-hf"
-    tokenizer = LlamaTokenizer.from_pretrained(model_path)
-    model = AutoModelForCausalLM.from_pretrained(
-        model_path, device_map=args.device_map, load_in_8bit=True
+
+    
+    tokenizer = AutoTokenizer.from_pretrained("meta-llama/Meta-Llama-3-8B")
+    model = AutoModelForCausalLM.from_pretrained("meta-llama/Meta-Llama-3-8B",
+                                                 torch_dtype=torch.float16, device_map=args.device_map
     )
-=======
-   
-    mname = "lmsys/vicuna-7b-v1.5"
-    model = LlamaForCausalLM.from_pretrained(mname).to("cuda")
-    tokenizer = AutoTokenizer.from_pretrained(mname)
->>>>>>> 6d3ca5d (results in json)
+
 if args.model == "text-davinci" or args.model == "gpt-3.5-turbo":
     openai.api_key = OPENAI_KEY
 
@@ -118,10 +110,7 @@ def query_multiple(id_list, claim_list, label_list):
 
 
 if __name__ == "__main__":
-<<<<<<< HEAD
-=======
-    print("excuating the main function")
->>>>>>> 6d3ca5d (results in json)
+
     if args.dataset == "hover":
         if not os.path.exists(f"./HoVerDev/out/decompose"):
             os.makedirs(f"./HoVerDev/out/decompose")
@@ -185,11 +174,7 @@ if __name__ == "__main__":
     if args.dataset == "scifact":
         if not os.path.exists(f"./SciFact-Open/out/decompose"):
             os.makedirs(f"./SciFact-Open/out/decompose")
-<<<<<<< HEAD
 
-=======
-        print("decompose scifact")
->>>>>>> 6d3ca5d (results in json)
         """Set Prompt"""
         if args.prompt_strategy == "cot":
             prompt = cot_decompose
@@ -205,12 +190,7 @@ if __name__ == "__main__":
 
         """ Multiple """
         df = pd.read_pickle(f"./SciFact-Open/processed/df_new.pkl")
-<<<<<<< HEAD
-        id_list = df["uid"]
-        claim_list = df["claim"]
-        label_list = df["label"]
 
-=======
         print("read dataset")
         id_list = df["uid"]
         claim_list = df["claim"]
@@ -218,7 +198,7 @@ if __name__ == "__main__":
         #id_list = torch.tensor(id_list).to("cuda")
         #claim_list = torch.tensor(claim_list).to("cuda")
         #label_list = torch.tensor(label_list).to("cuda")
->>>>>>> 6d3ca5d (results in json)
+
         out = query_multiple(id_list, claim_list, label_list)
         with open(
             f"./SciFact-Open/out/decompose/{args.model}_decompose_{args.prompt_strategy}_{args.version}.json",
