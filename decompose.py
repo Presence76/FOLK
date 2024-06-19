@@ -31,8 +31,8 @@ if args.model == "llama-13b":
 if args.model == "llama-30b":
 
     
-    tokenizer = AutoTokenizer.from_pretrained("meta-llama/Meta-Llama-3-8B")
-    model = AutoModelForCausalLM.from_pretrained("meta-llama/Meta-Llama-3-8B",
+    tokenizer = AutoTokenizer.from_pretrained("meta-llama/Meta-Llama-3-8B-Instruct")
+    model = AutoModelForCausalLM.from_pretrained("meta-llama/Meta-Llama-3-8B-Instruct",
                                                  torch_dtype=torch.float16,device_map="auto"
     )
     
@@ -89,7 +89,8 @@ def query_multiple(id_list, claim_list, label_list):
             )
             
             output = tokenizer.decode(generation_output[0])
-            # response = re.findall(r'>>>>>>(?s:.*?)------', output)[3]
+            #response = re.findall(r'>>>>>>(?s:.*?)------', output)[3]
+            print(output)
             response = output.split(claim, 1)[1]
             print(claim)
             print(response)

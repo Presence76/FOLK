@@ -15,6 +15,6 @@ python decompose.py \
     --dataset "scifact" \
     --prompt_strategy "logic" \
     --model "llama-30b"\
-    --version "V.Test" \
+    --version "T" \
     --max_token 1024 \
 

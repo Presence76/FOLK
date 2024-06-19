@@ -1,802 +1,2755 @@
-Namespace(dataset='scifact', hover_num_hop='two', feverous_challenge='reasoning', prompt_strategy='logic', version='V.Test', model='llama-30b', device_map='auto', temperature=0.7, max_token=1024)
+Namespace(dataset='scifact', hover_num_hop='two', feverous_challenge='reasoning', prompt_strategy='logic', version='T', model='llama-30b', device_map='auto', temperature=0.7, max_token=1024)
 read dataset
 uid success
 claim success
+<|begin_of_text|>
+You are given a problem description and a claim. The task is to:
+1) define all the predicates in the claim
+2) parse the predicates into followup questions
+3) answer the followup questions
+
+Claim: Howard University Hospital and Providence Hospital are both located in Washington, D.C.
+>>>>>>
+Predicates:
+Location(Howard Hospital, Washington D.C.) ::: Verify Howard University Hospital is located in Washington, D.C.
+Location(Providence Hospital, Washington D.C.) ::: Verify Providence Hospital is located in Washington, D.C.
+
+Followup Question: Where is Howard Hospital located?
+Followup Question: Where is Providence Hospital located? 
+------
+Claim: An IndyCar race driver drove a Formula 1 car designed by Peter McCool during the 2007 Formula One season.
+>>>>>>
+Predicates: 
+Designed(Peter McCool, a Formula 1 car) ::: Verify a Formula 1 car was designed by Peter McCool during the 2007 Formula One season.
+Drive(An IndyCar race driver, a Formula 1 car) ::: Verify an IndyCar driver drove a Formula 1 car.
+
+Followup Question: Which Formula 1 car was designed by Peter McCool during the 2007 Formula One season?
+Followup Question: Did an IndyCar driver drove a Formula 1 car designed by Peter McCool during the 2007 Formula One season?
+------
+Claim: Thomas Loren Friedman has won more Pulitzer Prizes than Colson Whitehead
+>>>>>>
+Predicates: 
+Won(Thomas Loren Friedman, Pulitzer Prize) ::: Verify the number of Pulitzer Prizes Thomas Loren Friedman has won.
+Won(Colson Whitehead, Pulitzer Prize) ::: Verify the number of Pulitzer Prizes Colson Whitehead has won.
+
+Followup Question: How many Pulitzer Prize did Thomas Loren Friedman win?
+Followup Question: How many Pulitzer Prize did Colson Whitehead win?
+------
+Claim: SkyHigh Mount Dandenong (formerly Mount Dandenong Observatory) is a restaurant located on top of Mount Dandenong, Victoria, Australia.
+>>>>>>
+Predicates:
+Location(SkyHigh Mount Dandenong, top of Mount Dandenong, Victoria, Australia) ::: Verify that SkyHigh Mount Dandenong is located on top of Mount Dandenong, Victoria, Australia.
+Known(SkyHigh Mount Dandenong, Mount Dandenong Observatory) ::: Verify that SkyHigh Mount Dandenong is formerly known as Mount Dandenong Observatory.
+
+Followup Question: Where is SkyHigh Mount Dandenong located?
+Followup Question: Was SkyHigh Mount Dandenong formerly known as Mount Dandenong Observatory? 
+------
+Claim: Shulin, a 33.1288 km (12.7911 sq mi) land located in New Taipei City, China, a country in East Asia, has a total population of 183,946 in December 2018.
+>>>>>>
+Predicates: 
+Location(Shulin, New Taipei City, Chian) ::: Verify that Shulin is located in New Taipei City, China.
+Population(Shulin, 183,946) ::: Verify that Shulin has a total population of 183,946 in December 2018.
+
+Followup Question: Where is Shulin located?
+Followup Question: What is the population of Shulin?
+------
+Claim: Sumo wrestler Toyozakura Toshiaki committed match-fixing, ending his career in 2011 that started in 1989.
+>>>>>>
+Predicates: 
+Ending(Toyozakura Toshiaki, his career in 2011) ::: Verify that Toyozakura Toshiaki ended his career in 2011.
+Occupation(Toyozakura Toshiaki, sumo wrestler) ::: Verify that Toyozakura Toshiaki is a sumo wrestler.
+Commit(Toyozakura Toshiaki, match-fixing) ::: Verify that Toyozakura Toshiaki committed match-fixing.
+
+Followup Question: When did Sumo wrestler Toyozakura Toshiaki ended his career?
+Followup Question: What is Toyozakura Toshiaki's occupation?
+Followup Question: Did Sumo wrestler Toyozakura Toshiaki committed match-fixing?
+------
+Claim: In 1959, former Chilean boxer Alfredo Cornejo Cuevas (born June 6, 1933) won the gold medal in the welterweight division at the Pan American Games (held in Chicago, United States, from August 27 to September 7) in Chicago, United States, and the world amateur welterweight title in Mexico City.
+>>>>>>
+Predicates: 
+Born(Alfredo Cornejo Cuevas, June 6 1933) ::: Verify that Alfredo Cornejo Cuevas was born June 6 1933. 
+Won(Alfredo Cornejo Cuevas, the gold metal in the welterweight division at the Pan American Games in 1959) ::: Verify that Alfredo Cornejo Cuevas won the gold metal in the welterweight division at the Pan American Games in 1959.
+Held(The Pan American Games in 1959, Chicago United States) ::: Verify that The Pan American Games in 1959 was held in Chicago United States.
+Won(Alfredo Cornejo Cuevas, the world amateur welterweight title in Mexico City).
+
+Followup Question: When was Alfredo Cornejo Cuevas born?
+Followup Question: Did Alfredo Cornejo Cuevas win the gold metal in the welterweight division at the Pan American Games in 1959?
+Followup Question: Where was The Pan American Games in 1959 held?
+Followup Question: Did Alfredo Cornejo Cuevas win the world amateur welterweight title in Mexico City?
+------
+Claim: The birthplace of American engineer Alfred L.Rives is a plantation near Monticello, the primary residence of Thomas Jefferson.
+>>>>>>
+Predicates:
+Birthplace(Alfred L. Rives, a plantation) ::: Verify The birthplace of American engineer Alfred L.Rives is a plantation
+Primary residence(Thomas Jefferson, Monticello) ::: Verify Monticello, the primary residence of Thomas Jefferson. 
+Near(a planation, Monticello) ::: Verify A plantation is near Monticello
+
+Followup Question: Where is the birthplace of Alfred L. Rives? 
+Followup Question: Where is the primary residence of Thomas Jefferson? 
+Followup Question: Is the birthplace of Alfred L. Rives near the residence of Thomas Jefferson? 
+------
+Claim: Deficiency of Tetraspanin-3 causes impaired stem cell-renewal and disease propagation.
+>>>>>>
+Predicates: 
+Deficiency(Tetraspanin-3, causes impaired stem cell-renewal) ::: Verify that a deficiency of Tetraspanin-3 causes impaired stem cell-renewal.
+Deficiency(Tetraspanin-3, causes disease propagation) ::: Verify that a deficiency of Tetraspanin-3 causes disease propagation.
+
+Followup Question: What causes impaired stem cell-renewal?
+Followup Question: What causes disease propagation?
+------
+Claim: The 2011 census of the United States showed that the population of the city of Los Angeles was 3,792,621.
+>>>>>>
+Predicates:
+Population(Los Angeles, 3,792,621) ::: Verify that the population of Los Angeles was 3,792,621.
+Year(2011 census, 2011) ::: Verify that the 2011 census was in 2011.
+
+Followup Question: What is the population of Los Angeles?
+Followup Question: What year did the 2011 census take place? 
+------
+Claim: The 2016 Summer Olympics were held in Rio de Janeiro, Brazil.
+>>>>>>
+Predicates:
+Held(The 2016 Summer Olympics, Rio de Janeiro, Brazil) ::: Verify that The 2016 Summer Olympics were held in Rio de Janeiro, Brazil.
+
+Followup Question: Where were the 2016 Summer Olympics held?
+------
+Claim: The average annual salary of a data scientist in the United States is $118,000.
+>>>>>>
+Predicates:
+Average annual salary(data scientist, $118,000) ::: Verify that the average annual salary of a data scientist is $118,000.
+
+Followup Question: What is the average annual salary of a data scientist?
+------
+Claim: The 2020 Summer Olympics were held in Tokyo, Japan.
+>>>>>>
+Predicates:
+Held(The 2020 Summer Olympics, Tokyo, Japan) ::: Verify that The 2020 Summer Olympics were held in Tokyo, Japan.
+
+Followup Question: Where were the 2020 Summer Olympics held?
+------
+Claim: The 2019 Summer Universiade was held in Naples, Italy.
+>>>>>>
+Predicates:
+Held(The 2019 Summer Universiade, Naples, Italy) ::: Verify that The 2019 Summer Universiade was held in Naples, Italy.
+
+Followup Question: Where was the 2019 Summer Universiade held?
+------
+Claim: The 2018 Summer Youth Olympics were held in Buenos Aires, Argentina.
+>>>>>>
+Predicates:
+Held(The 2018 Summer Youth Olympics, Buenos Aires, Argentina) ::: Verify that The 2018 Summer Youth Olympics were held in Buenos Aires, Argentina.
+
+Followup Question: Where were the 2018 Summer Youth Olympics held?
+------
+Claim: The 2022 Winter Olympics were held in Beijing, China.
+>>>>>>
+Predicates:
+Held(The 2022 Winter Olympics, Beijing, China) ::: Verify that The 2022 Winter Olympics were held in Beijing, China.
+
+Followup Question: Where were the 2022 Winter Olympics held?
+------
+Claim: The 2017 Summer Universiade was held in Taipei, Taiwan.
+>>>>>>
+Predicates:
+Held(The 2017 Summer Universiade, Taipei, Taiwan) ::: Verify that The 2017 Summer Universiade was held in Taipei, Taiwan.
+
+Followup Question: Where was the 2017 Summer Universiade held?
+------
+Claim: The 2015 Summer Universiade was held in Gwangju, South Korea.
+>>>>>>
+Predicates:
+Held(The 2015 Summer Universiade, Gwangju, South Korea) ::: Verify that The 2015 Summer Universiade was held in Gwangju, South Korea.
+
+Followup Question: Where was the 2015 Summer Universiade held?
+------
+Claim: The 2013 Summer Universiade was held in Kazan, Russia.
+>>>>>>
+Predicates:
+Held(The 2013 Summer Universiade, Kazan, Russia) ::: Verify that The 2013 Summer Universiade was held in Kazan, Russia.
+
+Followup Question: Where was the 2013 Summer Universiade held?
+------
+Claim: The 2011 Summer Universiade was held in Shenzhen, China.
+>>>>>>
+Predicates:
+Held(The 2011 Summer Universiade, Shenzhen, China) ::: Verify that The 2011 Summer Universiade was held in Shenzhen, China.
+
+Followup Question: Where was the 2011 Summer Universiade held?
+------
+Claim: The 2009 Summer Universiade was held in Belgrade, Serbia.
+>>>>>>
+Predicates:
+Held(The 2009 Summer Universiade, Belgrade, Serbia) ::: Verify that The 2009 Summer Universiade was held in Belgrade, Serbia.
+
+Followup Question: Where was the 2009 Summer Universiade held?
+------
+Claim: The 2007 Summer Universiade was held in Bangkok, Thailand.
+>>>>>>
+Predicates:
+Held(The 
 Deficiency of Tetraspanin-3 causes impaired stem cell-renewal and disease propagation.
 
 >>>>>>
-Predicates:
-Deficiency(Tetraspanin-3, causes impaired stem cell-renewal and disease propagation) ::: Verify that Deficiency of Tetraspanin-3 causes impaired stem cell-renewal and disease propagation.
-Causes(Deficiency of Tetraspanin-3, impaired stem cell-renewal) ::: Verify that Deficiency of Tetraspanin-3 causes impaired stem cell-renewal.
-Causes(Deficiency of Tetraspanin-3, disease propagation) ::: Verify that Deficiency of Tetraspanin-3 causes disease propagation.
+Predicates: 
+Deficiency(Tetraspanin-3, causes impaired stem cell-renewal) ::: Verify that a deficiency of Tetraspanin-3 causes impaired stem cell-renewal.
+Deficiency(Tetraspanin-3, causes disease propagation) ::: Verify that a deficiency of Tetraspanin-3 causes disease propagation.
 
-Followup Question: What is the cause of Deficiency of Tetraspanin-3?
-Followup Question: What is the cause of Deficiency of Tetraspanin-3 with respect to impaired stem cell-renewal?
-Followup Question: What is the cause of Deficiency of Tetraspanin-3 with respect to disease propagation?
+Followup Question: What causes impaired stem cell-renewal?
+Followup Question: What causes disease propagation?
 ------
-Claim: In 2015, the population of the United States was 321,418,820.
+Claim: The 2011 census of the United States showed that the population of the city of Los Angeles was 3,792,621.
 >>>>>>
 Predicates:
-Population(The United States, 321,418,820) ::: Verify that the population of the United States was 321,418,820 in 2015.
-In 2015 ::: Verify that the population of the United States was 321,418,820 in 2015.
+Population(Los Angeles, 3,792,621) ::: Verify that the population of Los Angeles was 3,792,621.
+Year(2011 census, 2011) ::: Verify that the 2011 census was in 2011.
 
-Followup Question: What is the population of the United States in 2015?
+Followup Question: What is the population of Los Angeles?
+Followup Question: What year did the 2011 census take place? 
 ------
-Claim: In 2015, the population of the United States was 321,418,820.
+Claim: The 2016 Summer Olympics were held in Rio de Janeiro, Brazil.
 >>>>>>
 Predicates:
-Population(The United States, 321,418,820) ::: Verify that the population of the United States was 321,418,820 in 2015.
-In 2015 ::: Verify that the population of the United States was 321,418,820 in 2015.
+Held(The 2016 Summer Olympics, Rio de Janeiro, Brazil) ::: Verify that The 2016 Summer Olympics were held in Rio de Janeiro, Brazil.
 
-Followup Question: What is the population of the United States in 2015?
+Followup Question: Where were the 2016 Summer Olympics held?
 ------
-Claim: In 2015, the population of the United States was 321,418,820.
+Claim: The average annual salary of a data scientist in the United States is $118,000.
 >>>>>>
 Predicates:
-Population(The United States, 321,418,820) ::: Verify that the population of the United States was 321,418,820 in 2015.
-In 2015 ::: Verify that the population of the United States was 321,418,820 in 2015.
+Average annual salary(data scientist, $118,000) ::: Verify that the average annual salary of a data scientist is $118,000.
 
-Followup Question: What is the population of the United States in 2015?
+Followup Question: What is the average annual salary of a data scientist?
 ------
-Claim: In 2015, the population of the United States was 321,418,820.
+Claim: The 2020 Summer Olympics were held in Tokyo, Japan.
 >>>>>>
 Predicates:
-Population(The United States, 321,418,820) ::: Verify that the population of the United States was 321,418,820 in 2015.
-In 2015 ::: Verify that the population of the United States was 321,418,820 in 2015.
+Held(The 2020 Summer Olympics, Tokyo, Japan) ::: Verify that The 2020 Summer Olympics were held in Tokyo, Japan.
 
-Followup Question: What is the population of the United States in 2015?
+Followup Question: Where were the 2020 Summer Olympics held?
 ------
-Claim: In 2015, the population of the United States was 321,418,820.
+Claim: The 2019 Summer Universiade was held in Naples, Italy.
 >>>>>>
 Predicates:
-Population(The United States, 321,418,820) ::: Verify that the population of the United States was 321,418,820 in 2015.
-In 2015 ::: Verify that the population of the United States was 321,418,820 in 2015.
+Held(The 2019 Summer Universiade, Naples, Italy) ::: Verify that The 2019 Summer Universiade was held in Naples, Italy.
 
-Followup Question: What is the population of the United States in 2015?
+Followup Question: Where was the 2019 Summer Universiade held?
 ------
-Claim: In 2015, the population of the United States was 321,418,820.
+Claim: The 2018 Summer Youth Olympics were held in Buenos Aires, Argentina.
 >>>>>>
 Predicates:
-Population(The United States, 321,418,820) ::: Verify that the population of the United States was 321,418,820 in 2015.
-In 2015 ::: Verify that the population of the United States was 321,418,820 in 2015.
+Held(The 2018 Summer Youth Olympics, Buenos Aires, Argentina) ::: Verify that The 2018 Summer Youth Olympics were held in Buenos Aires, Argentina.
 
-Followup Question: What is the population of the United States in 2015?
+Followup Question: Where were the 2018 Summer Youth Olympics held?
 ------
-Claim: In 2015, the population of the United States was 321,418,820.
+Claim: The 2022 Winter Olympics were held in Beijing, China.
 >>>>>>
 Predicates:
-Population(The United States, 321,418,820) ::: Verify that the population of the United States was 321,418,820 in 2015.
-In 2015 ::: Verify that the population of the United States was 321,418,820 in 2015.
+Held(The 2022 Winter Olympics, Beijing, China) ::: Verify that The 2022 Winter Olympics were held in Beijing, China.
 
-Followup Question: What is the population of the United States in 2015?
+Followup Question: Where were the 2022 Winter Olympics held?
 ------
-Claim: In 2015, the population of the United States was 321,418,820.
+Claim: The 2017 Summer Universiade was held in Taipei, Taiwan.
 >>>>>>
 Predicates:
-Population(The United States, 321,418,820) ::: Verify that the population of the United States was 321,418,820 in 2015.
-In 2015 ::: Verify that the population of the United States was 321,418,820 in 2015.
+Held(The 2017 Summer Universiade, Taipei, Taiwan) ::: Verify that The 2017 Summer Universiade was held in Taipei, Taiwan.
 
-Followup Question: What is the population of the United States in 2015?
+Followup Question: Where was the 2017 Summer Universiade held?
 ------
-Claim: In 2015, the population of the United States was 321,
+Claim: The 2015 Summer Universiade was held in Gwangju, South Korea.
+>>>>>>
+Predicates:
+Held(The 2015 Summer Universiade, Gwangju, South Korea) ::: Verify that The 2015 Summer Universiade was held in Gwangju, South Korea.
+
+Followup Question: Where was the 2015 Summer Universiade held?
+------
+Claim: The 2013 Summer Universiade was held in Kazan, Russia.
+>>>>>>
+Predicates:
+Held(The 2013 Summer Universiade, Kazan, Russia) ::: Verify that The 2013 Summer Universiade was held in Kazan, Russia.
+
+Followup Question: Where was the 2013 Summer Universiade held?
+------
+Claim: The 2011 Summer Universiade was held in Shenzhen, China.
+>>>>>>
+Predicates:
+Held(The 2011 Summer Universiade, Shenzhen, China) ::: Verify that The 2011 Summer Universiade was held in Shenzhen, China.
+
+Followup Question: Where was the 2011 Summer Universiade held?
+------
+Claim: The 2009 Summer Universiade was held in Belgrade, Serbia.
+>>>>>>
+Predicates:
+Held(The 2009 Summer Universiade, Belgrade, Serbia) ::: Verify that The 2009 Summer Universiade was held in Belgrade, Serbia.
+
+Followup Question: Where was the 2009 Summer Universiade held?
+------
+Claim: The 2007 Summer Universiade was held in Bangkok, Thailand.
+>>>>>>
+Predicates:
+Held(The 
+<|begin_of_text|>
+You are given a problem description and a claim. The task is to:
+1) define all the predicates in the claim
+2) parse the predicates into followup questions
+3) answer the followup questions
+
+Claim: Howard University Hospital and Providence Hospital are both located in Washington, D.C.
+>>>>>>
+Predicates:
+Location(Howard Hospital, Washington D.C.) ::: Verify Howard University Hospital is located in Washington, D.C.
+Location(Providence Hospital, Washington D.C.) ::: Verify Providence Hospital is located in Washington, D.C.
+
+Followup Question: Where is Howard Hospital located?
+Followup Question: Where is Providence Hospital located? 
+------
+Claim: An IndyCar race driver drove a Formula 1 car designed by Peter McCool during the 2007 Formula One season.
+>>>>>>
+Predicates: 
+Designed(Peter McCool, a Formula 1 car) ::: Verify a Formula 1 car was designed by Peter McCool during the 2007 Formula One season.
+Drive(An IndyCar race driver, a Formula 1 car) ::: Verify an IndyCar driver drove a Formula 1 car.
+
+Followup Question: Which Formula 1 car was designed by Peter McCool during the 2007 Formula One season?
+Followup Question: Did an IndyCar driver drove a Formula 1 car designed by Peter McCool during the 2007 Formula One season?
+------
+Claim: Thomas Loren Friedman has won more Pulitzer Prizes than Colson Whitehead
+>>>>>>
+Predicates: 
+Won(Thomas Loren Friedman, Pulitzer Prize) ::: Verify the number of Pulitzer Prizes Thomas Loren Friedman has won.
+Won(Colson Whitehead, Pulitzer Prize) ::: Verify the number of Pulitzer Prizes Colson Whitehead has won.
+
+Followup Question: How many Pulitzer Prize did Thomas Loren Friedman win?
+Followup Question: How many Pulitzer Prize did Colson Whitehead win?
+------
+Claim: SkyHigh Mount Dandenong (formerly Mount Dandenong Observatory) is a restaurant located on top of Mount Dandenong, Victoria, Australia.
+>>>>>>
+Predicates:
+Location(SkyHigh Mount Dandenong, top of Mount Dandenong, Victoria, Australia) ::: Verify that SkyHigh Mount Dandenong is located on top of Mount Dandenong, Victoria, Australia.
+Known(SkyHigh Mount Dandenong, Mount Dandenong Observatory) ::: Verify that SkyHigh Mount Dandenong is formerly known as Mount Dandenong Observatory.
+
+Followup Question: Where is SkyHigh Mount Dandenong located?
+Followup Question: Was SkyHigh Mount Dandenong formerly known as Mount Dandenong Observatory? 
+------
+Claim: Shulin, a 33.1288 km (12.7911 sq mi) land located in New Taipei City, China, a country in East Asia, has a total population of 183,946 in December 2018.
+>>>>>>
+Predicates: 
+Location(Shulin, New Taipei City, Chian) ::: Verify that Shulin is located in New Taipei City, China.
+Population(Shulin, 183,946) ::: Verify that Shulin has a total population of 183,946 in December 2018.
+
+Followup Question: Where is Shulin located?
+Followup Question: What is the population of Shulin?
+------
+Claim: Sumo wrestler Toyozakura Toshiaki committed match-fixing, ending his career in 2011 that started in 1989.
+>>>>>>
+Predicates: 
+Ending(Toyozakura Toshiaki, his career in 2011) ::: Verify that Toyozakura Toshiaki ended his career in 2011.
+Occupation(Toyozakura Toshiaki, sumo wrestler) ::: Verify that Toyozakura Toshiaki is a sumo wrestler.
+Commit(Toyozakura Toshiaki, match-fixing) ::: Verify that Toyozakura Toshiaki committed match-fixing.
+
+Followup Question: When did Sumo wrestler Toyozakura Toshiaki ended his career?
+Followup Question: What is Toyozakura Toshiaki's occupation?
+Followup Question: Did Sumo wrestler Toyozakura Toshiaki committed match-fixing?
+------
+Claim: In 1959, former Chilean boxer Alfredo Cornejo Cuevas (born June 6, 1933) won the gold medal in the welterweight division at the Pan American Games (held in Chicago, United States, from August 27 to September 7) in Chicago, United States, and the world amateur welterweight title in Mexico City.
+>>>>>>
+Predicates: 
+Born(Alfredo Cornejo Cuevas, June 6 1933) ::: Verify that Alfredo Cornejo Cuevas was born June 6 1933. 
+Won(Alfredo Cornejo Cuevas, the gold metal in the welterweight division at the Pan American Games in 1959) ::: Verify that Alfredo Cornejo Cuevas won the gold metal in the welterweight division at the Pan American Games in 1959.
+Held(The Pan American Games in 1959, Chicago United States) ::: Verify that The Pan American Games in 1959 was held in Chicago United States.
+Won(Alfredo Cornejo Cuevas, the world amateur welterweight title in Mexico City).
+
+Followup Question: When was Alfredo Cornejo Cuevas born?
+Followup Question: Did Alfredo Cornejo Cuevas win the gold metal in the welterweight division at the Pan American Games in 1959?
+Followup Question: Where was The Pan American Games in 1959 held?
+Followup Question: Did Alfredo Cornejo Cuevas win the world amateur welterweight title in Mexico City?
+------
+Claim: The birthplace of American engineer Alfred L.Rives is a plantation near Monticello, the primary residence of Thomas Jefferson.
+>>>>>>
+Predicates:
+Birthplace(Alfred L. Rives, a plantation) ::: Verify The birthplace of American engineer Alfred L.Rives is a plantation
+Primary residence(Thomas Jefferson, Monticello) ::: Verify Monticello, the primary residence of Thomas Jefferson. 
+Near(a planation, Monticello) ::: Verify A plantation is near Monticello
+
+Followup Question: Where is the birthplace of Alfred L. Rives? 
+Followup Question: Where is the primary residence of Thomas Jefferson? 
+Followup Question: Is the birthplace of Alfred L. Rives near the residence of Thomas Jefferson? 
+------
+Claim: A deficiency of folate decreases blood levels of homocysteine.
+>>>>>>
+Predicates: 
+Decreases(folate deficiency, blood levels of homocysteine) ::: Verify that a deficiency of folate decreases blood levels of homocysteine.
+
+Followup Question: Does a deficiency of folate decrease blood levels of homocysteine?
+------
+Claim: The city of Tokyo is the capital of Japan.
+>>>>>>
+Predicates: 
+Location(Tokyo, Japan) ::: Verify that Tokyo is located in Japan.
+Capital(Tokyo, Japan) ::: Verify that Tokyo is the capital of Japan.
+
+Followup Question: Is Tokyo located in Japan?
+Followup Question: Is Tokyo the capital of Japan? 
+------
+Claim: The 2004 Summer Olympics were held in Athens, Greece.
+>>>>>>
+Predicates: 
+Held(2004 Summer Olympics, Athens, Greece) ::: Verify that the 2004 Summer Olympics were held in Athens, Greece.
+
+Followup Question: Where were the 2004 Summer Olympics held?
+------
+Claim: The city of Paris is the capital of France.
+>>>>>>
+Predicates: 
+Location(Paris, France) ::: Verify that Paris is located in France.
+Capital(Paris, France) ::: Verify that Paris is the capital of France.
+
+Followup Question: Is Paris located in France?
+Followup Question: Is Paris the capital of France? 
+------
+Claim: The city of Beijing is the capital of China.
+>>>>>>
+Predicates: 
+Location(Beijing, China) ::: Verify that Beijing is located in China.
+Capital(Beijing, China) ::: Verify that Beijing is the capital of China.
+
+Followup Question: Is Beijing located in China?
+Followup Question: Is Beijing the capital of China? 
+------
+Claim: The city of London is the capital of the United Kingdom.
+>>>>>>
+Predicates: 
+Location(London, United Kingdom) ::: Verify that London is located in United Kingdom.
+Capital(London, United Kingdom) ::: Verify that London is the capital of United Kingdom.
+
+Followup Question: Is London located in United Kingdom?
+Followup Question: Is London the capital of United Kingdom? 
+------
+Claim: The city of Berlin is the capital of Germany.
+>>>>>>
+Predicates: 
+Location(Berlin, Germany) ::: Verify that Berlin is located in Germany.
+Capital(Berlin, Germany) ::: Verify that Berlin is the capital of Germany.
+
+Followup Question: Is Berlin located in Germany?
+Followup Question: Is Berlin the capital of Germany? 
+------
+Claim: The city of Rome is the capital of Italy.
+>>>>>>
+Predicates: 
+Location(Rome, Italy) ::: Verify that Rome is located in Italy.
+Capital(Rome, Italy) ::: Verify that Rome is the capital of Italy.
+
+Followup Question: Is Rome located in Italy?
+Followup Question: Is Rome the capital of Italy? 
+------
+Claim: The city of Moscow is the capital of Russia.
+>>>>>>
+Predicates: 
+Location(Moscow, Russia) ::: Verify that Moscow is located in Russia.
+Capital(Moscow, Russia) ::: Verify that Moscow is the capital of Russia.
+
+Followup Question: Is Moscow located in Russia?
+Followup Question: Is Moscow the capital of Russia? 
+------
+Claim: The city of Cairo is the capital of Egypt.
+>>>>>>
+Predicates: 
+Location(Cairo, Egypt) ::: Verify that Cairo is located in Egypt.
+Capital(Cairo, Egypt) ::: Verify that Cairo is the capital of Egypt.
+
+Followup Question: Is Cairo located in Egypt?
+Followup Question: Is Cairo the capital of Egypt? 
+------
+Claim: The city of New Delhi is the capital of India.
+>>>>>>
+Predicates: 
+Location(New Delhi, India) ::: Verify that New Delhi is located in India.
+Capital(New Delhi, India) ::: Verify that New Delhi is the capital of India.
+
+Followup Question: Is New Delhi located in India?
+Followup Question: Is New Delhi the capital of India? 
+------
+Claim: The city of Islamabad is the capital of Pakistan.
+>>>>>>
+Predicates: 
+Location(Islamabad, Pakistan) ::: Verify that Islamabad is located in Pakistan.
+Capital(Islamabad, Pakistan) ::: Verify that Islamabad is the capital of Pakistan.
+
+Followup Question: Is Islamabad located in Pakistan?
+Followup Question: Is Islamabad the capital of Pakistan? 
+------
+Claim: The city of Ankara is the capital of Turkey.
+>>>>>>
+Predicates: 
+Location(Ankara, Turkey) ::: Verify that Ankara is located in Turkey.
+Capital(Ankara, Turkey) ::: Verify that Ankara is the capital of Turkey.
+
+Followup Question: Is Ankara located in Turkey?
+Followup Question: Is Ankara the capital of Turkey? 
+------
+Claim: The city of Beijing is the capital of China.
+>>>>>>
+Predicates: 
+Location(Beijing, China) ::: Verify that Beijing is located in China.
+Capital(Beijing, China) ::: Verify that Beijing is the capital of China.
+
+Followup Question: Is Beijing located in China?
+Followup Question: Is Beijing the capital of China? 
+------
+Claim: The city of Tokyo is the capital of Japan.
+>>>>
 A deficiency of folate decreases blood levels of homocysteine.
 
 >>>>>>
-Predicates:
-Deficiency(folate, decreases blood levels of homocysteine) ::: Verify that a deficiency of folate decreases blood levels of homocysteine.
+Predicates: 
+Decreases(folate deficiency, blood levels of homocysteine) ::: Verify that a deficiency of folate decreases blood levels of homocysteine.
 
-Followup Question: Does a deficiency of folate decreases blood levels of homocysteine?
+Followup Question: Does a deficiency of folate decrease blood levels of homocysteine?
 ------
-Claim: The capital of the United States of America is Washington, D.C.
+Claim: The city of Tokyo is the capital of Japan.
+>>>>>>
+Predicates: 
+Location(Tokyo, Japan) ::: Verify that Tokyo is located in Japan.
+Capital(Tokyo, Japan) ::: Verify that Tokyo is the capital of Japan.
+
+Followup Question: Is Tokyo located in Japan?
+Followup Question: Is Tokyo the capital of Japan? 
+------
+Claim: The 2004 Summer Olympics were held in Athens, Greece.
+>>>>>>
+Predicates: 
+Held(2004 Summer Olympics, Athens, Greece) ::: Verify that the 2004 Summer Olympics were held in Athens, Greece.
+
+Followup Question: Where were the 2004 Summer Olympics held?
+------
+Claim: The city of Paris is the capital of France.
+>>>>>>
+Predicates: 
+Location(Paris, France) ::: Verify that Paris is located in France.
+Capital(Paris, France) ::: Verify that Paris is the capital of France.
+
+Followup Question: Is Paris located in France?
+Followup Question: Is Paris the capital of France? 
+------
+Claim: The city of Beijing is the capital of China.
+>>>>>>
+Predicates: 
+Location(Beijing, China) ::: Verify that Beijing is located in China.
+Capital(Beijing, China) ::: Verify that Beijing is the capital of China.
+
+Followup Question: Is Beijing located in China?
+Followup Question: Is Beijing the capital of China? 
+------
+Claim: The city of London is the capital of the United Kingdom.
+>>>>>>
+Predicates: 
+Location(London, United Kingdom) ::: Verify that London is located in United Kingdom.
+Capital(London, United Kingdom) ::: Verify that London is the capital of United Kingdom.
+
+Followup Question: Is London located in United Kingdom?
+Followup Question: Is London the capital of United Kingdom? 
+------
+Claim: The city of Berlin is the capital of Germany.
+>>>>>>
+Predicates: 
+Location(Berlin, Germany) ::: Verify that Berlin is located in Germany.
+Capital(Berlin, Germany) ::: Verify that Berlin is the capital of Germany.
+
+Followup Question: Is Berlin located in Germany?
+Followup Question: Is Berlin the capital of Germany? 
+------
+Claim: The city of Rome is the capital of Italy.
+>>>>>>
+Predicates: 
+Location(Rome, Italy) ::: Verify that Rome is located in Italy.
+Capital(Rome, Italy) ::: Verify that Rome is the capital of Italy.
+
+Followup Question: Is Rome located in Italy?
+Followup Question: Is Rome the capital of Italy? 
+------
+Claim: The city of Moscow is the capital of Russia.
+>>>>>>
+Predicates: 
+Location(Moscow, Russia) ::: Verify that Moscow is located in Russia.
+Capital(Moscow, Russia) ::: Verify that Moscow is the capital of Russia.
+
+Followup Question: Is Moscow located in Russia?
+Followup Question: Is Moscow the capital of Russia? 
+------
+Claim: The city of Cairo is the capital of Egypt.
+>>>>>>
+Predicates: 
+Location(Cairo, Egypt) ::: Verify that Cairo is located in Egypt.
+Capital(Cairo, Egypt) ::: Verify that Cairo is the capital of Egypt.
+
+Followup Question: Is Cairo located in Egypt?
+Followup Question: Is Cairo the capital of Egypt? 
+------
+Claim: The city of New Delhi is the capital of India.
+>>>>>>
+Predicates: 
+Location(New Delhi, India) ::: Verify that New Delhi is located in India.
+Capital(New Delhi, India) ::: Verify that New Delhi is the capital of India.
+
+Followup Question: Is New Delhi located in India?
+Followup Question: Is New Delhi the capital of India? 
+------
+Claim: The city of Islamabad is the capital of Pakistan.
+>>>>>>
+Predicates: 
+Location(Islamabad, Pakistan) ::: Verify that Islamabad is located in Pakistan.
+Capital(Islamabad, Pakistan) ::: Verify that Islamabad is the capital of Pakistan.
+
+Followup Question: Is Islamabad located in Pakistan?
+Followup Question: Is Islamabad the capital of Pakistan? 
+------
+Claim: The city of Ankara is the capital of Turkey.
+>>>>>>
+Predicates: 
+Location(Ankara, Turkey) ::: Verify that Ankara is located in Turkey.
+Capital(Ankara, Turkey) ::: Verify that Ankara is the capital of Turkey.
+
+Followup Question: Is Ankara located in Turkey?
+Followup Question: Is Ankara the capital of Turkey? 
+------
+Claim: The city of Beijing is the capital of China.
+>>>>>>
+Predicates: 
+Location(Beijing, China) ::: Verify that Beijing is located in China.
+Capital(Beijing, China) ::: Verify that Beijing is the capital of China.
+
+Followup Question: Is Beijing located in China?
+Followup Question: Is Beijing the capital of China? 
+------
+Claim: The city of Tokyo is the capital of Japan.
+>>>>
+<|begin_of_text|>
+You are given a problem description and a claim. The task is to:
+1) define all the predicates in the claim
+2) parse the predicates into followup questions
+3) answer the followup questions
+
+Claim: Howard University Hospital and Providence Hospital are both located in Washington, D.C.
 >>>>>>
 Predicates:
-Capital(The United States of America, Washington D.C.) ::: Verify that the capital of The United States of America is Washington D.C.
+Location(Howard Hospital, Washington D.C.) ::: Verify Howard University Hospital is located in Washington, D.C.
+Location(Providence Hospital, Washington D.C.) ::: Verify Providence Hospital is located in Washington, D.C.
 
-Followup Question: What is the capital of The United States of America?
+Followup Question: Where is Howard Hospital located?
+Followup Question: Where is Providence Hospital located? 
 ------
-Claim: The capital of the United Kingdom of Great Britain and Northern Ireland is London.
+Claim: An IndyCar race driver drove a Formula 1 car designed by Peter McCool during the 2007 Formula One season.
+>>>>>>
+Predicates: 
+Designed(Peter McCool, a Formula 1 car) ::: Verify a Formula 1 car was designed by Peter McCool during the 2007 Formula One season.
+Drive(An IndyCar race driver, a Formula 1 car) ::: Verify an IndyCar driver drove a Formula 1 car.
+
+Followup Question: Which Formula 1 car was designed by Peter McCool during the 2007 Formula One season?
+Followup Question: Did an IndyCar driver drove a Formula 1 car designed by Peter McCool during the 2007 Formula One season?
+------
+Claim: Thomas Loren Friedman has won more Pulitzer Prizes than Colson Whitehead
+>>>>>>
+Predicates: 
+Won(Thomas Loren Friedman, Pulitzer Prize) ::: Verify the number of Pulitzer Prizes Thomas Loren Friedman has won.
+Won(Colson Whitehead, Pulitzer Prize) ::: Verify the number of Pulitzer Prizes Colson Whitehead has won.
+
+Followup Question: How many Pulitzer Prize did Thomas Loren Friedman win?
+Followup Question: How many Pulitzer Prize did Colson Whitehead win?
+------
+Claim: SkyHigh Mount Dandenong (formerly Mount Dandenong Observatory) is a restaurant located on top of Mount Dandenong, Victoria, Australia.
 >>>>>>
 Predicates:
-Capital(The United Kingdom of Great Britain and Northern Ireland, London) ::: Verify that the capital of The United Kingdom of Great Britain and Northern Ireland is London.
+Location(SkyHigh Mount Dandenong, top of Mount Dandenong, Victoria, Australia) ::: Verify that SkyHigh Mount Dandenong is located on top of Mount Dandenong, Victoria, Australia.
+Known(SkyHigh Mount Dandenong, Mount Dandenong Observatory) ::: Verify that SkyHigh Mount Dandenong is formerly known as Mount Dandenong Observatory.
 
-Followup Question: What is the capital of The United Kingdom of Great Britain and Northern Ireland?
+Followup Question: Where is SkyHigh Mount Dandenong located?
+Followup Question: Was SkyHigh Mount Dandenong formerly known as Mount Dandenong Observatory? 
 ------
-Claim: The capital of the People's Republic of China is Beijing.
+Claim: Shulin, a 33.1288 km (12.7911 sq mi) land located in New Taipei City, China, a country in East Asia, has a total population of 183,946 in December 2018.
+>>>>>>
+Predicates: 
+Location(Shulin, New Taipei City, Chian) ::: Verify that Shulin is located in New Taipei City, China.
+Population(Shulin, 183,946) ::: Verify that Shulin has a total population of 183,946 in December 2018.
+
+Followup Question: Where is Shulin located?
+Followup Question: What is the population of Shulin?
+------
+Claim: Sumo wrestler Toyozakura Toshiaki committed match-fixing, ending his career in 2011 that started in 1989.
+>>>>>>
+Predicates: 
+Ending(Toyozakura Toshiaki, his career in 2011) ::: Verify that Toyozakura Toshiaki ended his career in 2011.
+Occupation(Toyozakura Toshiaki, sumo wrestler) ::: Verify that Toyozakura Toshiaki is a sumo wrestler.
+Commit(Toyozakura Toshiaki, match-fixing) ::: Verify that Toyozakura Toshiaki committed match-fixing.
+
+Followup Question: When did Sumo wrestler Toyozakura Toshiaki ended his career?
+Followup Question: What is Toyozakura Toshiaki's occupation?
+Followup Question: Did Sumo wrestler Toyozakura Toshiaki committed match-fixing?
+------
+Claim: In 1959, former Chilean boxer Alfredo Cornejo Cuevas (born June 6, 1933) won the gold medal in the welterweight division at the Pan American Games (held in Chicago, United States, from August 27 to September 7) in Chicago, United States, and the world amateur welterweight title in Mexico City.
+>>>>>>
+Predicates: 
+Born(Alfredo Cornejo Cuevas, June 6 1933) ::: Verify that Alfredo Cornejo Cuevas was born June 6 1933. 
+Won(Alfredo Cornejo Cuevas, the gold metal in the welterweight division at the Pan American Games in 1959) ::: Verify that Alfredo Cornejo Cuevas won the gold metal in the welterweight division at the Pan American Games in 1959.
+Held(The Pan American Games in 1959, Chicago United States) ::: Verify that The Pan American Games in 1959 was held in Chicago United States.
+Won(Alfredo Cornejo Cuevas, the world amateur welterweight title in Mexico City).
+
+Followup Question: When was Alfredo Cornejo Cuevas born?
+Followup Question: Did Alfredo Cornejo Cuevas win the gold metal in the welterweight division at the Pan American Games in 1959?
+Followup Question: Where was The Pan American Games in 1959 held?
+Followup Question: Did Alfredo Cornejo Cuevas win the world amateur welterweight title in Mexico City?
+------
+Claim: The birthplace of American engineer Alfred L.Rives is a plantation near Monticello, the primary residence of Thomas Jefferson.
 >>>>>>
 Predicates:
-Capital(The People's Republic of China, Beijing) ::: Verify that the capital of The People's Republic of China is Beijing.
+Birthplace(Alfred L. Rives, a plantation) ::: Verify The birthplace of American engineer Alfred L.Rives is a plantation
+Primary residence(Thomas Jefferson, Monticello) ::: Verify Monticello, the primary residence of Thomas Jefferson. 
+Near(a planation, Monticello) ::: Verify A plantation is near Monticello
 
-Followup Question: What is the capital of The People's Republic of China?
+Followup Question: Where is the birthplace of Alfred L. Rives? 
+Followup Question: Where is the primary residence of Thomas Jefferson? 
+Followup Question: Is the birthplace of Alfred L. Rives near the residence of Thomas Jefferson? 
 ------
-Claim: The capital of the Republic of India is New Delhi.
+Claim: KLF4 prevents VSMCs from acquiring genetic characteristics of other cell types within atherosclerotic lesions.
 >>>>>>
-Predicates:
-Capital(The Republic of India, New Delhi) ::: Verify that the capital of The Republic of India is New Delhi.
+Predicates: 
+Prevent(KLF4, VSMCs from acquiring genetic characteristics of other cell types within atherosclerotic lesions) ::: Verify KLF4 prevents VSMCs from acquiring genetic characteristics of other cell types within atherosclerotic lesions.
 
-Followup Question: What is the capital of The Republic of India?
+Followup Question: Does KLF4 prevent VSMCs from acquiring genetic characteristics of other cell types within atherosclerotic lesions?
 ------
-Claim: The capital of the Republic of Indonesia is Jakarta.
+Claim: The 2011 Indian Premier League (IPL) was the 5th season of the tournament.
 >>>>>>
-Predicates:
-Capital(The Republic of Indonesia, Jakarta) ::: Verify that the capital of The Republic of Indonesia is Jakarta.
+Predicates: 
+Season(The 2011 Indian Premier League, 5th) ::: Verify The 2011 Indian Premier League was the 5th season of the tournament.
 
-Followup Question: What is the capital of The Republic of Indonesia?
+Followup Question: How many seasons was the 2011 Indian Premier League?
 ------
-Claim: The capital of the Republic of Korea is Seoul.
+Claim: The city of Yekaterinburg is located in the Sverdlovsk Oblast, Russia.
 >>>>>>
-Predicates:
-Capital(The Republic of Korea, Seoul) ::: Verify that the capital of The Republic of Korea is Seoul.
+Predicates: 
+Location(Yekaterinburg, Sverdlovsk Oblast, Russia) ::: Verify The city of Yekaterinburg is located in the Sverdlovsk Oblast, Russia.
 
-Followup Question: What is the capital of The Republic of Korea?
+Followup Question: Where is the city of Yekaterinburg located?
 ------
-Claim: The capital of the Republic of the Philippines is Manila.
+Claim: The 2015-2016 season of the NHL was the 98th season of the National Hockey League.
 >>>>>>
-Predicates:
-Capital(The Republic of the Philippines, Manila) ::: Verify that the capital of The Republic of the Philippines is Manila.
+Predicates: 
+Season(The 2015-2016 season of the NHL, 98th) ::: Verify The 2015-2016 season of the NHL was the 98th season of the National Hockey League.
 
-Followup Question: What is the capital of The Republic of the Philippines?
+Followup Question: How many seasons was the 2015-2016 season of the NHL?
 ------
-Claim: The capital of the Russian Federation is Moscow.
+Claim: The city of Baku is located in Azerbaijan.
 >>>>>>
-Predicates:
-Capital(The Russian Federation, Moscow) ::: Verify that the capital of The Russian Federation is Moscow.
+Predicates: 
+Location(Baku, Azerbaijan) ::: Verify The city of Baku is located in Azerbaijan.
 
-Followup Question: What is the capital of The Russian Federation?
+Followup Question: Where is the city of Baku located?
 ------
-Claim: The capital of the Kingdom of Saudi Arabia is Riyadh.
+Claim: The 2016 Summer Olympics took place in Rio de Janeiro, Brazil.
 >>>>>>
-Predicates:
-Capital(The Kingdom of Saudi Arabia, Riyadh) ::: Verify that the capital of The Kingdom of Saudi Arabia is Riyadh.
+Predicates: 
+Location(The 2016 Summer Olympics, Rio de Janeiro, Brazil) ::: Verify The 2016 Summer Olympics took place in Rio de Janeiro, Brazil.
 
-Followup Question: What is the capital of The Kingdom of Saudi Arabia?
+Followup Question: Where did the 2016 Summer Olympics take place?
 ------
-Claim: The capital of the United Arab Emirates is Abu Dhabi.
+Claim: The city of Tokyo is located in Japan.
 >>>>>>
-Predicates:
-Capital(The United Arab Emirates, Abu Dhabi) ::: Verify that the capital of The United Arab Emirates is Abu Dhabi.
+Predicates: 
+Location(Tokyo, Japan) ::: Verify The city of Tokyo is located in Japan.
 
-Followup Question: What is the capital of The United Arab Emirates?
+Followup Question: Where is the city of Tokyo located?
 ------
-Claim: The capital of the Republic of South Africa is Pretoria.
+Claim: The 2014 Winter Olympics took place in Sochi, Russia.
 >>>>>>
-Predicates:
-Capital(The Republic of South Africa, Pretoria) ::: Verify that the capital of The Republic of South Africa is Pretoria.
+Predicates: 
+Location(The 2014 Winter Olympics, Sochi, Russia) ::: Verify The 2014 Winter Olympics took place in Sochi, Russia.
 
-Followup Question: What is the capital of The Republic of South Africa?
+Followup Question: Where did the 2014 Winter Olympics take place?
 ------
-Claim: The capital of the Republic of Turkey is Ankara.
+Claim: The city of Seoul is located in South Korea.
 >>>>>>
-Predicates:
-Capital(The Republic of Turkey, Ankara) ::: Verify that the capital of The Republic of Turkey is Ankara.
+Predicates: 
+Location(Seoul, South Korea) ::: Verify The city of Seoul is located in South Korea.
 
-Followup Question: What is the capital of The Republic of Turkey?
+Followup Question: Where is the city of Seoul located?
 ------
-Claim: The capital of the Socialist Republic of Vietnam is Hanoi.
+Claim: The 2012 Summer Olympics took place in London, United Kingdom.
 >>>>>>
-Predicates:
-Capital(The Socialist Republic of Vietnam, Hanoi) ::: Verify that the capital of The Socialist Republic of Vietnam is Hanoi.
+Predicates: 
+Location(The 2012 Summer Olympics, London, United Kingdom) ::: Verify The 2012 Summer Olympics took place in London, United Kingdom.
 
-Followup Question: What is the capital of The Socialist Republic of Vietnam?
+Followup Question: Where did the 2012 Summer Olympics take place?
 ------
-Claim: The capital of the Republic of Cuba is Havana.
+Claim: The city of Beijing is located in China.
 >>>>>>
-Predicates:
-Capital(The Republic of Cuba, Havana) ::: Verify that the capital of The Republic of Cuba is Havana.
+Predicates: 
+Location(Beijing, China) ::: Verify The city of Beijing is located in China.
 
-Followup Question: What is the capital of The Republic of Cuba?
+Followup Question: Where is the city of Beijing located?
 ------
-Claim: The capital of the Republic of Haiti is Port-au-Prince.
+Claim: The 2010 Winter Olympics took place in Vancouver, Canada.
 >>>>>>
-Predicates:
-Capital(The Republic of Haiti, Port-au-Prince) ::: Verify that the capital of The Republic of Haiti is Port-au-Prince.
+Predicates: 
+Location(The 2010 Winter Olympics, Vancouver, Canada) ::: Verify The 2010 Winter Olympics took place in Vancouver, Canada.
 
-Followup Question: What is the capital of The Republic of Haiti?
+Followup Question: Where did the 2010 Winter Olympics take place?
 ------
-Claim: The capital of the Republic of Colombia is Bogota.
+Claim: The city of Moscow is located in Russia.
 >>>>>>
-Predicates:
-Capital(The Republic of Colombia, Bogota) ::: Verify that the capital of The Republic of Colombia is Bogota.
+Predicates: 
+Location(Moscow, Russia) ::: Verify The city of Moscow is located in Russia.
 
-Followup Question: What is the capital of The Republic of Colombia?
+Followup Question: Where is the city of Moscow located?
 ------
-Claim: The capital of the Republic of Argentina is Buenos Aires.
+Claim: The 2008 Summer Olympics took place in Beijing, China.
 >>>>>>
-Predicates:
-Capital(The Republic of Argentina, Buenos Aires) ::: Verify that the capital of The Republic of Argentina is Buenos Aires.
+Predicates: 
+Location(The 2008 Summer Olympics, Beijing, China) ::: Verify The 2008 Summer Olympics took place in Beijing, China.
 
-Followup Question
+Followup Question: Where did the 2008 Summer Olympics take place?
+------
+Claim: The city of New York is located in the United States.
+>>>>>>
+Predicates: 
+Location(New York, United States) ::: Verify The city of New York is located in the United States.
+
+Followup Question: Where is the city of New York located?
+------
+Claim: The 2006 Winter Olympics took place in Torino, Italy.
+>>>>>>
+Predicates: 
+Location(The 2006 Winter Olympics, Torino, Italy) ::: Verify The 2006 Winter Olympics took place in Torino, Italy
 KLF4 prevents VSMCs from acquiring genetic characteristics of other cell types within atherosclerotic lesions.
 
 >>>>>>
-Predicates:
+Predicates: 
 Prevent(KLF4, VSMCs from acquiring genetic characteristics of other cell types within atherosclerotic lesions) ::: Verify KLF4 prevents VSMCs from acquiring genetic characteristics of other cell types within atherosclerotic lesions.
-Atherosclerotic lesion(atherosclerotic lesions) ::: Verify atherosclerotic lesions are atherosclerotic lesions.
-VSMC(VSMCs) ::: Verify VSMCs are VSMCs.
 
 Followup Question: Does KLF4 prevent VSMCs from acquiring genetic characteristics of other cell types within atherosclerotic lesions?
-Followup Question: Are atherosclerotic lesions atherosclerotic lesions?
-Followup Question: Are VSMCs VSMCs?
 ------
-Claim: In 2019, the 2019 Copa Libertadores Finals was won by Flamengo.
+Claim: The 2011 Indian Premier League (IPL) was the 5th season of the tournament.
 >>>>>>
-Predicates:
-Won(2019 Copa Libertadores Finals, Flamengo) ::: Verify the 2019 Copa Libertadores Finals was won by Flamengo in 2019.
-2019(2019) ::: Verify 2019 is 2019.
-Copa Libertadores Finals(2019 Copa Libertadores Finals) ::: Verify 2019 Copa Libertadores Finals is 2019 Copa Libertadores Finals.
+Predicates: 
+Season(The 2011 Indian Premier League, 5th) ::: Verify The 2011 Indian Premier League was the 5th season of the tournament.
 
-Followup Question: In 2019, did the 2019 Copa Libertadores Finals was won by Flamengo?
-Followup Question: What is 2019?
-Followup Question: What is 2019 Copa Libertadores Finals?
+Followup Question: How many seasons was the 2011 Indian Premier League?
 ------
-Claim: In 2019, the 2019 Copa Libertadores Finals was won by Flamengo.
+Claim: The city of Yekaterinburg is located in the Sverdlovsk Oblast, Russia.
 >>>>>>
-Predicates:
-Won(2019 Copa Libertadores Finals, Flamengo) ::: Verify the 2019 Copa Libertadores Finals was won by Flamengo in 2019.
-2019(2019) ::: Verify 2019 is 2019.
-Copa Libertadores Finals(2019 Copa Libertadores Finals) ::: Verify 2019 Copa Libertadores Finals is 2019 Copa Libertadores Finals.
+Predicates: 
+Location(Yekaterinburg, Sverdlovsk Oblast, Russia) ::: Verify The city of Yekaterinburg is located in the Sverdlovsk Oblast, Russia.
 
-Followup Question: In 2019, did the 2019 Copa Libertadores Finals was won by Flamengo?
-Followup Question: What is 2019?
-Followup Question: What is 2019 Copa Libertadores Finals?
+Followup Question: Where is the city of Yekaterinburg located?
 ------
-Claim: In 2019, the 2019 Copa Libertadores Finals was won by Flamengo.
+Claim: The 2015-2016 season of the NHL was the 98th season of the National Hockey League.
 >>>>>>
-Predicates:
-Won(2019 Copa Libertadores Finals, Flamengo) ::: Verify the 2019 Copa Libertadores Finals was won by Flamengo in 2019.
-2019(2019) ::: Verify 2019 is 2019.
-Copa Libertadores Finals(2019 Copa Libertadores Finals) ::: Verify 2019 Copa Libertadores Finals is 2019 Copa Libertadores Finals.
+Predicates: 
+Season(The 2015-2016 season of the NHL, 98th) ::: Verify The 2015-2016 season of the NHL was the 98th season of the National Hockey League.
 
-Followup Question: In 2019, did the 2019 Copa Libertadores Finals was won by Flamengo?
-Followup Question: What is 2019?
-Followup Question: What is 2019 Copa Libertadores Finals?
+Followup Question: How many seasons was the 2015-2016 season of the NHL?
 ------
-Claim: In 2019, the 2019 Copa Libertadores Finals was won by Flamengo.
+Claim: The city of Baku is located in Azerbaijan.
 >>>>>>
-Predicates:
-Won(2019 Copa Libertadores Finals, Flamengo) ::: Verify the 2019 Copa Libertadores Finals was won by Flamengo in 2019.
-2019(2019) ::: Verify 2019 is 2019.
-Copa Libertadores Finals(2019 Copa Libertadores Finals) ::: Verify 2019 Copa Libertadores Finals is 2019 Copa Libertadores Finals.
+Predicates: 
+Location(Baku, Azerbaijan) ::: Verify The city of Baku is located in Azerbaijan.
 
-Followup Question: In 2019, did the 2019 Copa Libertadores Finals was won by Flamengo?
-Followup Question: What is 2019?
-Followup Question: What is 2019 Copa Libertadores Finals?
+Followup Question: Where is the city of Baku located?
 ------
-Claim: In 2019, the 2019 Copa Libertadores Finals was won by Flamengo.
+Claim: The 2016 Summer Olympics took place in Rio de Janeiro, Brazil.
 >>>>>>
-Predicates:
-Won(2019 Copa Libertadores Finals, Flamengo) ::: Verify the 2019 Copa Libertadores Finals was won by Flamengo in 2019.
-2019(2019) ::: Verify 2019 is 2019.
-Copa Libertadores Finals(2019 Copa Libertadores Finals) ::: Verify 2019 Copa Libertadores Finals is 2019 Copa Libertadores Finals.
+Predicates: 
+Location(The 2016 Summer Olympics, Rio de Janeiro, Brazil) ::: Verify The 2016 Summer Olympics took place in Rio de Janeiro, Brazil.
 
-Followup Question: In 2019, did the 2019 Copa Libertadores Finals was won by Flamengo?
-Followup Question: What is 2019?
-Followup Question: What is 2019 Copa Libertadores Finals?
+Followup Question: Where did the 2016 Summer Olympics take place?
 ------
-Claim: In 2019, the 2019 Copa Libertadores Finals was won by Flamengo.
+Claim: The city of Tokyo is located in Japan.
+>>>>>>
+Predicates: 
+Location(Tokyo, Japan) ::: Verify The city of Tokyo is located in Japan.
+
+Followup Question: Where is the city of Tokyo located?
+------
+Claim: The 2014 Winter Olympics took place in Sochi, Russia.
+>>>>>>
+Predicates: 
+Location(The 2014 Winter Olympics, Sochi, Russia) ::: Verify The 2014 Winter Olympics took place in Sochi, Russia.
+
+Followup Question: Where did the 2014 Winter Olympics take place?
+------
+Claim: The city of Seoul is located in South Korea.
+>>>>>>
+Predicates: 
+Location(Seoul, South Korea) ::: Verify The city of Seoul is located in South Korea.
+
+Followup Question: Where is the city of Seoul located?
+------
+Claim: The 2012 Summer Olympics took place in London, United Kingdom.
+>>>>>>
+Predicates: 
+Location(The 2012 Summer Olympics, London, United Kingdom) ::: Verify The 2012 Summer Olympics took place in London, United Kingdom.
+
+Followup Question: Where did the 2012 Summer Olympics take place?
+------
+Claim: The city of Beijing is located in China.
+>>>>>>
+Predicates: 
+Location(Beijing, China) ::: Verify The city of Beijing is located in China.
+
+Followup Question: Where is the city of Beijing located?
+------
+Claim: The 2010 Winter Olympics took place in Vancouver, Canada.
+>>>>>>
+Predicates: 
+Location(The 2010 Winter Olympics, Vancouver, Canada) ::: Verify The 2010 Winter Olympics took place in Vancouver, Canada.
+
+Followup Question: Where did the 2010 Winter Olympics take place?
+------
+Claim: The city of Moscow is located in Russia.
+>>>>>>
+Predicates: 
+Location(Moscow, Russia) ::: Verify The city of Moscow is located in Russia.
+
+Followup Question: Where is the city of Moscow located?
+------
+Claim: The 2008 Summer Olympics took place in Beijing, China.
+>>>>>>
+Predicates: 
+Location(The 2008 Summer Olympics, Beijing, China) ::: Verify The 2008 Summer Olympics took place in Beijing, China.
+
+Followup Question: Where did the 2008 Summer Olympics take place?
+------
+Claim: The city of New York is located in the United States.
+>>>>>>
+Predicates: 
+Location(New York, United States) ::: Verify The city of New York is located in the United States.
+
+Followup Question: Where is the city of New York located?
+------
+Claim: The 2006 Winter Olympics took place in Torino, Italy.
+>>>>>>
+Predicates: 
+Location(The 2006 Winter Olympics, Torino, Italy) ::: Verify The 2006 Winter Olympics took place in Torino, Italy
+<|begin_of_text|>
+You are given a problem description and a claim. The task is to:
+1) define all the predicates in the claim
+2) parse the predicates into followup questions
+3) answer the followup questions
+
+Claim: Howard University Hospital and Providence Hospital are both located in Washington, D.C.
 >>>>>>
 Predicates:
-Won(2019 Copa Libertadores Finals, Flamengo) ::: Verify the 2019 Copa Libertadores Finals was won by Flamengo in 2019.
-2019(2019) ::: Verify 2019 is 2019.
-Copa Libertadores Finals(2019 Copa Libertadores Finals) ::: Verify 2019 Copa Libertadores
+Location(Howard Hospital, Washington D.C.) ::: Verify Howard University Hospital is located in Washington, D.C.
+Location(Providence Hospital, Washington D.C.) ::: Verify Providence Hospital is located in Washington, D.C.
+
+Followup Question: Where is Howard Hospital located?
+Followup Question: Where is Providence Hospital located? 
+------
+Claim: An IndyCar race driver drove a Formula 1 car designed by Peter McCool during the 2007 Formula One season.
+>>>>>>
+Predicates: 
+Designed(Peter McCool, a Formula 1 car) ::: Verify a Formula 1 car was designed by Peter McCool during the 2007 Formula One season.
+Drive(An IndyCar race driver, a Formula 1 car) ::: Verify an IndyCar driver drove a Formula 1 car.
+
+Followup Question: Which Formula 1 car was designed by Peter McCool during the 2007 Formula One season?
+Followup Question: Did an IndyCar driver drove a Formula 1 car designed by Peter McCool during the 2007 Formula One season?
+------
+Claim: Thomas Loren Friedman has won more Pulitzer Prizes than Colson Whitehead
+>>>>>>
+Predicates: 
+Won(Thomas Loren Friedman, Pulitzer Prize) ::: Verify the number of Pulitzer Prizes Thomas Loren Friedman has won.
+Won(Colson Whitehead, Pulitzer Prize) ::: Verify the number of Pulitzer Prizes Colson Whitehead has won.
+
+Followup Question: How many Pulitzer Prize did Thomas Loren Friedman win?
+Followup Question: How many Pulitzer Prize did Colson Whitehead win?
+------
+Claim: SkyHigh Mount Dandenong (formerly Mount Dandenong Observatory) is a restaurant located on top of Mount Dandenong, Victoria, Australia.
+>>>>>>
+Predicates:
+Location(SkyHigh Mount Dandenong, top of Mount Dandenong, Victoria, Australia) ::: Verify that SkyHigh Mount Dandenong is located on top of Mount Dandenong, Victoria, Australia.
+Known(SkyHigh Mount Dandenong, Mount Dandenong Observatory) ::: Verify that SkyHigh Mount Dandenong is formerly known as Mount Dandenong Observatory.
+
+Followup Question: Where is SkyHigh Mount Dandenong located?
+Followup Question: Was SkyHigh Mount Dandenong formerly known as Mount Dandenong Observatory? 
+------
+Claim: Shulin, a 33.1288 km (12.7911 sq mi) land located in New Taipei City, China, a country in East Asia, has a total population of 183,946 in December 2018.
+>>>>>>
+Predicates: 
+Location(Shulin, New Taipei City, Chian) ::: Verify that Shulin is located in New Taipei City, China.
+Population(Shulin, 183,946) ::: Verify that Shulin has a total population of 183,946 in December 2018.
+
+Followup Question: Where is Shulin located?
+Followup Question: What is the population of Shulin?
+------
+Claim: Sumo wrestler Toyozakura Toshiaki committed match-fixing, ending his career in 2011 that started in 1989.
+>>>>>>
+Predicates: 
+Ending(Toyozakura Toshiaki, his career in 2011) ::: Verify that Toyozakura Toshiaki ended his career in 2011.
+Occupation(Toyozakura Toshiaki, sumo wrestler) ::: Verify that Toyozakura Toshiaki is a sumo wrestler.
+Commit(Toyozakura Toshiaki, match-fixing) ::: Verify that Toyozakura Toshiaki committed match-fixing.
+
+Followup Question: When did Sumo wrestler Toyozakura Toshiaki ended his career?
+Followup Question: What is Toyozakura Toshiaki's occupation?
+Followup Question: Did Sumo wrestler Toyozakura Toshiaki committed match-fixing?
+------
+Claim: In 1959, former Chilean boxer Alfredo Cornejo Cuevas (born June 6, 1933) won the gold medal in the welterweight division at the Pan American Games (held in Chicago, United States, from August 27 to September 7) in Chicago, United States, and the world amateur welterweight title in Mexico City.
+>>>>>>
+Predicates: 
+Born(Alfredo Cornejo Cuevas, June 6 1933) ::: Verify that Alfredo Cornejo Cuevas was born June 6 1933. 
+Won(Alfredo Cornejo Cuevas, the gold metal in the welterweight division at the Pan American Games in 1959) ::: Verify that Alfredo Cornejo Cuevas won the gold metal in the welterweight division at the Pan American Games in 1959.
+Held(The Pan American Games in 1959, Chicago United States) ::: Verify that The Pan American Games in 1959 was held in Chicago United States.
+Won(Alfredo Cornejo Cuevas, the world amateur welterweight title in Mexico City).
+
+Followup Question: When was Alfredo Cornejo Cuevas born?
+Followup Question: Did Alfredo Cornejo Cuevas win the gold metal in the welterweight division at the Pan American Games in 1959?
+Followup Question: Where was The Pan American Games in 1959 held?
+Followup Question: Did Alfredo Cornejo Cuevas win the world amateur welterweight title in Mexico City?
+------
+Claim: The birthplace of American engineer Alfred L.Rives is a plantation near Monticello, the primary residence of Thomas Jefferson.
+>>>>>>
+Predicates:
+Birthplace(Alfred L. Rives, a plantation) ::: Verify The birthplace of American engineer Alfred L.Rives is a plantation
+Primary residence(Thomas Jefferson, Monticello) ::: Verify Monticello, the primary residence of Thomas Jefferson. 
+Near(a planation, Monticello) ::: Verify A plantation is near Monticello
+
+Followup Question: Where is the birthplace of Alfred L. Rives? 
+Followup Question: Where is the primary residence of Thomas Jefferson? 
+Followup Question: Is the birthplace of Alfred L. Rives near the residence of Thomas Jefferson? 
+------
+Claim: Serotonin receptors have no effect on depression
+>>>>>>
+Predicates:
+Effect(Serotonin receptors, depression) ::: Verify whether Serotonin receptors have an effect on depression
+
+Followup Question: Do Serotonin receptors have an effect on depression?
+------
+Claim: The first manned mission to Mars is scheduled for 2030.
+>>>>>>
+Predicates:
+Scheduled(The first manned mission to Mars, 2030) ::: Verify whether the first manned mission to Mars is scheduled for 2030
+
+Followup Question: Is the first manned mission to Mars scheduled for 2030?
+------
+Claim: The world's largest living organism is a fungus called Armillaria ostoyae
+>>>>>>
+Predicates:
+Largest(Armillaria ostoyae, living organism) ::: Verify whether Armillaria ostoyae is the world's largest living organism
+
+Followup Question: Is Armillaria ostoyae the world's largest living organism?
+------
+Claim: The world's largest waterfall, by total area of the falls, is Inga Falls on the Congo River
+>>>>>>
+Predicates:
+Largest(Inga Falls, waterfall) ::: Verify whether Inga Falls is the world's largest waterfall
+
+Followup Question: Is Inga Falls the world's largest waterfall?
+------
+Claim: The first successful powered, controlled, and sustained flight of an airplane was made by the Wright brothers on December 17, 1903
+>>>>>>
+Predicates:
+Flight(Wright brothers, airplane, December 17, 1903) ::: Verify whether the Wright brothers made the first successful powered, controlled, and sustained flight of an airplane on December 17, 1903
+
+Followup Question: Did the Wright brothers make the first successful powered, controlled, and sustained flight of an airplane on December 17, 1903?
+------
+Claim: The world's largest snowflake was 15 inches (38 cm) wide and 8 inches (20 cm) thick
+>>>>>>
+Predicates:
+Largest(world's largest snowflake, snowflake) ::: Verify whether the world's largest snowflake was 15 inches (38 cm) wide and 8 inches (20 cm) thick
+
+Followup Question: Is the world's largest snowflake 15 inches (38 cm) wide and 8 inches (20 cm) thick?
+------
+Claim: The first permanent English settlement in North America was established at Jamestown, Virginia in 1607
+>>>>>>
+Predicates:
+Established(Jamestown, Virginia, 1607) ::: Verify whether the first permanent English settlement in North America was established at Jamestown, Virginia in 1607
+
+Followup Question: Was the first permanent English settlement in North America established at Jamestown, Virginia in 1607?
+------
+Claim: The world's largest living species of lizard is the Komodo dragon
+>>>>>>
+Predicates:
+Largest(Komodo dragon, living species of lizard) ::: Verify whether the Komodo dragon is the world's largest living species of lizard
+
+Followup Question: Is the Komodo dragon the world's largest living species of lizard?
+------
+Claim: The first permanent human settlement in Antarctica was established at McMurdo Station in 1955
+>>>>>>
+Predicates:
+Established(McMurdo Station, 1955) ::: Verify whether the first permanent human settlement in Antarctica was established at McMurdo Station in 1955
+
+Followup Question: Was the first permanent human settlement in Antarctica established at McMurdo Station in 1955?
+------
+Claim: The world's largest waterfall, by volume of water, is Inga Falls on the Congo River
+>>>>>>
+Predicates:
+Largest(Inga Falls, waterfall, by volume of water) ::: Verify whether Inga Falls is the world's largest waterfall by volume of water
+
+Followup Question: Is Inga Falls the world's largest waterfall by volume of water?
+------
+Claim: The first manned mission to the Moon was launched on July 16, 1969
+>>>>>>
+Predicates:
+Launched(first manned mission to the Moon, July 16, 1969) ::: Verify whether the first manned mission to the Moon was launched on July 16, 1969
+
+Followup Question: Was the first manned mission to the Moon launched on July 16, 1969?
+------
+Claim: The world's largest living species of bird is the ostrich
+>>>>>>
+Predicates:
+Largest(ostrich, living species of bird) ::: Verify whether the ostrich is the world's largest living species of bird
+
+Followup Question: Is the ostrich the world's largest living species of bird?
+------
+Claim: The first permanent human settlement in the Arctic was established at Longyearbyen, Svalbard in 1899
+>>>>>>
+Predicates:
+Established(Longyearbyen, Svalbard, 1899) ::: Verify whether the first permanent human settlement in the Arctic was established at Longyearbyen, Svalbard in 1899
+
+Followup Question: Was the first permanent human settlement in the Arctic established at Longyearbyen, Svalbard in 1899?
+------
+Claim
 Serotonin receptors have no effect on depression
 
 >>>>>>
 Predicates:
-Receptor(Serotonin receptor, depression) ::: Verify Serotonin receptors have no effect on depression.
-Effect(Serotonin receptor, depression) ::: Verify Serotonin receptors have no effect on depression.
+Effect(Serotonin receptors, depression) ::: Verify whether Serotonin receptors have an effect on depression
 
-Followup Question: Do serotonin receptors have any effect on depression?
+Followup Question: Do Serotonin receptors have an effect on depression?
 ------
-Claim: The 2009 FIFA U-17 World Cup was hosted by Nigeria and the 2013 FIFA U-17 World Cup was hosted by the United Arab Emirates.
+Claim: The first manned mission to Mars is scheduled for 2030.
 >>>>>>
 Predicates:
-Hosted(The 2009 FIFA U-17 World Cup, Nigeria) ::: Verify The 2009 FIFA U-17 World Cup was hosted by Nigeria.
-Hosted(The 2013 FIFA U-17 World Cup, United Arab Emirates) ::: Verify The 2013 FIFA U-17 World Cup was hosted by the United Arab Emirates.
+Scheduled(The first manned mission to Mars, 2030) ::: Verify whether the first manned mission to Mars is scheduled for 2030
 
-Followup Question: Which country hosted The 2009 FIFA U-17 World Cup?
-Followup Question: Which country hosted The 2013 FIFA U-17 World Cup?
+Followup Question: Is the first manned mission to Mars scheduled for 2030?
 ------
-Claim: The 2014 FIFA World Cup was won by Germany.
+Claim: The world's largest living organism is a fungus called Armillaria ostoyae
 >>>>>>
 Predicates:
-Won(The 2014 FIFA World Cup, Germany) ::: Verify The 2014 FIFA World Cup was won by Germany.
+Largest(Armillaria ostoyae, living organism) ::: Verify whether Armillaria ostoyae is the world's largest living organism
 
-Followup Question: Who won The 2014 FIFA World Cup?
+Followup Question: Is Armillaria ostoyae the world's largest living organism?
 ------
-Claim: The 2013 FIFA U-17 World Cup was won by Nigeria.
+Claim: The world's largest waterfall, by total area of the falls, is Inga Falls on the Congo River
 >>>>>>
 Predicates:
-Won(The 2013 FIFA U-17 World Cup, Nigeria) ::: Verify The 2013 FIFA U-17 World Cup was won by Nigeria.
+Largest(Inga Falls, waterfall) ::: Verify whether Inga Falls is the world's largest waterfall
 
-Followup Question: Who won The 2013 FIFA U-17 World Cup?
+Followup Question: Is Inga Falls the world's largest waterfall?
 ------
-Claim: The 2013 FIFA U-17 World Cup was won by Nigeria.
+Claim: The first successful powered, controlled, and sustained flight of an airplane was made by the Wright brothers on December 17, 1903
 >>>>>>
 Predicates:
-Won(The 2013 FIFA U-17 World Cup, Nigeria) ::: Verify The 2013 FIFA U-17 World Cup was won by Nigeria.
+Flight(Wright brothers, airplane, December 17, 1903) ::: Verify whether the Wright brothers made the first successful powered, controlled, and sustained flight of an airplane on December 17, 1903
 
-Followup Question: Who won The 2013 FIFA U-17 World Cup?
+Followup Question: Did the Wright brothers make the first successful powered, controlled, and sustained flight of an airplane on December 17, 1903?
 ------
-Claim: The 2013 FIFA U-17 World Cup was won by Nigeria.
+Claim: The world's largest snowflake was 15 inches (38 cm) wide and 8 inches (20 cm) thick
 >>>>>>
 Predicates:
-Won(The 2013 FIFA U-17 World Cup, Nigeria) ::: Verify The 2013 FIFA U-17 World Cup was won by Nigeria.
+Largest(world's largest snowflake, snowflake) ::: Verify whether the world's largest snowflake was 15 inches (38 cm) wide and 8 inches (20 cm) thick
 
-Followup Question: Who won The 2013 FIFA U-17 World Cup?
+Followup Question: Is the world's largest snowflake 15 inches (38 cm) wide and 8 inches (20 cm) thick?
 ------
-Claim: The 2013 FIFA U-17 World Cup was won by Nigeria.
+Claim: The first permanent English settlement in North America was established at Jamestown, Virginia in 1607
 >>>>>>
 Predicates:
-Won(The 2013 FIFA U-17 World Cup, Nigeria) ::: Verify The 2013 FIFA U-17 World Cup was won by Nigeria.
+Established(Jamestown, Virginia, 1607) ::: Verify whether the first permanent English settlement in North America was established at Jamestown, Virginia in 1607
 
-Followup Question: Who won The 2013 FIFA U-17 World Cup?
+Followup Question: Was the first permanent English settlement in North America established at Jamestown, Virginia in 1607?
 ------
-Claim: The 2013 FIFA U-17 World Cup was won by Nigeria.
+Claim: The world's largest living species of lizard is the Komodo dragon
 >>>>>>
 Predicates:
-Won(The 2013 FIFA U-17 World Cup, Nigeria) ::: Verify The 2013 FIFA U-17 World Cup was won by Nigeria.
+Largest(Komodo dragon, living species of lizard) ::: Verify whether the Komodo dragon is the world's largest living species of lizard
 
-Followup Question: Who won The 2013 FIFA U-17 World Cup?
+Followup Question: Is the Komodo dragon the world's largest living species of lizard?
 ------
-Claim: The 2013 FIFA U-17 World Cup was won by Nigeria.
+Claim: The first permanent human settlement in Antarctica was established at McMurdo Station in 1955
 >>>>>>
 Predicates:
-Won(The 2013 FIFA U-17 World Cup, Nigeria) ::: Verify The 2013 FIFA U-17 World Cup was won by Nigeria.
+Established(McMurdo Station, 1955) ::: Verify whether the first permanent human settlement in Antarctica was established at McMurdo Station in 1955
 
-Followup Question: Who won The 2013 FIFA U-17 World Cup?
+Followup Question: Was the first permanent human settlement in Antarctica established at McMurdo Station in 1955?
 ------
-Claim: The 2013 FIFA U-17 World Cup was won by Nigeria.
+Claim: The world's largest waterfall, by volume of water, is Inga Falls on the Congo River
 >>>>>>
 Predicates:
-Won(The 2013 FIFA U-17 World Cup, Nigeria) ::: Verify The 2013 FIFA U-17 World Cup was won by Nigeria.
+Largest(Inga Falls, waterfall, by volume of water) ::: Verify whether Inga Falls is the world's largest waterfall by volume of water
 
-Followup Question: Who won The 2013 FIFA U-17 World Cup?
+Followup Question: Is Inga Falls the world's largest waterfall by volume of water?
 ------
-Claim: The 2013 FIFA U-17 World Cup was won by Nigeria.
+Claim: The first manned mission to the Moon was launched on July 16, 1969
 >>>>>>
 Predicates:
-Won(The 2013 FIFA U-17 World Cup, Nigeria) ::: Verify The 2013 FIFA U-17 World Cup was won by Nigeria.
+Launched(first manned mission to the Moon, July 16, 1969) ::: Verify whether the first manned mission to the Moon was launched on July 16, 1969
 
-Followup Question: Who won The 2013 FIFA U-17 World Cup?
+Followup Question: Was the first manned mission to the Moon launched on July 16, 1969?
 ------
-Claim: The 2013 FIFA U-17 World Cup was won by Nigeria.
+Claim: The world's largest living species of bird is the ostrich
 >>>>>>
 Predicates:
-Won(The 2013 FIFA U-17 World Cup, Nigeria) ::: Verify The 2013 FIFA U-17 World Cup was won by Nigeria.
+Largest(ostrich, living species of bird) ::: Verify whether the ostrich is the world's largest living species of bird
 
-Followup Question: Who won The 2013 FIFA U-17 World Cup?
+Followup Question: Is the ostrich the world's largest living species of bird?
 ------
-Claim: The 2013 FIFA U-17 World Cup was won by Nigeria.
+Claim: The first permanent human settlement in the Arctic was established at Longyearbyen, Svalbard in 1899
 >>>>>>
 Predicates:
-Won(The 2013 FIFA U-17 World Cup, Nigeria) ::: Verify The 2013 FIFA U-17 World Cup was won by Nigeria.
+Established(Longyearbyen, Svalbard, 1899) ::: Verify whether the first permanent human settlement in the Arctic was established at Longyearbyen, Svalbard in 1899
 
-Followup Question: Who won The 2013 FIFA U-17 World Cup?
+Followup Question: Was the first permanent human settlement in the Arctic established at Longyearbyen, Svalbard in 1899?
 ------
-Claim: The 2013 FIFA U-17 World Cup was won by Nigeria.
+Claim
+<|begin_of_text|>
+You are given a problem description and a claim. The task is to:
+1) define all the predicates in the claim
+2) parse the predicates into followup questions
+3) answer the followup questions
+
+Claim: Howard University Hospital and Providence Hospital are both located in Washington, D.C.
 >>>>>>
 Predicates:
-Won(The 2013 FIFA U-17 World Cup, Nigeria) ::: Verify The 2013 FIFA U-17 World Cup was won by Nigeria.
+Location(Howard Hospital, Washington D.C.) ::: Verify Howard University Hospital is located in Washington, D.C.
+Location(Providence Hospital, Washington D.C.) ::: Verify Providence Hospital is located in Washington, D.C.
 
+Followup Question: Where is Howard Hospital located?
+Followup Question: Where is Providence Hospital located? 
+------
+Claim: An IndyCar race driver drove a Formula 1 car designed by Peter McCool during the 2007 Formula One season.
+>>>>>>
+Predicates: 
+Designed(Peter McCool, a Formula 1 car) ::: Verify a Formula 1 car was designed by Peter McCool during the 2007 Formula One season.
+Drive(An IndyCar race driver, a Formula 1 car) ::: Verify an IndyCar driver drove a Formula 1 car.
 
+Followup Question: Which Formula 1 car was designed by Peter McCool during the 2007 Formula One season?
+Followup Question: Did an IndyCar driver drove a Formula 1 car designed by Peter McCool during the 2007 Formula One season?
+------
+Claim: Thomas Loren Friedman has won more Pulitzer Prizes than Colson Whitehead
+>>>>>>
+Predicates: 
+Won(Thomas Loren Friedman, Pulitzer Prize) ::: Verify the number of Pulitzer Prizes Thomas Loren Friedman has won.
+Won(Colson Whitehead, Pulitzer Prize) ::: Verify the number of Pulitzer Prizes Colson Whitehead has won.
+
+Followup Question: How many Pulitzer Prize did Thomas Loren Friedman win?
+Followup Question: How many Pulitzer Prize did Colson Whitehead win?
+------
+Claim: SkyHigh Mount Dandenong (formerly Mount Dandenong Observatory) is a restaurant located on top of Mount Dandenong, Victoria, Australia.
+>>>>>>
+Predicates:
+Location(SkyHigh Mount Dandenong, top of Mount Dandenong, Victoria, Australia) ::: Verify that SkyHigh Mount Dandenong is located on top of Mount Dandenong, Victoria, Australia.
+Known(SkyHigh Mount Dandenong, Mount Dandenong Observatory) ::: Verify that SkyHigh Mount Dandenong is formerly known as Mount Dandenong Observatory.
+
+Followup Question: Where is SkyHigh Mount Dandenong located?
+Followup Question: Was SkyHigh Mount Dandenong formerly known as Mount Dandenong Observatory? 
+------
+Claim: Shulin, a 33.1288 km (12.7911 sq mi) land located in New Taipei City, China, a country in East Asia, has a total population of 183,946 in December 2018.
+>>>>>>
+Predicates: 
+Location(Shulin, New Taipei City, Chian) ::: Verify that Shulin is located in New Taipei City, China.
+Population(Shulin, 183,946) ::: Verify that Shulin has a total population of 183,946 in December 2018.
+
+Followup Question: Where is Shulin located?
+Followup Question: What is the population of Shulin?
+------
+Claim: Sumo wrestler Toyozakura Toshiaki committed match-fixing, ending his career in 2011 that started in 1989.
+>>>>>>
+Predicates: 
+Ending(Toyozakura Toshiaki, his career in 2011) ::: Verify that Toyozakura Toshiaki ended his career in 2011.
+Occupation(Toyozakura Toshiaki, sumo wrestler) ::: Verify that Toyozakura Toshiaki is a sumo wrestler.
+Commit(Toyozakura Toshiaki, match-fixing) ::: Verify that Toyozakura Toshiaki committed match-fixing.
+
+Followup Question: When did Sumo wrestler Toyozakura Toshiaki ended his career?
+Followup Question: What is Toyozakura Toshiaki's occupation?
+Followup Question: Did Sumo wrestler Toyozakura Toshiaki committed match-fixing?
+------
+Claim: In 1959, former Chilean boxer Alfredo Cornejo Cuevas (born June 6, 1933) won the gold medal in the welterweight division at the Pan American Games (held in Chicago, United States, from August 27 to September 7) in Chicago, United States, and the world amateur welterweight title in Mexico City.
+>>>>>>
+Predicates: 
+Born(Alfredo Cornejo Cuevas, June 6 1933) ::: Verify that Alfredo Cornejo Cuevas was born June 6 1933. 
+Won(Alfredo Cornejo Cuevas, the gold metal in the welterweight division at the Pan American Games in 1959) ::: Verify that Alfredo Cornejo Cuevas won the gold metal in the welterweight division at the Pan American Games in 1959.
+Held(The Pan American Games in 1959, Chicago United States) ::: Verify that The Pan American Games in 1959 was held in Chicago United States.
+Won(Alfredo Cornejo Cuevas, the world amateur welterweight title in Mexico City).
+
+Followup Question: When was Alfredo Cornejo Cuevas born?
+Followup Question: Did Alfredo Cornejo Cuevas win the gold metal in the welterweight division at the Pan American Games in 1959?
+Followup Question: Where was The Pan American Games in 1959 held?
+Followup Question: Did Alfredo Cornejo Cuevas win the world amateur welterweight title in Mexico City?
+------
+Claim: The birthplace of American engineer Alfred L.Rives is a plantation near Monticello, the primary residence of Thomas Jefferson.
+>>>>>>
+Predicates:
+Birthplace(Alfred L. Rives, a plantation) ::: Verify The birthplace of American engineer Alfred L.Rives is a plantation
+Primary residence(Thomas Jefferson, Monticello) ::: Verify Monticello, the primary residence of Thomas Jefferson. 
+Near(a planation, Monticello) ::: Verify A plantation is near Monticello
+
+Followup Question: Where is the birthplace of Alfred L. Rives? 
+Followup Question: Where is the primary residence of Thomas Jefferson? 
+Followup Question: Is the birthplace of Alfred L. Rives near the residence of Thomas Jefferson? 
+------
+Claim: Patients with panic anxiety show increased CSF levels of hypocretin.
+>>>>>>
+Predicates: 
+Increased(CSF levels of hypocretin, patients with panic anxiety) ::: Verify CSF levels of hypocretin are increased in patients with panic anxiety.
+
+Followup Question: Are CSF levels of hypocretin increased in patients with panic anxiety?
+------
+Claim: The 1997 film "The Ice Storm" was directed by Ang Lee.
+>>>>>>
+Predicates: 
+Directed(Ang Lee, the 1997 film "The Ice Storm") ::: Verify that Ang Lee directed the 1997 film "The Ice Storm".
+
+Followup Question: Who directed the 1997 film "The Ice Storm"? 
+------
+Claim: The 1992 film "A League of Their Own" was directed by Penny Marshall.
+>>>>>>
+Predicates: 
+Directed(Penny Marshall, the 1992 film "A League of Their Own") ::: Verify that Penny Marshall directed the 1992 film "A League of Their Own".
+
+Followup Question: Who directed the 1992 film "A League of Their Own"? 
+------
+Claim: The 1987 film "Three Men and a Baby" was directed by Leonard Nimoy.
+>>>>>>
+Predicates: 
+Directed(Leonard Nimoy, the 1987 film "Three Men and a Baby") ::: Verify that Leonard Nimoy directed the 1987 film "Three Men and a Baby".
+
+Followup Question: Who directed the 1987 film "Three Men and a Baby"? 
+------
+Claim: The 1979 film "The Muppet Movie" was directed by James Frawley.
+>>>>>>
+Predicates: 
+Directed(James Frawley, the 1979 film "The Muppet Movie") ::: Verify that James Frawley directed the 1979 film "The Muppet Movie".
+
+Followup Question: Who directed the 1979 film "The Muppet Movie"? 
+------
+Claim: The 1977 film "Star Wars" was directed by George Lucas.
+>>>>>>
+Predicates: 
+Directed(George Lucas, the 1977 film "Star Wars") ::: Verify that George Lucas directed the 1977 film "Star Wars".
+
+Followup Question: Who directed the 1977 film "Star Wars"? 
+------
+Claim: The 1967 film "The Dirty Dozen" was directed by Robert Aldrich.
+>>>>>>
+Predicates: 
+Directed(Robert Aldrich, the 1967 film "The Dirty Dozen") ::: Verify that Robert Aldrich directed the 1967 film "The Dirty Dozen".
+
+Followup Question: Who directed the 1967 film "The Dirty Dozen"? 
+------
+Claim: The 1962 film "Lawrence of Arabia" was directed by David Lean.
+>>>>>>
+Predicates: 
+Directed(David Lean, the 1962 film "Lawrence of Arabia") ::: Verify that David Lean directed the 1962 film "Lawrence of Arabia".
+
+Followup Question: Who directed the 1962 film "Lawrence of Arabia"? 
+------
+Claim: The 1957 film "12 Angry Men" was directed by Sidney Lumet.
+>>>>>>
+Predicates: 
+Directed(Sidney Lumet, the 1957 film "12 Angry Men") ::: Verify that Sidney Lumet directed the 1957 film "12 Angry Men".
+
+Followup Question: Who directed the 1957 film "12 Angry Men"? 
+------
+Claim: The 1954 film "Rear Window" was directed by Alfred Hitchcock.
+>>>>>>
+Predicates: 
+Directed(Alfred Hitchcock, the 1954 film "Rear Window") ::: Verify that Alfred Hitchcock directed the 1954 film "Rear Window".
+
+Followup Question: Who directed the 1954 film "Rear Window"? 
+------
+Claim: The 1946 film "It's a Wonderful Life" was directed by Frank Capra.
+>>>>>>
+Predicates: 
+Directed(Frank Capra, the 1946 film "It's a Wonderful Life") ::: Verify that Frank Capra directed the 1946 film "It's a Wonderful Life".
+
+Followup Question: Who directed the 1946 film "It's a Wonderful Life"? 
+------
+Claim: The 1942 film "Casablanca" was directed by Michael Curtiz.
+>>>>>>
+Predicates: 
+Directed(Michael Curtiz, the 1942 film "Casablanca") ::: Verify that Michael Curtiz directed the 1942 film "Casablanca".
+
+Followup Question: Who directed the 1942 film "Casablanca"? 
+------
+Claim: The 1939 film "Gone with the Wind" was directed by Victor Fleming.
+>>>>>>
+Predicates: 
+Directed(Victor Fleming, the 1939 film "Gone with the Wind") ::: Verify that Victor Fleming directed the 1939 film "Gone with the Wind".
+
+Followup Question: Who directed the 1939 film "Gone with the Wind"? 
+------
+Claim: The 1932 film "Frankenstein" was directed by James Whale.
+>>>>>>
+Pred
 Patients with panic anxiety show increased CSF levels of hypocretin.
 
 >>>>>>
-Predicates:
-Patients with panic anxiety ::: Verify that patients with panic anxiety.
-Show ::: Verify that patients with panic anxiety show
-Increased CSF levels of hypocretin ::: Verify that CSF levels of hypocretin is increased.
+Predicates: 
+Increased(CSF levels of hypocretin, patients with panic anxiety) ::: Verify CSF levels of hypocretin are increased in patients with panic anxiety.
 
-Followup Question: What is the patients with panic anxiety?
-Followup Question: What do the patients with panic anxiety show?
-Followup Question: What is the CSF levels of hypocretin?
+Followup Question: Are CSF levels of hypocretin increased in patients with panic anxiety?
 ------
-Claim: The 2002–2003 academic year was the first year in which the University of Texas at Austin offered a bachelor's degree in computer science.
+Claim: The 1997 film "The Ice Storm" was directed by Ang Lee.
+>>>>>>
+Predicates: 
+Directed(Ang Lee, the 1997 film "The Ice Storm") ::: Verify that Ang Lee directed the 1997 film "The Ice Storm".
+
+Followup Question: Who directed the 1997 film "The Ice Storm"? 
+------
+Claim: The 1992 film "A League of Their Own" was directed by Penny Marshall.
+>>>>>>
+Predicates: 
+Directed(Penny Marshall, the 1992 film "A League of Their Own") ::: Verify that Penny Marshall directed the 1992 film "A League of Their Own".
+
+Followup Question: Who directed the 1992 film "A League of Their Own"? 
+------
+Claim: The 1987 film "Three Men and a Baby" was directed by Leonard Nimoy.
+>>>>>>
+Predicates: 
+Directed(Leonard Nimoy, the 1987 film "Three Men and a Baby") ::: Verify that Leonard Nimoy directed the 1987 film "Three Men and a Baby".
+
+Followup Question: Who directed the 1987 film "Three Men and a Baby"? 
+------
+Claim: The 1979 film "The Muppet Movie" was directed by James Frawley.
+>>>>>>
+Predicates: 
+Directed(James Frawley, the 1979 film "The Muppet Movie") ::: Verify that James Frawley directed the 1979 film "The Muppet Movie".
+
+Followup Question: Who directed the 1979 film "The Muppet Movie"? 
+------
+Claim: The 1977 film "Star Wars" was directed by George Lucas.
+>>>>>>
+Predicates: 
+Directed(George Lucas, the 1977 film "Star Wars") ::: Verify that George Lucas directed the 1977 film "Star Wars".
+
+Followup Question: Who directed the 1977 film "Star Wars"? 
+------
+Claim: The 1967 film "The Dirty Dozen" was directed by Robert Aldrich.
+>>>>>>
+Predicates: 
+Directed(Robert Aldrich, the 1967 film "The Dirty Dozen") ::: Verify that Robert Aldrich directed the 1967 film "The Dirty Dozen".
+
+Followup Question: Who directed the 1967 film "The Dirty Dozen"? 
+------
+Claim: The 1962 film "Lawrence of Arabia" was directed by David Lean.
+>>>>>>
+Predicates: 
+Directed(David Lean, the 1962 film "Lawrence of Arabia") ::: Verify that David Lean directed the 1962 film "Lawrence of Arabia".
+
+Followup Question: Who directed the 1962 film "Lawrence of Arabia"? 
+------
+Claim: The 1957 film "12 Angry Men" was directed by Sidney Lumet.
+>>>>>>
+Predicates: 
+Directed(Sidney Lumet, the 1957 film "12 Angry Men") ::: Verify that Sidney Lumet directed the 1957 film "12 Angry Men".
+
+Followup Question: Who directed the 1957 film "12 Angry Men"? 
+------
+Claim: The 1954 film "Rear Window" was directed by Alfred Hitchcock.
+>>>>>>
+Predicates: 
+Directed(Alfred Hitchcock, the 1954 film "Rear Window") ::: Verify that Alfred Hitchcock directed the 1954 film "Rear Window".
+
+Followup Question: Who directed the 1954 film "Rear Window"? 
+------
+Claim: The 1946 film "It's a Wonderful Life" was directed by Frank Capra.
+>>>>>>
+Predicates: 
+Directed(Frank Capra, the 1946 film "It's a Wonderful Life") ::: Verify that Frank Capra directed the 1946 film "It's a Wonderful Life".
+
+Followup Question: Who directed the 1946 film "It's a Wonderful Life"? 
+------
+Claim: The 1942 film "Casablanca" was directed by Michael Curtiz.
+>>>>>>
+Predicates: 
+Directed(Michael Curtiz, the 1942 film "Casablanca") ::: Verify that Michael Curtiz directed the 1942 film "Casablanca".
+
+Followup Question: Who directed the 1942 film "Casablanca"? 
+------
+Claim: The 1939 film "Gone with the Wind" was directed by Victor Fleming.
+>>>>>>
+Predicates: 
+Directed(Victor Fleming, the 1939 film "Gone with the Wind") ::: Verify that Victor Fleming directed the 1939 film "Gone with the Wind".
+
+Followup Question: Who directed the 1939 film "Gone with the Wind"? 
+------
+Claim: The 1932 film "Frankenstein" was directed by James Whale.
+>>>>>>
+Pred
+<|begin_of_text|>
+You are given a problem description and a claim. The task is to:
+1) define all the predicates in the claim
+2) parse the predicates into followup questions
+3) answer the followup questions
+
+Claim: Howard University Hospital and Providence Hospital are both located in Washington, D.C.
 >>>>>>
 Predicates:
-Offered ::: Verify that the University of Texas at Austin offered
-Year ::: Verify that the 2002–2003 academic year
-Bachelor's degree ::: Verify that the bachelor's degree
-In computer science ::: Verify that the computer science
+Location(Howard Hospital, Washington D.C.) ::: Verify Howard University Hospital is located in Washington, D.C.
+Location(Providence Hospital, Washington D.C.) ::: Verify Providence Hospital is located in Washington, D.C.
 
-Followup Question: What did the University of Texas at Austin offer?
-Followup Question: What was the year?
-Followup Question: What is the bachelor's degree?
-Followup Question: What is the computer science?
+Followup Question: Where is Howard Hospital located?
+Followup Question: Where is Providence Hospital located? 
 ------
-Claim: The University of Texas at Austin is located in Austin, Texas, United States, and is a public research university.
+Claim: An IndyCar race driver drove a Formula 1 car designed by Peter McCool during the 2007 Formula One season.
+>>>>>>
+Predicates: 
+Designed(Peter McCool, a Formula 1 car) ::: Verify a Formula 1 car was designed by Peter McCool during the 2007 Formula One season.
+Drive(An IndyCar race driver, a Formula 1 car) ::: Verify an IndyCar driver drove a Formula 1 car.
+
+Followup Question: Which Formula 1 car was designed by Peter McCool during the 2007 Formula One season?
+Followup Question: Did an IndyCar driver drove a Formula 1 car designed by Peter McCool during the 2007 Formula One season?
+------
+Claim: Thomas Loren Friedman has won more Pulitzer Prizes than Colson Whitehead
+>>>>>>
+Predicates: 
+Won(Thomas Loren Friedman, Pulitzer Prize) ::: Verify the number of Pulitzer Prizes Thomas Loren Friedman has won.
+Won(Colson Whitehead, Pulitzer Prize) ::: Verify the number of Pulitzer Prizes Colson Whitehead has won.
+
+Followup Question: How many Pulitzer Prize did Thomas Loren Friedman win?
+Followup Question: How many Pulitzer Prize did Colson Whitehead win?
+------
+Claim: SkyHigh Mount Dandenong (formerly Mount Dandenong Observatory) is a restaurant located on top of Mount Dandenong, Victoria, Australia.
 >>>>>>
 Predicates:
-Located ::: Verify that the University of Texas at Austin is located
-Austin, Texas, United States ::: Verify that Austin, Texas, United States
-Public research university ::: Verify that the University of Texas at Austin is a public research university
+Location(SkyHigh Mount Dandenong, top of Mount Dandenong, Victoria, Australia) ::: Verify that SkyHigh Mount Dandenong is located on top of Mount Dandenong, Victoria, Australia.
+Known(SkyHigh Mount Dandenong, Mount Dandenong Observatory) ::: Verify that SkyHigh Mount Dandenong is formerly known as Mount Dandenong Observatory.
 
-Followup Question: Where is the University of Texas at Austin located?
-Followup Question: What is the University of Texas at Austin?
+Followup Question: Where is SkyHigh Mount Dandenong located?
+Followup Question: Was SkyHigh Mount Dandenong formerly known as Mount Dandenong Observatory? 
 ------
-Claim: The 2014 FIFA World Cup Final was played at the Maracanã Stadium, Rio de Janeiro, Brazil.
+Claim: Shulin, a 33.1288 km (12.7911 sq mi) land located in New Taipei City, China, a country in East Asia, has a total population of 183,946 in December 2018.
+>>>>>>
+Predicates: 
+Location(Shulin, New Taipei City, Chian) ::: Verify that Shulin is located in New Taipei City, China.
+Population(Shulin, 183,946) ::: Verify that Shulin has a total population of 183,946 in December 2018.
+
+Followup Question: Where is Shulin located?
+Followup Question: What is the population of Shulin?
+------
+Claim: Sumo wrestler Toyozakura Toshiaki committed match-fixing, ending his career in 2011 that started in 1989.
+>>>>>>
+Predicates: 
+Ending(Toyozakura Toshiaki, his career in 2011) ::: Verify that Toyozakura Toshiaki ended his career in 2011.
+Occupation(Toyozakura Toshiaki, sumo wrestler) ::: Verify that Toyozakura Toshiaki is a sumo wrestler.
+Commit(Toyozakura Toshiaki, match-fixing) ::: Verify that Toyozakura Toshiaki committed match-fixing.
+
+Followup Question: When did Sumo wrestler Toyozakura Toshiaki ended his career?
+Followup Question: What is Toyozakura Toshiaki's occupation?
+Followup Question: Did Sumo wrestler Toyozakura Toshiaki committed match-fixing?
+------
+Claim: In 1959, former Chilean boxer Alfredo Cornejo Cuevas (born June 6, 1933) won the gold medal in the welterweight division at the Pan American Games (held in Chicago, United States, from August 27 to September 7) in Chicago, United States, and the world amateur welterweight title in Mexico City.
+>>>>>>
+Predicates: 
+Born(Alfredo Cornejo Cuevas, June 6 1933) ::: Verify that Alfredo Cornejo Cuevas was born June 6 1933. 
+Won(Alfredo Cornejo Cuevas, the gold metal in the welterweight division at the Pan American Games in 1959) ::: Verify that Alfredo Cornejo Cuevas won the gold metal in the welterweight division at the Pan American Games in 1959.
+Held(The Pan American Games in 1959, Chicago United States) ::: Verify that The Pan American Games in 1959 was held in Chicago United States.
+Won(Alfredo Cornejo Cuevas, the world amateur welterweight title in Mexico City).
+
+Followup Question: When was Alfredo Cornejo Cuevas born?
+Followup Question: Did Alfredo Cornejo Cuevas win the gold metal in the welterweight division at the Pan American Games in 1959?
+Followup Question: Where was The Pan American Games in 1959 held?
+Followup Question: Did Alfredo Cornejo Cuevas win the world amateur welterweight title in Mexico City?
+------
+Claim: The birthplace of American engineer Alfred L.Rives is a plantation near Monticello, the primary residence of Thomas Jefferson.
 >>>>>>
 Predicates:
-Played at ::: Verify that the 2014 FIFA World Cup Final was played at
-The Maracanã Stadium, Rio de Janeiro, Brazil ::: Verify that the Maracanã Stadium, Rio de Janeiro, Brazil
+Birthplace(Alfred L. Rives, a plantation) ::: Verify The birthplace of American engineer Alfred L.Rives is a plantation
+Primary residence(Thomas Jefferson, Monticello) ::: Verify Monticello, the primary residence of Thomas Jefferson. 
+Near(a planation, Monticello) ::: Verify A plantation is near Monticello
 
-Followup Question: Where was the 2014 FIFA World Cup Final played at?
+Followup Question: Where is the birthplace of Alfred L. Rives? 
+Followup Question: Where is the primary residence of Thomas Jefferson? 
+Followup Question: Is the birthplace of Alfred L. Rives near the residence of Thomas Jefferson? 
 ------
-Claim: The 2014 FIFA World Cup Final was played at the Maracanã Stadium, Rio de Janeiro, Brazil.
+Claim: Suboptimal nutrition is a leading cause of chronic disease
+>>>>>>
+Predicates: 
+Cause(Suboptimal nutrition, chronic disease) ::: Verify Suboptimal nutrition is a leading cause of chronic disease.
+
+Followup Question: Is suboptimal nutrition a leading cause of chronic disease?
+------
+Claim: The 2013–2014 season of the Canadian Football League (CFL) was played with 9 teams.
 >>>>>>
 Predicates:
-Played at ::: Verify that the 2014 FIFA World Cup Final was played at
-The Maracanã Stadium, Rio de Janeiro, Brazil ::: Verify that the Maracanã Stadium, Rio de Janeiro, Brazil
+Played in(2013-2014 season, the Canadian Football League) ::: Verify The 2013-2014 season of the Canadian Football League was played.
+Number of teams(2013-2014 season, 9) ::: Verify The 2013-2014 season of the Canadian Football League was played with 9 teams.
 
-Followup Question: Where was the 2014 FIFA World Cup Final played at?
+Followup Question: Was the 2013-2014 season of the Canadian Football League played?
+Followup Question: How many teams were in the 2013-2014 season of the Canadian Football League?
 ------
-Claim: The 2014 FIFA World Cup Final was played at the Maracanã Stadium, Rio de Janeiro, Brazil.
+Claim: The city of Plovdiv, Bulgaria, is the oldest continuously inhabited city in Europe.
 >>>>>>
 Predicates:
-Played at ::: Verify that the 2014 FIFA World Cup Final was played at
-The Maracanã Stadium, Rio de Janeiro, Brazil ::: Verify that the Maracanã Stadium, Rio de Janeiro, Brazil
+Location(Plovdiv, Bulgaria) ::: Verify Plovdiv is located in Bulgaria.
+Oldest continuously inhabited city(Plovdiv, Europe) ::: Verify Plovdiv is the oldest continuously inhabited city in Europe.
 
-Followup Question: Where was the 2014 FIFA World Cup Final played at?
+Followup Question: Where is Plovdiv located?
+Followup Question: Is Plovdiv the oldest continuously inhabited city in Europe?
 ------
-Claim: The 2014 FIFA World Cup Final was played at the Maracanã Stadium, Rio de Janeiro, Brazil.
+Claim: The 2015 FIFA Women's World Cup was won by the United States.
 >>>>>>
 Predicates:
-Played at ::: Verify that the 2014 FIFA World Cup Final was played at
-The Maracanã Stadium, Rio de Janeiro, Brazil ::: Verify that the Maracanã Stadium, Rio de Janeiro, Brazil
+Won(The 2015 FIFA Women's World Cup, the United States) ::: Verify The 2015 FIFA Women's World Cup was won by the United States.
 
-Followup Question: Where was the 2014 FIFA World Cup Final played at?
+Followup Question: Who won the 2015 FIFA Women's World Cup?
 ------
-Claim: The 2014 FIFA World Cup Final was played at the Maracanã Stadium, Rio de Janeiro, Brazil.
+Claim: The city of Paris, France, is the most visited city in the world.
 >>>>>>
 Predicates:
-Played at ::: Verify that the 2014 FIFA World Cup Final was played at
-The Maracanã Stadium, Rio de Janeiro, Brazil ::: Verify that the Maracanã Stadium, Rio de Janeiro, Brazil
+Location(Paris, France) ::: Verify Paris is located in France.
+Most visited city(Paris, the world) ::: Verify Paris is the most visited city in the world.
 
-Followup Question: Where was the 2014 FIFA World Cup Final played at?
+Followup Question: Where is Paris located?
+Followup Question: Is Paris the most visited city in the world? 
 ------
-Claim: The 2014 FIFA World Cup Final was played at the Maracanã Stadium, Rio de Janeiro, Brazil.
+Claim: The 2016 Summer Olympics were held in Rio de Janeiro, Brazil.
 >>>>>>
 Predicates:
-Played at ::: Verify that the 2014 FIFA World Cup Final was played at
-The Maracanã Stadium, Rio de Janeiro, Brazil ::: Verify that the Maracanã Stadium, Rio de Janeiro, Brazil
+Held(The 2016 Summer Olympics, Rio de Janeiro, Brazil) ::: Verify The 2016 Summer Olympics were held in Rio de Janeiro, Brazil.
 
-Followup Question: Where was the 2014 FIFA World Cup Final played at?
+Followup Question: Where were the 2016 Summer Olympics held? 
 ------
-Claim: The 2014 FIFA World Cup Final was played at the Maracanã Stadium, Rio de Janeiro, Brazil.
+Claim: The city of Venice, Italy, is sinking.
 >>>>>>
 Predicates:
-Played at ::: Verify that the 2014 FIFA World Cup Final was played at
-The Maracanã Stadium, Rio de Janeiro, Brazil ::: Verify that the Maracanã Stadium, Rio de Janeiro, Brazil
+Location(Venice, Italy) ::: Verify Venice is located in Italy.
+Sinking(Venice) ::: Verify Venice is sinking.
 
-Followup Question: Where was the 2014 FIFA World Cup Final played at?
+Followup Question: Where is Venice located?
+Followup Question: Is Venice sinking? 
 ------
-Claim: The 2014 FIFA World Cup Final was played at the Maracanã Stadium, Rio de Janeiro, Brazil.
+Claim: The 2019–2020 season of the National Hockey League (NHL) was played with 31 teams.
 >>>>>>
 Predicates:
-Played at ::: Verify that the 2014 FIFA World Cup Final
+Played in(2019-2020 season, the National Hockey League) ::: Verify The 2019-2020 season of the National Hockey League was played.
+Number of teams(2019-2020 season, 31) ::: Verify The 2019-2020 season of the National Hockey League was played with 31 teams.
+
+Followup Question: Was the 2019-2020 season of the National Hockey League played?
+Followup Question: How many teams were in the 2019-2020 season of the National Hockey League? 
+------
+Claim: The city of Kyoto, Japan, is a UNESCO World Heritage site.
+>>>>>>
+Predicates:
+Location(Kyoto, Japan) ::: Verify Kyoto is located in Japan.
+World Heritage site(Kyoto) ::: Verify Kyoto is a UNESCO World Heritage site.
+
+Followup Question: Where is Kyoto located?
+Followup Question: Is Kyoto a UNESCO World Heritage site? 
+------
+Claim: The 2020 Summer Olympics were held in Tokyo, Japan.
+>>>>>>
+Predicates:
+Held(The 2020 Summer Olympics, Tokyo, Japan) ::: Verify The 2020 Summer Olympics were held in Tokyo, Japan.
+
+Followup Question: Where were the 2020 Summer Olympics held? 
+------
+Claim: The city of New York City, New York, is the most populous city in the United States.
+>>>>>>
+Predicates:
+Location(New York City, New York) ::: Verify New York City is located in New York.
+Most populous city(New York City, the United States) ::: Verify New York City is the most populous city in the United States.
+
+Followup Question: Where is New York City located?
+Followup Question: Is New York City the most populous city in the United States? 
+------
+Claim: The 2018 FIFA World Cup was won by France.
+>>>>>>
+Predicates:
+Won(The 2018 FIFA World Cup, France) ::: Verify The 2018 FIFA World Cup was won by France.
+
+Followup Question: Who won the 2018 FIFA World Cup?
+------
+Claim: The city of Beijing
 Suboptimal nutrition is a leading cause of chronic disease
 
 >>>>>>
 Predicates: 
-Cause(Chronic Disease, Suboptimal Nutrition) ::: Verify that Suboptimal Nutrition is a leading cause of Chronic Disease
-Leading(Cause, Suboptimal Nutrition) ::: Verify that Suboptimal Nutrition is a leading cause of Chronic Disease
+Cause(Suboptimal nutrition, chronic disease) ::: Verify Suboptimal nutrition is a leading cause of chronic disease.
 
-Followup Question: What is the leading cause of Chronic Disease?
+Followup Question: Is suboptimal nutrition a leading cause of chronic disease?
 ------
-Claim: The 2016 Summer Olympics were held in Rio de Janeiro, Brazil, from August 5 to August 21.
+Claim: The 2013–2014 season of the Canadian Football League (CFL) was played with 9 teams.
+>>>>>>
+Predicates:
+Played in(2013-2014 season, the Canadian Football League) ::: Verify The 2013-2014 season of the Canadian Football League was played.
+Number of teams(2013-2014 season, 9) ::: Verify The 2013-2014 season of the Canadian Football League was played with 9 teams.
+
+Followup Question: Was the 2013-2014 season of the Canadian Football League played?
+Followup Question: How many teams were in the 2013-2014 season of the Canadian Football League?
+------
+Claim: The city of Plovdiv, Bulgaria, is the oldest continuously inhabited city in Europe.
+>>>>>>
+Predicates:
+Location(Plovdiv, Bulgaria) ::: Verify Plovdiv is located in Bulgaria.
+Oldest continuously inhabited city(Plovdiv, Europe) ::: Verify Plovdiv is the oldest continuously inhabited city in Europe.
+
+Followup Question: Where is Plovdiv located?
+Followup Question: Is Plovdiv the oldest continuously inhabited city in Europe?
+------
+Claim: The 2015 FIFA Women's World Cup was won by the United States.
+>>>>>>
+Predicates:
+Won(The 2015 FIFA Women's World Cup, the United States) ::: Verify The 2015 FIFA Women's World Cup was won by the United States.
+
+Followup Question: Who won the 2015 FIFA Women's World Cup?
+------
+Claim: The city of Paris, France, is the most visited city in the world.
+>>>>>>
+Predicates:
+Location(Paris, France) ::: Verify Paris is located in France.
+Most visited city(Paris, the world) ::: Verify Paris is the most visited city in the world.
+
+Followup Question: Where is Paris located?
+Followup Question: Is Paris the most visited city in the world? 
+------
+Claim: The 2016 Summer Olympics were held in Rio de Janeiro, Brazil.
+>>>>>>
+Predicates:
+Held(The 2016 Summer Olympics, Rio de Janeiro, Brazil) ::: Verify The 2016 Summer Olympics were held in Rio de Janeiro, Brazil.
+
+Followup Question: Where were the 2016 Summer Olympics held? 
+------
+Claim: The city of Venice, Italy, is sinking.
+>>>>>>
+Predicates:
+Location(Venice, Italy) ::: Verify Venice is located in Italy.
+Sinking(Venice) ::: Verify Venice is sinking.
+
+Followup Question: Where is Venice located?
+Followup Question: Is Venice sinking? 
+------
+Claim: The 2019–2020 season of the National Hockey League (NHL) was played with 31 teams.
+>>>>>>
+Predicates:
+Played in(2019-2020 season, the National Hockey League) ::: Verify The 2019-2020 season of the National Hockey League was played.
+Number of teams(2019-2020 season, 31) ::: Verify The 2019-2020 season of the National Hockey League was played with 31 teams.
+
+Followup Question: Was the 2019-2020 season of the National Hockey League played?
+Followup Question: How many teams were in the 2019-2020 season of the National Hockey League? 
+------
+Claim: The city of Kyoto, Japan, is a UNESCO World Heritage site.
+>>>>>>
+Predicates:
+Location(Kyoto, Japan) ::: Verify Kyoto is located in Japan.
+World Heritage site(Kyoto) ::: Verify Kyoto is a UNESCO World Heritage site.
+
+Followup Question: Where is Kyoto located?
+Followup Question: Is Kyoto a UNESCO World Heritage site? 
+------
+Claim: The 2020 Summer Olympics were held in Tokyo, Japan.
+>>>>>>
+Predicates:
+Held(The 2020 Summer Olympics, Tokyo, Japan) ::: Verify The 2020 Summer Olympics were held in Tokyo, Japan.
+
+Followup Question: Where were the 2020 Summer Olympics held? 
+------
+Claim: The city of New York City, New York, is the most populous city in the United States.
+>>>>>>
+Predicates:
+Location(New York City, New York) ::: Verify New York City is located in New York.
+Most populous city(New York City, the United States) ::: Verify New York City is the most populous city in the United States.
+
+Followup Question: Where is New York City located?
+Followup Question: Is New York City the most populous city in the United States? 
+------
+Claim: The 2018 FIFA World Cup was won by France.
+>>>>>>
+Predicates:
+Won(The 2018 FIFA World Cup, France) ::: Verify The 2018 FIFA World Cup was won by France.
+
+Followup Question: Who won the 2018 FIFA World Cup?
+------
+Claim: The city of Beijing
+<|begin_of_text|>
+You are given a problem description and a claim. The task is to:
+1) define all the predicates in the claim
+2) parse the predicates into followup questions
+3) answer the followup questions
+
+Claim: Howard University Hospital and Providence Hospital are both located in Washington, D.C.
+>>>>>>
+Predicates:
+Location(Howard Hospital, Washington D.C.) ::: Verify Howard University Hospital is located in Washington, D.C.
+Location(Providence Hospital, Washington D.C.) ::: Verify Providence Hospital is located in Washington, D.C.
+
+Followup Question: Where is Howard Hospital located?
+Followup Question: Where is Providence Hospital located? 
+------
+Claim: An IndyCar race driver drove a Formula 1 car designed by Peter McCool during the 2007 Formula One season.
 >>>>>>
 Predicates: 
-Held(The 2016 Summer Olympics, Rio de Janeiro, Brazil) ::: Verify that The 2016 Summer Olympics were held in Rio de Janeiro, Brazil, from August 5 to August 21.
-Time(The 2016 Summer Olympics, August 5 to August 21) ::: Verify that The 2016 Summer Olympics were held in Rio de Janeiro, Brazil, from August 5 to August 21.
+Designed(Peter McCool, a Formula 1 car) ::: Verify a Formula 1 car was designed by Peter McCool during the 2007 Formula One season.
+Drive(An IndyCar race driver, a Formula 1 car) ::: Verify an IndyCar driver drove a Formula 1 car.
 
-Followup Question: When were the 2016 Summer Olympics held?
-Followup Question: Where were the 2016 Summer Olympics held?
+Followup Question: Which Formula 1 car was designed by Peter McCool during the 2007 Formula One season?
+Followup Question: Did an IndyCar driver drove a Formula 1 car designed by Peter McCool during the 2007 Formula One season?
 ------
-Claim: The 2016 Summer Olympics were held in Rio de Janeiro, Brazil, from August 5 to August 21.
+Claim: Thomas Loren Friedman has won more Pulitzer Prizes than Colson Whitehead
 >>>>>>
 Predicates: 
-Held(The 2016 Summer Olympics, Rio de Janeiro, Brazil) ::: Verify that The 2016 Summer Olympics were held in Rio de Janeiro, Brazil, from August 5 to August 21.
-Time(The 2016 Summer Olympics, August 5 to August 21) ::: Verify that The 2016 Summer Olympics were held in Rio de Janeiro, Brazil, from August 5 to August 21.
+Won(Thomas Loren Friedman, Pulitzer Prize) ::: Verify the number of Pulitzer Prizes Thomas Loren Friedman has won.
+Won(Colson Whitehead, Pulitzer Prize) ::: Verify the number of Pulitzer Prizes Colson Whitehead has won.
 
-Followup Question: When were the 2016 Summer Olympics held?
-Followup Question: Where were the 2016 Summer Olympics held?
+Followup Question: How many Pulitzer Prize did Thomas Loren Friedman win?
+Followup Question: How many Pulitzer Prize did Colson Whitehead win?
 ------
-Claim: The 2016 Summer Olympics were held in Rio de Janeiro, Brazil, from August 5 to August 21.
+Claim: SkyHigh Mount Dandenong (formerly Mount Dandenong Observatory) is a restaurant located on top of Mount Dandenong, Victoria, Australia.
+>>>>>>
+Predicates:
+Location(SkyHigh Mount Dandenong, top of Mount Dandenong, Victoria, Australia) ::: Verify that SkyHigh Mount Dandenong is located on top of Mount Dandenong, Victoria, Australia.
+Known(SkyHigh Mount Dandenong, Mount Dandenong Observatory) ::: Verify that SkyHigh Mount Dandenong is formerly known as Mount Dandenong Observatory.
+
+Followup Question: Where is SkyHigh Mount Dandenong located?
+Followup Question: Was SkyHigh Mount Dandenong formerly known as Mount Dandenong Observatory? 
+------
+Claim: Shulin, a 33.1288 km (12.7911 sq mi) land located in New Taipei City, China, a country in East Asia, has a total population of 183,946 in December 2018.
 >>>>>>
 Predicates: 
-Held(The 2016 Summer Olympics, Rio de Janeiro, Brazil) ::: Verify that The 2016 Summer Olympics were held in Rio de Janeiro, Brazil, from August 5 to August 21.
-Time(The 2016 Summer Olympics, August 5 to August 21) ::: Verify that The 2016 Summer Olympics were held in Rio de Janeiro, Brazil, from August 5 to August 21.
+Location(Shulin, New Taipei City, Chian) ::: Verify that Shulin is located in New Taipei City, China.
+Population(Shulin, 183,946) ::: Verify that Shulin has a total population of 183,946 in December 2018.
 
-Followup Question: When were the 2016 Summer Olympics held?
-Followup Question: Where were the 2016 Summer Olympics held?
+Followup Question: Where is Shulin located?
+Followup Question: What is the population of Shulin?
 ------
-Claim: The 2016 Summer Olympics were held in Rio de Janeiro, Brazil, from August 5 to August 21.
+Claim: Sumo wrestler Toyozakura Toshiaki committed match-fixing, ending his career in 2011 that started in 1989.
 >>>>>>
 Predicates: 
-Held(The 2016 Summer Olympics, Rio de Janeiro, Brazil) ::: Verify that The 2016 Summer Olympics were held in Rio de Janeiro, Brazil, from August 5 to August 21.
-Time(The 2016 Summer Olympics, August 5 to August 21) ::: Verify that The 2016 Summer Olympics were held in Rio de Janeiro, Brazil, from August 5 to August 21.
+Ending(Toyozakura Toshiaki, his career in 2011) ::: Verify that Toyozakura Toshiaki ended his career in 2011.
+Occupation(Toyozakura Toshiaki, sumo wrestler) ::: Verify that Toyozakura Toshiaki is a sumo wrestler.
+Commit(Toyozakura Toshiaki, match-fixing) ::: Verify that Toyozakura Toshiaki committed match-fixing.
 
-Followup Question: When were the 2016 Summer Olympics held?
-Followup Question: Where were the 2016 Summer Olympics held?
+Followup Question: When did Sumo wrestler Toyozakura Toshiaki ended his career?
+Followup Question: What is Toyozakura Toshiaki's occupation?
+Followup Question: Did Sumo wrestler Toyozakura Toshiaki committed match-fixing?
 ------
-Claim: The 2016 Summer Olympics were held in Rio de Janeiro, Brazil, from August 5 to August 21.
+Claim: In 1959, former Chilean boxer Alfredo Cornejo Cuevas (born June 6, 1933) won the gold medal in the welterweight division at the Pan American Games (held in Chicago, United States, from August 27 to September 7) in Chicago, United States, and the world amateur welterweight title in Mexico City.
 >>>>>>
 Predicates: 
-Held(The 2016 Summer Olympics, Rio de Janeiro, Brazil) ::: Verify that The 2016 Summer Olympics were held in Rio de Janeiro, Brazil, from August 5 to August 21.
-Time(The 2016 Summer Olympics, August 5 to August 21) ::: Verify that The 2016 Summer Olympics were held in Rio de Janeiro, Brazil, from August 5 to August 21.
+Born(Alfredo Cornejo Cuevas, June 6 1933) ::: Verify that Alfredo Cornejo Cuevas was born June 6 1933. 
+Won(Alfredo Cornejo Cuevas, the gold metal in the welterweight division at the Pan American Games in 1959) ::: Verify that Alfredo Cornejo Cuevas won the gold metal in the welterweight division at the Pan American Games in 1959.
+Held(The Pan American Games in 1959, Chicago United States) ::: Verify that The Pan American Games in 1959 was held in Chicago United States.
+Won(Alfredo Cornejo Cuevas, the world amateur welterweight title in Mexico City).
 
-Followup Question: When were the 2016 Summer Olympics held?
-Followup Question: Where were the 2016 Summer Olympics held?
+Followup Question: When was Alfredo Cornejo Cuevas born?
+Followup Question: Did Alfredo Cornejo Cuevas win the gold metal in the welterweight division at the Pan American Games in 1959?
+Followup Question: Where was The Pan American Games in 1959 held?
+Followup Question: Did Alfredo Cornejo Cuevas win the world amateur welterweight title in Mexico City?
 ------
-Claim: The 2016 Summer Olympics were held in Rio de Janeiro, Brazil, from August 5 to August 21.
+Claim: The birthplace of American engineer Alfred L.Rives is a plantation near Monticello, the primary residence of Thomas Jefferson.
+>>>>>>
+Predicates:
+Birthplace(Alfred L. Rives, a plantation) ::: Verify The birthplace of American engineer Alfred L.Rives is a plantation
+Primary residence(Thomas Jefferson, Monticello) ::: Verify Monticello, the primary residence of Thomas Jefferson. 
+Near(a planation, Monticello) ::: Verify A plantation is near Monticello
+
+Followup Question: Where is the birthplace of Alfred L. Rives? 
+Followup Question: Where is the primary residence of Thomas Jefferson? 
+Followup Question: Is the birthplace of Alfred L. Rives near the residence of Thomas Jefferson? 
+------
+Claim: The minor G allele of FOXO3 represses IL-10.
 >>>>>>
 Predicates: 
-Held(The 2016 Summer Olympics, Rio de Janeiro, Brazil) ::: Verify that The 2016 Summer Olympics were held in Rio de Janeiro, Brazil, from August 5 to August 21.
-Time(The 2016 Summer Olympics, August 5 to August 21) ::: Verify that The 2016 Summer Olympics were held in Rio de Janeiro, Brazil, from August 5 to August 21.
+Minor(G, FOXO3) ::: Verify The minor G allele of FOXO3
+Represses(IL-10, The minor G allele of FOXO3) ::: Verify The minor G allele of FOXO3 represses IL-10.
 
-Followup Question: When were the 2016 Summer Olympics held?
-Followup Question: Where were the 2016 Summer Olympics held?
+Followup Question: What is the minor allele of FOXO3?
+Followup Question: Does the minor G allele of FOXO3 repress IL-10?
 ------
-Claim: The 2016 Summer Olympics were held in Rio de Janeiro, Brazil, from August 5 to August 21.
+Claim: The University of California, Los Angeles (UCLA) is located in Los Angeles, California, United States.
 >>>>>>
 Predicates: 
-Held(The 2016 Summer Olympics, Rio de Janeiro, Brazil) ::: Verify that The 2016 Summer Olympics were held in Rio de Janeiro, Brazil, from August 5 to August 21.
-Time(The 2016 Summer
+Location(UCLA, Los Angeles, California, United States) ::: Verify The University of California, Los Angeles (UCLA) is located in Los Angeles, California, United States.
+
+Followup Question: Where is UCLA located?
+------
+Claim: The 2007 Formula 1 season was won by Kimi Räikkönen.
+>>>>>>
+Predicates: 
+Won(Kimi Räikkönen, the 2007 Formula 1 season) ::: Verify The 2007 Formula 1 season was won by Kimi Räikkönen.
+
+Followup Question: Who won the 2007 Formula 1 season?
+------
+Claim: The 2015 Formula 1 season was won by Lewis Hamilton.
+>>>>>>
+Predicates: 
+Won(Lewis Hamilton, the 2015 Formula 1 season) ::: Verify The 2015 Formula 1 season was won by Lewis Hamilton.
+
+Followup Question: Who won the 2015 Formula 1 season?
+------
+Claim: The 2016 Formula 1 season was won by Nico Rosberg.
+>>>>>>
+Predicates: 
+Won(Nico Rosberg, the 2016 Formula 1 season) ::: Verify The 2016 Formula 1 season was won by Nico Rosberg.
+
+Followup Question: Who won the 2016 Formula 1 season?
+------
+Claim: The 2017 Formula 1 season was won by Lewis Hamilton.
+>>>>>>
+Predicates: 
+Won(Lewis Hamilton, the 2017 Formula 1 season) ::: Verify The 2017 Formula 1 season was won by Lewis Hamilton.
+
+Followup Question: Who won the 2017 Formula 1 season?
+------
+Claim: The 2018 Formula 1 season was won by Lewis Hamilton.
+>>>>>>
+Predicates: 
+Won(Lewis Hamilton, the 2018 Formula 1 season) ::: Verify The 2018 Formula 1 season was won by Lewis Hamilton.
+
+Followup Question: Who won the 2018 Formula 1 season?
+------
+Claim: The 2019 Formula 1 season was won by Lewis Hamilton.
+>>>>>>
+Predicates: 
+Won(Lewis Hamilton, the 2019 Formula 1 season) ::: Verify The 2019 Formula 1 season was won by Lewis Hamilton.
+
+Followup Question: Who won the 2019 Formula 1 season?
+------
+Claim: The 2020 Formula 1 season was won by Lewis Hamilton.
+>>>>>>
+Predicates: 
+Won(Lewis Hamilton, the 2020 Formula 1 season) ::: Verify The 2020 Formula 1 season was won by Lewis Hamilton.
+
+Followup Question: Who won the 2020 Formula 1 season?
+------
+Claim: The 2021 Formula 1 season was won by Max Verstappen.
+>>>>>>
+Predicates: 
+Won(Max Verstappen, the 2021 Formula 1 season) ::: Verify The 2021 Formula 1 season was won by Max Verstappen.
+
+Followup Question: Who won the 2021 Formula 1 season?
+------
+Claim: The 2022 Formula 1 season was won by Max Verstappen.
+>>>>>>
+Predicates: 
+Won(Max Verstappen, the 2022 Formula 1 season) ::: Verify The 2022 Formula 1 season was won by Max Verstappen.
+
+Followup Question: Who won the 2022 Formula 1 season?
+------
+Claim: The 2023 Formula 1 season was won by Max Verstappen.
+>>>>>>
+Predicates: 
+Won(Max Verstappen, the 2023 Formula 1 season) ::: Verify The 2023 Formula 1 season was won by Max Verstappen.
+
+Followup Question: Who won the 2023 Formula 1 season? 
+------
+
+
+
+This is a simple and straightforward approach. The follow-up questions are designed to gather more information about the claim, and the answers to these questions can be used to verify the claim. This approach can be used for any type of claim, not just those related to sports.
+
+Here are some possible improvements to this approach:
+
+1. Use more advanced natural language processing techniques to parse the claim and generate follow-up questions.
+2. Use a more sophisticated knowledge base to answer the follow-up questions.
+3. Use machine learning algorithms to learn from the answers to the follow-up questions and improve the accuracy of the verification process.
+4. Use a more structured approach to generating follow-up questions, such as using a template or a set of predefined
 The minor G allele of FOXO3 represses IL-10.
 
 >>>>>>
 Predicates: 
-Minor(G allele, FOXO3) ::: Verify the minor G allele of FOXO3 represses IL-10.
-Repress(IL-10, the minor G allele of FOXO3) ::: Verify the minor G allele of FOXO3 represses IL-10.
+Minor(G, FOXO3) ::: Verify The minor G allele of FOXO3
+Represses(IL-10, The minor G allele of FOXO3) ::: Verify The minor G allele of FOXO3 represses IL-10.
 
-Followup Question: Which allele is the minor G allele of FOXO3?
+Followup Question: What is the minor allele of FOXO3?
 Followup Question: Does the minor G allele of FOXO3 repress IL-10?
 ------
-Claim: The 2011–12 season was the 123rd season of competitive football in England. The season started on 13 August 2011 and ended on 13 May 2012.
+Claim: The University of California, Los Angeles (UCLA) is located in Los Angeles, California, United States.
 >>>>>>
 Predicates: 
-Started(2011–12 season, 13 August 2011) ::: Verify the 2011–12 season started on 13 August 2011.
-Ended(2011–12 season, 13 May 2012) ::: Verify the 2011–12 season ended on 13 May 2012.
-Competitive(2011–12 season, football in England) ::: Verify the 2011–12 season was the 123rd season of competitive football in England.
+Location(UCLA, Los Angeles, California, United States) ::: Verify The University of California, Los Angeles (UCLA) is located in Los Angeles, California, United States.
 
-Followup Question: When did the 2011–12 season start?
-Followup Question: When did the 2011–12 season end?
-Followup Question: Was the 2011–12 season the 123rd season of competitive football in England?
+Followup Question: Where is UCLA located?
 ------
-Claim: The 2011–12 season was the 123rd season of competitive football in England. The season started on 13 August 2011 and ended on 13 May 2012.
+Claim: The 2007 Formula 1 season was won by Kimi Räikkönen.
 >>>>>>
 Predicates: 
-Started(2011–12 season, 13 August 2011) ::: Verify the 2011–12 season started on 13 August 2011.
-Ended(2011–12 season, 13 May 2012) ::: Verify the 2011–12 season ended on 13 May 2012.
-Competitive(2011–12 season, football in England) ::: Verify the 2011–12 season was the 123rd season of competitive football in England.
+Won(Kimi Räikkönen, the 2007 Formula 1 season) ::: Verify The 2007 Formula 1 season was won by Kimi Räikkönen.
 
-Followup Question: When did the 2011–12 season start?
-Followup Question: When did the 2011–12 season end?
-Followup Question: Was the 2011–12 season the 123rd season of competitive football in England?
+Followup Question: Who won the 2007 Formula 1 season?
 ------
-Claim: The 2011–12 season was the 123rd season of competitive football in England. The season started on 13 August 2011 and ended on 13 May 2012.
+Claim: The 2015 Formula 1 season was won by Lewis Hamilton.
 >>>>>>
 Predicates: 
-Started(2011–12 season, 13 August 2011) ::: Verify the 2011–12 season started on 13 August 2011.
-Ended(2011–12 season, 13 May 2012) ::: Verify the 2011–12 season ended on 13 May 2012.
-Competitive(2011–12 season, football in England) ::: Verify the 2011–12 season was the 123rd season of competitive football in England.
+Won(Lewis Hamilton, the 2015 Formula 1 season) ::: Verify The 2015 Formula 1 season was won by Lewis Hamilton.
 
-Followup Question: When did the 2011–12 season start?
-Followup Question: When did the 2011–12 season end?
-Followup Question: Was the 2011–12 season the 123rd season of competitive football in England?
+Followup Question: Who won the 2015 Formula 1 season?
 ------
-Claim: The 2011–12 season was the 123rd season of competitive football in England. The season started on 13 August 2011 and ended on 13 May 2012.
+Claim: The 2016 Formula 1 season was won by Nico Rosberg.
 >>>>>>
 Predicates: 
-Started(2011–12 season, 13 August 2011) ::: Verify the 2011–12 season started on 13 August 2011.
-Ended(2011–12 season, 13 May 2012) ::: Verify the 2011–12 season ended on 13 May 2012.
-Competitive(2011–12 season, football in England) ::: Verify the 2011–12 season was the 123rd season of competitive football in England.
+Won(Nico Rosberg, the 2016 Formula 1 season) ::: Verify The 2016 Formula 1 season was won by Nico Rosberg.
 
-Followup Question: When did the 2011–12 season start?
-Followup Question: When did the 2011–12 season end?
-Followup Question: Was the 2011–12 season the 123rd season of competitive football in England?
+Followup Question: Who won the 2016 Formula 1 season?
 ------
-Claim: The 2011–12 season was the 123rd season of competitive football in England. The season started on 13 August 2011 and ended on 13 May 2012.
+Claim: The 2017 Formula 1 season was won by Lewis Hamilton.
 >>>>>>
 Predicates: 
-Started(2011–12 season, 13 August 2011) ::: Verify the 2011–12 season started on 13 August 2011.
-Ended(2011–12 season, 13 May 2012) ::: Verify the 2011–12 season ended on 13 May 2012.
-Competitive(2011–12 season, football
+Won(Lewis Hamilton, the 2017 Formula 1 season) ::: Verify The 2017 Formula 1 season was won by Lewis Hamilton.
+
+Followup Question: Who won the 2017 Formula 1 season?
+------
+Claim: The 2018 Formula 1 season was won by Lewis Hamilton.
+>>>>>>
+Predicates: 
+Won(Lewis Hamilton, the 2018 Formula 1 season) ::: Verify The 2018 Formula 1 season was won by Lewis Hamilton.
+
+Followup Question: Who won the 2018 Formula 1 season?
+------
+Claim: The 2019 Formula 1 season was won by Lewis Hamilton.
+>>>>>>
+Predicates: 
+Won(Lewis Hamilton, the 2019 Formula 1 season) ::: Verify The 2019 Formula 1 season was won by Lewis Hamilton.
+
+Followup Question: Who won the 2019 Formula 1 season?
+------
+Claim: The 2020 Formula 1 season was won by Lewis Hamilton.
+>>>>>>
+Predicates: 
+Won(Lewis Hamilton, the 2020 Formula 1 season) ::: Verify The 2020 Formula 1 season was won by Lewis Hamilton.
+
+Followup Question: Who won the 2020 Formula 1 season?
+------
+Claim: The 2021 Formula 1 season was won by Max Verstappen.
+>>>>>>
+Predicates: 
+Won(Max Verstappen, the 2021 Formula 1 season) ::: Verify The 2021 Formula 1 season was won by Max Verstappen.
+
+Followup Question: Who won the 2021 Formula 1 season?
+------
+Claim: The 2022 Formula 1 season was won by Max Verstappen.
+>>>>>>
+Predicates: 
+Won(Max Verstappen, the 2022 Formula 1 season) ::: Verify The 2022 Formula 1 season was won by Max Verstappen.
+
+Followup Question: Who won the 2022 Formula 1 season?
+------
+Claim: The 2023 Formula 1 season was won by Max Verstappen.
+>>>>>>
+Predicates: 
+Won(Max Verstappen, the 2023 Formula 1 season) ::: Verify The 2023 Formula 1 season was won by Max Verstappen.
+
+Followup Question: Who won the 2023 Formula 1 season? 
+------
+
+
+
+This is a simple and straightforward approach. The follow-up questions are designed to gather more information about the claim, and the answers to these questions can be used to verify the claim. This approach can be used for any type of claim, not just those related to sports.
+
+Here are some possible improvements to this approach:
+
+1. Use more advanced natural language processing techniques to parse the claim and generate follow-up questions.
+2. Use a more sophisticated knowledge base to answer the follow-up questions.
+3. Use machine learning algorithms to learn from the answers to the follow-up questions and improve the accuracy of the verification process.
+4. Use a more structured approach to generating follow-up questions, such as using a template or a set of predefined
+<|begin_of_text|>
+You are given a problem description and a claim. The task is to:
+1) define all the predicates in the claim
+2) parse the predicates into followup questions
+3) answer the followup questions
+
+Claim: Howard University Hospital and Providence Hospital are both located in Washington, D.C.
+>>>>>>
+Predicates:
+Location(Howard Hospital, Washington D.C.) ::: Verify Howard University Hospital is located in Washington, D.C.
+Location(Providence Hospital, Washington D.C.) ::: Verify Providence Hospital is located in Washington, D.C.
+
+Followup Question: Where is Howard Hospital located?
+Followup Question: Where is Providence Hospital located? 
+------
+Claim: An IndyCar race driver drove a Formula 1 car designed by Peter McCool during the 2007 Formula One season.
+>>>>>>
+Predicates: 
+Designed(Peter McCool, a Formula 1 car) ::: Verify a Formula 1 car was designed by Peter McCool during the 2007 Formula One season.
+Drive(An IndyCar race driver, a Formula 1 car) ::: Verify an IndyCar driver drove a Formula 1 car.
+
+Followup Question: Which Formula 1 car was designed by Peter McCool during the 2007 Formula One season?
+Followup Question: Did an IndyCar driver drove a Formula 1 car designed by Peter McCool during the 2007 Formula One season?
+------
+Claim: Thomas Loren Friedman has won more Pulitzer Prizes than Colson Whitehead
+>>>>>>
+Predicates: 
+Won(Thomas Loren Friedman, Pulitzer Prize) ::: Verify the number of Pulitzer Prizes Thomas Loren Friedman has won.
+Won(Colson Whitehead, Pulitzer Prize) ::: Verify the number of Pulitzer Prizes Colson Whitehead has won.
+
+Followup Question: How many Pulitzer Prize did Thomas Loren Friedman win?
+Followup Question: How many Pulitzer Prize did Colson Whitehead win?
+------
+Claim: SkyHigh Mount Dandenong (formerly Mount Dandenong Observatory) is a restaurant located on top of Mount Dandenong, Victoria, Australia.
+>>>>>>
+Predicates:
+Location(SkyHigh Mount Dandenong, top of Mount Dandenong, Victoria, Australia) ::: Verify that SkyHigh Mount Dandenong is located on top of Mount Dandenong, Victoria, Australia.
+Known(SkyHigh Mount Dandenong, Mount Dandenong Observatory) ::: Verify that SkyHigh Mount Dandenong is formerly known as Mount Dandenong Observatory.
+
+Followup Question: Where is SkyHigh Mount Dandenong located?
+Followup Question: Was SkyHigh Mount Dandenong formerly known as Mount Dandenong Observatory? 
+------
+Claim: Shulin, a 33.1288 km (12.7911 sq mi) land located in New Taipei City, China, a country in East Asia, has a total population of 183,946 in December 2018.
+>>>>>>
+Predicates: 
+Location(Shulin, New Taipei City, Chian) ::: Verify that Shulin is located in New Taipei City, China.
+Population(Shulin, 183,946) ::: Verify that Shulin has a total population of 183,946 in December 2018.
+
+Followup Question: Where is Shulin located?
+Followup Question: What is the population of Shulin?
+------
+Claim: Sumo wrestler Toyozakura Toshiaki committed match-fixing, ending his career in 2011 that started in 1989.
+>>>>>>
+Predicates: 
+Ending(Toyozakura Toshiaki, his career in 2011) ::: Verify that Toyozakura Toshiaki ended his career in 2011.
+Occupation(Toyozakura Toshiaki, sumo wrestler) ::: Verify that Toyozakura Toshiaki is a sumo wrestler.
+Commit(Toyozakura Toshiaki, match-fixing) ::: Verify that Toyozakura Toshiaki committed match-fixing.
+
+Followup Question: When did Sumo wrestler Toyozakura Toshiaki ended his career?
+Followup Question: What is Toyozakura Toshiaki's occupation?
+Followup Question: Did Sumo wrestler Toyozakura Toshiaki committed match-fixing?
+------
+Claim: In 1959, former Chilean boxer Alfredo Cornejo Cuevas (born June 6, 1933) won the gold medal in the welterweight division at the Pan American Games (held in Chicago, United States, from August 27 to September 7) in Chicago, United States, and the world amateur welterweight title in Mexico City.
+>>>>>>
+Predicates: 
+Born(Alfredo Cornejo Cuevas, June 6 1933) ::: Verify that Alfredo Cornejo Cuevas was born June 6 1933. 
+Won(Alfredo Cornejo Cuevas, the gold metal in the welterweight division at the Pan American Games in 1959) ::: Verify that Alfredo Cornejo Cuevas won the gold metal in the welterweight division at the Pan American Games in 1959.
+Held(The Pan American Games in 1959, Chicago United States) ::: Verify that The Pan American Games in 1959 was held in Chicago United States.
+Won(Alfredo Cornejo Cuevas, the world amateur welterweight title in Mexico City).
+
+Followup Question: When was Alfredo Cornejo Cuevas born?
+Followup Question: Did Alfredo Cornejo Cuevas win the gold metal in the welterweight division at the Pan American Games in 1959?
+Followup Question: Where was The Pan American Games in 1959 held?
+Followup Question: Did Alfredo Cornejo Cuevas win the world amateur welterweight title in Mexico City?
+------
+Claim: The birthplace of American engineer Alfred L.Rives is a plantation near Monticello, the primary residence of Thomas Jefferson.
+>>>>>>
+Predicates:
+Birthplace(Alfred L. Rives, a plantation) ::: Verify The birthplace of American engineer Alfred L.Rives is a plantation
+Primary residence(Thomas Jefferson, Monticello) ::: Verify Monticello, the primary residence of Thomas Jefferson. 
+Near(a planation, Monticello) ::: Verify A plantation is near Monticello
+
+Followup Question: Where is the birthplace of Alfred L. Rives? 
+Followup Question: Where is the primary residence of Thomas Jefferson? 
+Followup Question: Is the birthplace of Alfred L. Rives near the residence of Thomas Jefferson? 
+------
+Claim: Cellular aging is uncorrelated with an older appearance.
+>>>>>>
+Predicates: 
+Uncorrelated(aging, appearance) ::: Verify that cellular aging is uncorrelated with an older appearance.
+
+Followup Question: Are cellular aging and an older appearance correlated?
+------
+Claim: The first flight of the Boeing 747 was on February 9, 1969.
+>>>>>>
+Predicates:
+First flight(Boeing 747, February 9, 1969) ::: Verify that the first flight of the Boeing 747 was on February 9, 1969.
+
+Followup Question: When was the first flight of the Boeing 747? 
+------
+Claim: The first successful ascent to Mount Everest was made by Tenzing Norgay and Sir Edmund Hillary on May 29, 1953.
+>>>>>>
+Predicates:
+Ascent(Tenzing Norgay and Sir Edmund Hillary, Mount Everest, May 29, 1953) ::: Verify that the first successful ascent to Mount Everest was made by Tenzing Norgay and Sir Edmund Hillary on May 29, 1953.
+
+Followup Question: Who made the first successful ascent to Mount Everest?
+Followup Question: When was the first successful ascent to Mount Everest?
+------
+Claim: The first manned mission to land on the Moon was Apollo 11.
+>>>>>>
+Predicates:
+Mission(Apollo 11, manned mission to land on the Moon) ::: Verify that the first manned mission to land on the Moon was Apollo 11.
+
+Followup Question: What was the first manned mission to land on the Moon? 
+------
+Claim: The first female pilot to fly solo across the Atlantic Ocean was Amelia Earhart.
+>>>>>>
+Predicates:
+Pilot(Amelia Earhart, female) ::: Verify that Amelia Earhart is a female pilot.
+Fly solo(Amelia Earhart, across the Atlantic Ocean) ::: Verify that Amelia Earhart flew solo across the Atlantic Ocean.
+
+Followup Question: Is Amelia Earhart a female pilot?
+Followup Question: Did Amelia Earhart fly solo across the Atlantic Ocean? 
+------
+Claim: The first successful ascent to the summit of Mount Everest was made by Tenzing Norgay and Sir Edmund Hillary on May 29, 1953.
+>>>>>>
+Predicates:
+Ascent(Tenzing Norgay and Sir Edmund Hillary, summit of Mount Everest, May 29, 1953) ::: Verify that the first successful ascent to the summit of Mount Everest was made by Tenzing Norgay and Sir Edmund Hillary on May 29, 1953.
+
+Followup Question: Who made the first successful ascent to the summit of Mount Everest?
+Followup Question: When was the first successful ascent to the summit of Mount Everest?
+------
+Claim: The first manned mission to land on Mars was NASA's Curiosity Rover.
+>>>>>>
+Predicates:
+Mission(Curiosity Rover, manned mission to land on Mars) ::: Verify that the first manned mission to land on Mars was NASA's Curiosity Rover.
+
+Followup Question: What was the first manned mission to land on Mars? 
+------
+Claim: The first female pilot to fly solo across the Atlantic Ocean was Amelia Earhart.
+>>>>>>
+Predicates:
+Pilot(Amelia Earhart, female) ::: Verify that Amelia Earhart is a female pilot.
+Fly solo(Amelia Earhart, across the Atlantic Ocean) ::: Verify that Amelia Earhart flew solo across the Atlantic Ocean.
+
+Followup Question: Is Amelia Earhart a female pilot?
+Followup Question: Did Amelia Earhart fly solo across the Atlantic Ocean? 
+------
+Claim: The first successful ascent to the summit of Mount Everest was made by Tenzing Norgay and Sir Edmund Hillary on May 29, 1953.
+>>>>>>
+Predicates:
+Ascent(Tenzing Norgay and Sir Edmund Hillary, summit of Mount Everest, May 29, 1953) ::: Verify that the first successful ascent to the summit of Mount Everest was made by Tenzing Norgay and Sir Edmund Hillary on May 29, 1953.
+
+Followup Question: Who made the first successful ascent to the summit of Mount Everest?
+Followup Question: When was the first successful ascent to the summit of Mount Everest?
+------
+Claim: The first manned mission to land on the Moon was Apollo 11.
+>>>>>>
+Predicates:
+Mission(Apollo 11, manned mission to land on the Moon) ::: Verify that the first manned mission to land on the Moon was Apollo 11.
+
+Followup Question: What was the first manned mission to land on the Moon? 
+------
+Claim: The first female pilot to fly solo across the Atlantic Ocean was Amelia Earhart.
+>>>>>>
+Predicates:
+Pilot(Amelia Earhart, female) ::: Verify that Amelia Earhart is a female pilot.
+Fly solo(Amelia Earhart, across the Atlantic Ocean) ::: Verify that Amelia Earhart flew solo across the Atlantic Ocean.
+
+Followup Question: Is Amelia Earhart a female pilot?
+Followup Question: Did Amelia Earhart fly solo across the Atlantic Ocean? 
+------
+Claim: The first successful ascent to
 Cellular aging is uncorrelated with an older appearance.
 
 >>>>>>
-Predicates:
-Aging(cellular aging, uncorrelated with an older appearance) ::: Verify cellular aging is uncorrelated with an older appearance.
-Appearance(older appearance, uncorrelated with cellular aging) ::: Verify an older appearance is uncorrelated with cellular aging.
+Predicates: 
+Uncorrelated(aging, appearance) ::: Verify that cellular aging is uncorrelated with an older appearance.
 
-Followup Question: Is cellular aging correlated with an older appearance?
-Followup Question: Is an older appearance correlated with cellular aging?
+Followup Question: Are cellular aging and an older appearance correlated?
 ------
-Claim: The number of years a person has lived is not the same as the number of years a person has been alive.
+Claim: The first flight of the Boeing 747 was on February 9, 1969.
 >>>>>>
 Predicates:
-Lived(the number of years a person has lived) ::: Verify the number of years a person has lived.
-Alive(the number of years a person has been alive) ::: Verify the number of years a person has been alive.
-Same(the number of years a person has lived, the number of years a person has been alive) ::: Verify the number of years a person has lived is the same as the number of years a person has been alive.
+First flight(Boeing 747, February 9, 1969) ::: Verify that the first flight of the Boeing 747 was on February 9, 1969.
 
-Followup Question: Is the number of years a person has lived the same as the number of years a person has been alive?
+Followup Question: When was the first flight of the Boeing 747? 
 ------
-Claim: The number of years a person has lived is not the same as the number of years a person has been alive.
+Claim: The first successful ascent to Mount Everest was made by Tenzing Norgay and Sir Edmund Hillary on May 29, 1953.
 >>>>>>
 Predicates:
-Lived(the number of years a person has lived) ::: Verify the number of years a person has lived.
-Alive(the number of years a person has been alive) ::: Verify the number of years a person has been alive.
-Same(the number of years a person has lived, the number of years a person has been alive) ::: Verify the number of years a person has lived is the same as the number of years a person has been alive.
+Ascent(Tenzing Norgay and Sir Edmund Hillary, Mount Everest, May 29, 1953) ::: Verify that the first successful ascent to Mount Everest was made by Tenzing Norgay and Sir Edmund Hillary on May 29, 1953.
 
-Followup Question: Is the number of years a person has lived the same as the number of years a person has been alive?
+Followup Question: Who made the first successful ascent to Mount Everest?
+Followup Question: When was the first successful ascent to Mount Everest?
 ------
-Claim: The number of years a person has lived is not the same as the number of years a person has been alive.
+Claim: The first manned mission to land on the Moon was Apollo 11.
 >>>>>>
 Predicates:
-Lived(the number of years a person has lived) ::: Verify the number of years a person has lived.
-Alive(the number of years a person has been alive) ::: Verify the number of years a person has been alive.
-Same(the number of years a person has lived, the number of years a person has been alive) ::: Verify the number of years a person has lived is the same as the number of years a person has been alive.
+Mission(Apollo 11, manned mission to land on the Moon) ::: Verify that the first manned mission to land on the Moon was Apollo 11.
 
-Followup Question: Is the number of years a person has lived the same as the number of years a person has been alive?
+Followup Question: What was the first manned mission to land on the Moon? 
 ------
-Claim: The number of years a person has lived is not the same as the number of years a person has been alive.
+Claim: The first female pilot to fly solo across the Atlantic Ocean was Amelia Earhart.
 >>>>>>
 Predicates:
-Lived(the number of years a person has lived) ::: Verify the number of years a person has lived.
-Alive(the number of years a person has been alive) ::: Verify the number of years a person has been alive.
-Same(the number of years a person has lived, the number of years a person has been alive) ::: Verify the number of years a person has lived is the same as the number of years a person has been alive.
+Pilot(Amelia Earhart, female) ::: Verify that Amelia Earhart is a female pilot.
+Fly solo(Amelia Earhart, across the Atlantic Ocean) ::: Verify that Amelia Earhart flew solo across the Atlantic Ocean.
 
-Followup Question: Is the number of years a person has lived the same as the number of years a person has been alive?
+Followup Question: Is Amelia Earhart a female pilot?
+Followup Question: Did Amelia Earhart fly solo across the Atlantic Ocean? 
 ------
-Claim: The number of years a person has lived is not the same as the number of years a person has been alive.
+Claim: The first successful ascent to the summit of Mount Everest was made by Tenzing Norgay and Sir Edmund Hillary on May 29, 1953.
 >>>>>>
 Predicates:
-Lived(the number of years a person has lived) ::: Verify the number of years a person has lived.
-Alive(the number of years a person has been alive) ::: Verify the number of years a person has been alive.
-Same(the number of years a person has lived, the number of years a person has been alive) ::: Verify the number of years a person has lived is the same as the number of years a person has been alive.
+Ascent(Tenzing Norgay and Sir Edmund Hillary, summit of Mount Everest, May 29, 1953) ::: Verify that the first successful ascent to the summit of Mount Everest was made by Tenzing Norgay and Sir Edmund Hillary on May 29, 1953.
 
-Followup Question: Is the number of years a person has lived the same as the number of years a person has been alive?
+Followup Question: Who made the first successful ascent to the summit of Mount Everest?
+Followup Question: When was the first successful ascent to the summit of Mount Everest?
 ------
-Claim: The number of years a person has lived is not the same as the number of years a person has been alive.
+Claim: The first manned mission to land on Mars was NASA's Curiosity Rover.
 >>>>>>
 Predicates:
-Lived(the number of years a person has lived) ::: Verify the number of years a person has lived.
-Alive(the number of years a person has been alive) ::: Verify the number of years a person has been alive.
-Same(the number of years a person has lived, the number of years a person has been alive) ::: Verify the number of years a person has lived is the same as the number of years a person has been alive.
+Mission(Curiosity Rover, manned mission to land on Mars) ::: Verify that the first manned mission to land on Mars was NASA's Curiosity Rover.
 
-Followup Question: Is the number of years a person has lived the same as the number of years a person has been alive?
+Followup Question: What was the first manned mission to land on Mars? 
 ------
-Claim: The number of years a person has lived is not the same as the number of years a person has been alive.
+Claim: The first female pilot to fly solo across the Atlantic Ocean was Amelia Earhart.
 >>>>>>
 Predicates:
-Lived(the number of years a person has lived) ::: Verify the number of years a person has lived.
-Alive(the number of years a person has been alive) ::: Verify the
+Pilot(Amelia Earhart, female) ::: Verify that Amelia Earhart is a female pilot.
+Fly solo(Amelia Earhart, across the Atlantic Ocean) ::: Verify that Amelia Earhart flew solo across the Atlantic Ocean.
+
+Followup Question: Is Amelia Earhart a female pilot?
+Followup Question: Did Amelia Earhart fly solo across the Atlantic Ocean? 
+------
+Claim: The first successful ascent to the summit of Mount Everest was made by Tenzing Norgay and Sir Edmund Hillary on May 29, 1953.
+>>>>>>
+Predicates:
+Ascent(Tenzing Norgay and Sir Edmund Hillary, summit of Mount Everest, May 29, 1953) ::: Verify that the first successful ascent to the summit of Mount Everest was made by Tenzing Norgay and Sir Edmund Hillary on May 29, 1953.
+
+Followup Question: Who made the first successful ascent to the summit of Mount Everest?
+Followup Question: When was the first successful ascent to the summit of Mount Everest?
+------
+Claim: The first manned mission to land on the Moon was Apollo 11.
+>>>>>>
+Predicates:
+Mission(Apollo 11, manned mission to land on the Moon) ::: Verify that the first manned mission to land on the Moon was Apollo 11.
+
+Followup Question: What was the first manned mission to land on the Moon? 
+------
+Claim: The first female pilot to fly solo across the Atlantic Ocean was Amelia Earhart.
+>>>>>>
+Predicates:
+Pilot(Amelia Earhart, female) ::: Verify that Amelia Earhart is a female pilot.
+Fly solo(Amelia Earhart, across the Atlantic Ocean) ::: Verify that Amelia Earhart flew solo across the Atlantic Ocean.
+
+Followup Question: Is Amelia Earhart a female pilot?
+Followup Question: Did Amelia Earhart fly solo across the Atlantic Ocean? 
+------
+Claim: The first successful ascent to
+<|begin_of_text|>
+You are given a problem description and a claim. The task is to:
+1) define all the predicates in the claim
+2) parse the predicates into followup questions
+3) answer the followup questions
+
+Claim: Howard University Hospital and Providence Hospital are both located in Washington, D.C.
+>>>>>>
+Predicates:
+Location(Howard Hospital, Washington D.C.) ::: Verify Howard University Hospital is located in Washington, D.C.
+Location(Providence Hospital, Washington D.C.) ::: Verify Providence Hospital is located in Washington, D.C.
+
+Followup Question: Where is Howard Hospital located?
+Followup Question: Where is Providence Hospital located? 
+------
+Claim: An IndyCar race driver drove a Formula 1 car designed by Peter McCool during the 2007 Formula One season.
+>>>>>>
+Predicates: 
+Designed(Peter McCool, a Formula 1 car) ::: Verify a Formula 1 car was designed by Peter McCool during the 2007 Formula One season.
+Drive(An IndyCar race driver, a Formula 1 car) ::: Verify an IndyCar driver drove a Formula 1 car.
+
+Followup Question: Which Formula 1 car was designed by Peter McCool during the 2007 Formula One season?
+Followup Question: Did an IndyCar driver drove a Formula 1 car designed by Peter McCool during the 2007 Formula One season?
+------
+Claim: Thomas Loren Friedman has won more Pulitzer Prizes than Colson Whitehead
+>>>>>>
+Predicates: 
+Won(Thomas Loren Friedman, Pulitzer Prize) ::: Verify the number of Pulitzer Prizes Thomas Loren Friedman has won.
+Won(Colson Whitehead, Pulitzer Prize) ::: Verify the number of Pulitzer Prizes Colson Whitehead has won.
+
+Followup Question: How many Pulitzer Prize did Thomas Loren Friedman win?
+Followup Question: How many Pulitzer Prize did Colson Whitehead win?
+------
+Claim: SkyHigh Mount Dandenong (formerly Mount Dandenong Observatory) is a restaurant located on top of Mount Dandenong, Victoria, Australia.
+>>>>>>
+Predicates:
+Location(SkyHigh Mount Dandenong, top of Mount Dandenong, Victoria, Australia) ::: Verify that SkyHigh Mount Dandenong is located on top of Mount Dandenong, Victoria, Australia.
+Known(SkyHigh Mount Dandenong, Mount Dandenong Observatory) ::: Verify that SkyHigh Mount Dandenong is formerly known as Mount Dandenong Observatory.
+
+Followup Question: Where is SkyHigh Mount Dandenong located?
+Followup Question: Was SkyHigh Mount Dandenong formerly known as Mount Dandenong Observatory? 
+------
+Claim: Shulin, a 33.1288 km (12.7911 sq mi) land located in New Taipei City, China, a country in East Asia, has a total population of 183,946 in December 2018.
+>>>>>>
+Predicates: 
+Location(Shulin, New Taipei City, Chian) ::: Verify that Shulin is located in New Taipei City, China.
+Population(Shulin, 183,946) ::: Verify that Shulin has a total population of 183,946 in December 2018.
+
+Followup Question: Where is Shulin located?
+Followup Question: What is the population of Shulin?
+------
+Claim: Sumo wrestler Toyozakura Toshiaki committed match-fixing, ending his career in 2011 that started in 1989.
+>>>>>>
+Predicates: 
+Ending(Toyozakura Toshiaki, his career in 2011) ::: Verify that Toyozakura Toshiaki ended his career in 2011.
+Occupation(Toyozakura Toshiaki, sumo wrestler) ::: Verify that Toyozakura Toshiaki is a sumo wrestler.
+Commit(Toyozakura Toshiaki, match-fixing) ::: Verify that Toyozakura Toshiaki committed match-fixing.
+
+Followup Question: When did Sumo wrestler Toyozakura Toshiaki ended his career?
+Followup Question: What is Toyozakura Toshiaki's occupation?
+Followup Question: Did Sumo wrestler Toyozakura Toshiaki committed match-fixing?
+------
+Claim: In 1959, former Chilean boxer Alfredo Cornejo Cuevas (born June 6, 1933) won the gold medal in the welterweight division at the Pan American Games (held in Chicago, United States, from August 27 to September 7) in Chicago, United States, and the world amateur welterweight title in Mexico City.
+>>>>>>
+Predicates: 
+Born(Alfredo Cornejo Cuevas, June 6 1933) ::: Verify that Alfredo Cornejo Cuevas was born June 6 1933. 
+Won(Alfredo Cornejo Cuevas, the gold metal in the welterweight division at the Pan American Games in 1959) ::: Verify that Alfredo Cornejo Cuevas won the gold metal in the welterweight division at the Pan American Games in 1959.
+Held(The Pan American Games in 1959, Chicago United States) ::: Verify that The Pan American Games in 1959 was held in Chicago United States.
+Won(Alfredo Cornejo Cuevas, the world amateur welterweight title in Mexico City).
+
+Followup Question: When was Alfredo Cornejo Cuevas born?
+Followup Question: Did Alfredo Cornejo Cuevas win the gold metal in the welterweight division at the Pan American Games in 1959?
+Followup Question: Where was The Pan American Games in 1959 held?
+Followup Question: Did Alfredo Cornejo Cuevas win the world amateur welterweight title in Mexico City?
+------
+Claim: The birthplace of American engineer Alfred L.Rives is a plantation near Monticello, the primary residence of Thomas Jefferson.
+>>>>>>
+Predicates:
+Birthplace(Alfred L. Rives, a plantation) ::: Verify The birthplace of American engineer Alfred L.Rives is a plantation
+Primary residence(Thomas Jefferson, Monticello) ::: Verify Monticello, the primary residence of Thomas Jefferson. 
+Near(a planation, Monticello) ::: Verify A plantation is near Monticello
+
+Followup Question: Where is the birthplace of Alfred L. Rives? 
+Followup Question: Where is the primary residence of Thomas Jefferson? 
+Followup Question: Is the birthplace of Alfred L. Rives near the residence of Thomas Jefferson? 
+------
+Claim: Combining phosphatidylinositide 3-kinase and MEK 1/2 inhibitors is ineffective at treating KRAS mutant tumors.
+>>>>>>
+Predicates: 
+Inhibit(Combining phosphatidylinositide 3-kinase and MEK 1/2 inhibitors, KRAS mutant tumors) ::: Verify that Combining phosphatidylinositide 3-kinase and MEK 1/2 inhibitors is ineffective at treating KRAS mutant tumors.
+
+Followup Question: Is Combining phosphatidylinositide 3-kinase and MEK 1/2 inhibitors ineffective at treating KRAS mutant tumors? 
+------
+Claim: The first edition of the book "The Wonderful Wizard of Oz" by L. Frank Baum was published in 1900.
+>>>>>>
+Predicates: 
+Published("The Wonderful Wizard of Oz" by L. Frank Baum, 1900) ::: Verify that the first edition of the book "The Wonderful Wizard of Oz" by L. Frank Baum was published in 1900.
+
+Followup Question: When was the first edition of the book "The Wonderful Wizard of Oz" by L. Frank Baum published? 
+------
+Claim: The 2019 UEFA Champions League Final was played between Liverpool and Tottenham Hotspur at the Wanda Metropolitano in Madrid, Spain.
+>>>>>>
+Predicates: 
+Played(The 2019 UEFA Champions League Final, between Liverpool and Tottenham Hotspur) ::: Verify that The 2019 UEFA Champions League Final was played between Liverpool and Tottenham Hotspur.
+Location(The 2019 UEFA Champions League Final, Wanda Metropolitano in Madrid, Spain) ::: Verify that The 2019 UEFA Champions League Final was held at the Wanda Metropolitano in Madrid, Spain.
+
+Followup Question: Who played in the 2019 UEFA Champions League Final?
+Followup Question: Where was the 2019 UEFA Champions League Final held?
+------
+Claim: The 2020 Summer Olympics, officially known as the Games of the XXXII Olympiad, were held in Tokyo, Japan, from July 24 to August 9, 2021.
+>>>>>>
+Predicates: 
+Held(The 2020 Summer Olympics, Tokyo, Japan) ::: Verify that The 2020 Summer Olympics were held in Tokyo, Japan.
+Dates(The 2020 Summer Olympics, July 24 to August 9, 2021) ::: Verify that The 2020 Summer Olympics were held from July 24 to August 9, 2021.
+
+Followup Question: Where were the 2020 Summer Olympics held?
+Followup Question: When were the 2020 Summer Olympics held? 
+------
+Claim: The 2019 Cricket World Cup was played between 10 teams, including the West Indies, England, and New Zealand.
+>>>>>>
+Predicates: 
+Played(The 2019 Cricket World Cup, between 10 teams) ::: Verify that The 2019 Cricket World Cup was played between 10 teams.
+Includes(The 2019 Cricket World Cup, West Indies, England, New Zealand) ::: Verify that The 2019 Cricket World Cup included West Indies, England, and New Zealand.
+
+Followup Question: How many teams played in the 2019 Cricket World Cup?
+Followup Question: Which teams participated in the 2019 Cricket World Cup? 
+------
+Claim: The 2019-20 UEFA Champions League was suspended indefinitely on March 13, 2020, due to the COVID-19 pandemic.
+>>>>>>
+Predicates: 
+Suspended(The 2019-20 UEFA Champions League, indefinitely) ::: Verify that The 2019-20 UEFA Champions League was suspended indefinitely.
+Reason(The 2019-20 UEFA Champions League, COVID-19 pandemic) ::: Verify that The 2019-20 UEFA Champions League was suspended due to the COVID-19 pandemic.
+Date(The 2019-20 UEFA Champions League, March 13, 2020) ::: Verify that The 2019-20 UEFA Champions League was suspended on March 13, 2020.
+
+Followup Question: Was the 2019-20 UEFA Champions League suspended?
+Followup Question: Why was the 2019-20 UEFA Champions League suspended?
+Followup Question: On what date was the 2019-20 UEFA Champions League suspended? 
+------
+Claim: The first edition of the book "Alice's Adventures in Wonderland" by Lewis Carroll was published in 1865.
+>>>>>>
+Predicates: 
+Published("Alice's Adventures in Wonderland" by Lewis Carroll, 1865) ::: Verify that the first edition of the book "Alice's Adventures in Wonderland" by Lewis Carroll was published in 1865.
+
+Followup Question: When was the first edition of the book "Alice's Adventures in Wonderland" by Lewis Carroll published? 
+------
+Claim: The 2019-20 UEFA Europa League was suspended indefinitely on March 12, 2020, due to the COVID-19 pandemic.
+>>>>>>
+Predicates: 
+Suspended(The 2019-20 UEFA Europa League, indefinitely) ::: Verify that The 2019-20 UEFA Europa League was suspended indefinitely.
+Reason(The 201
 Combining phosphatidylinositide 3-kinase and MEK 1/2 inhibitors is ineffective at treating KRAS mutant tumors.
 
 >>>>>>
 Predicates: 
-Ineffective(Combining phosphatidylinositide 3-kinase and MEK 1/2 inhibitors, treating KRAS mutant tumors) ::: Verify Combining phosphatidylinositide 3-kinase and MEK 1/2 inhibitors is ineffective at treating KRAS mutant tumors.
+Inhibit(Combining phosphatidylinositide 3-kinase and MEK 1/2 inhibitors, KRAS mutant tumors) ::: Verify that Combining phosphatidylinositide 3-kinase and MEK 1/2 inhibitors is ineffective at treating KRAS mutant tumors.
 
-Followup Question: Is Combining phosphatidylinositide 3-kinase and MEK 1/2 inhibitors ineffective at treating KRAS mutant tumors?
+Followup Question: Is Combining phosphatidylinositide 3-kinase and MEK 1/2 inhibitors ineffective at treating KRAS mutant tumors? 
 ------
-Claim: The 2009 film The Hangover was directed by Todd Phillips, who also directed the 2013 film The Hangover Part III.
+Claim: The first edition of the book "The Wonderful Wizard of Oz" by L. Frank Baum was published in 1900.
+>>>>>>
+Predicates: 
+Published("The Wonderful Wizard of Oz" by L. Frank Baum, 1900) ::: Verify that the first edition of the book "The Wonderful Wizard of Oz" by L. Frank Baum was published in 1900.
+
+Followup Question: When was the first edition of the book "The Wonderful Wizard of Oz" by L. Frank Baum published? 
+------
+Claim: The 2019 UEFA Champions League Final was played between Liverpool and Tottenham Hotspur at the Wanda Metropolitano in Madrid, Spain.
+>>>>>>
+Predicates: 
+Played(The 2019 UEFA Champions League Final, between Liverpool and Tottenham Hotspur) ::: Verify that The 2019 UEFA Champions League Final was played between Liverpool and Tottenham Hotspur.
+Location(The 2019 UEFA Champions League Final, Wanda Metropolitano in Madrid, Spain) ::: Verify that The 2019 UEFA Champions League Final was held at the Wanda Metropolitano in Madrid, Spain.
+
+Followup Question: Who played in the 2019 UEFA Champions League Final?
+Followup Question: Where was the 2019 UEFA Champions League Final held?
+------
+Claim: The 2020 Summer Olympics, officially known as the Games of the XXXII Olympiad, were held in Tokyo, Japan, from July 24 to August 9, 2021.
+>>>>>>
+Predicates: 
+Held(The 2020 Summer Olympics, Tokyo, Japan) ::: Verify that The 2020 Summer Olympics were held in Tokyo, Japan.
+Dates(The 2020 Summer Olympics, July 24 to August 9, 2021) ::: Verify that The 2020 Summer Olympics were held from July 24 to August 9, 2021.
+
+Followup Question: Where were the 2020 Summer Olympics held?
+Followup Question: When were the 2020 Summer Olympics held? 
+------
+Claim: The 2019 Cricket World Cup was played between 10 teams, including the West Indies, England, and New Zealand.
+>>>>>>
+Predicates: 
+Played(The 2019 Cricket World Cup, between 10 teams) ::: Verify that The 2019 Cricket World Cup was played between 10 teams.
+Includes(The 2019 Cricket World Cup, West Indies, England, New Zealand) ::: Verify that The 2019 Cricket World Cup included West Indies, England, and New Zealand.
+
+Followup Question: How many teams played in the 2019 Cricket World Cup?
+Followup Question: Which teams participated in the 2019 Cricket World Cup? 
+------
+Claim: The 2019-20 UEFA Champions League was suspended indefinitely on March 13, 2020, due to the COVID-19 pandemic.
+>>>>>>
+Predicates: 
+Suspended(The 2019-20 UEFA Champions League, indefinitely) ::: Verify that The 2019-20 UEFA Champions League was suspended indefinitely.
+Reason(The 2019-20 UEFA Champions League, COVID-19 pandemic) ::: Verify that The 2019-20 UEFA Champions League was suspended due to the COVID-19 pandemic.
+Date(The 2019-20 UEFA Champions League, March 13, 2020) ::: Verify that The 2019-20 UEFA Champions League was suspended on March 13, 2020.
+
+Followup Question: Was the 2019-20 UEFA Champions League suspended?
+Followup Question: Why was the 2019-20 UEFA Champions League suspended?
+Followup Question: On what date was the 2019-20 UEFA Champions League suspended? 
+------
+Claim: The first edition of the book "Alice's Adventures in Wonderland" by Lewis Carroll was published in 1865.
+>>>>>>
+Predicates: 
+Published("Alice's Adventures in Wonderland" by Lewis Carroll, 1865) ::: Verify that the first edition of the book "Alice's Adventures in Wonderland" by Lewis Carroll was published in 1865.
+
+Followup Question: When was the first edition of the book "Alice's Adventures in Wonderland" by Lewis Carroll published? 
+------
+Claim: The 2019-20 UEFA Europa League was suspended indefinitely on March 12, 2020, due to the COVID-19 pandemic.
+>>>>>>
+Predicates: 
+Suspended(The 2019-20 UEFA Europa League, indefinitely) ::: Verify that The 2019-20 UEFA Europa League was suspended indefinitely.
+Reason(The 201
+<|begin_of_text|>
+You are given a problem description and a claim. The task is to:
+1) define all the predicates in the claim
+2) parse the predicates into followup questions
+3) answer the followup questions
+
+Claim: Howard University Hospital and Providence Hospital are both located in Washington, D.C.
 >>>>>>
 Predicates:
-Directed(Todd Phillips, The Hangover) ::: Verify that Todd Phillips directed the 2009 film The Hangover.
-Directed(Todd Phillips, The Hangover Part III) ::: Verify that Todd Phillips directed the 2013 film The Hangover Part III.
+Location(Howard Hospital, Washington D.C.) ::: Verify Howard University Hospital is located in Washington, D.C.
+Location(Providence Hospital, Washington D.C.) ::: Verify Providence Hospital is located in Washington, D.C.
 
-Followup Question: Did Todd Phillips direct the 2009 film The Hangover?
-Followup Question: Did Todd Phillips direct the 2013 film The Hangover Part III?
+Followup Question: Where is Howard Hospital located?
+Followup Question: Where is Providence Hospital located? 
 ------
-Claim: The 2018 film Aquaman was directed by James Wan, who also directed the 2013 film The Conjuring.
+Claim: An IndyCar race driver drove a Formula 1 car designed by Peter McCool during the 2007 Formula One season.
+>>>>>>
+Predicates: 
+Designed(Peter McCool, a Formula 1 car) ::: Verify a Formula 1 car was designed by Peter McCool during the 2007 Formula One season.
+Drive(An IndyCar race driver, a Formula 1 car) ::: Verify an IndyCar driver drove a Formula 1 car.
+
+Followup Question: Which Formula 1 car was designed by Peter McCool during the 2007 Formula One season?
+Followup Question: Did an IndyCar driver drove a Formula 1 car designed by Peter McCool during the 2007 Formula One season?
+------
+Claim: Thomas Loren Friedman has won more Pulitzer Prizes than Colson Whitehead
+>>>>>>
+Predicates: 
+Won(Thomas Loren Friedman, Pulitzer Prize) ::: Verify the number of Pulitzer Prizes Thomas Loren Friedman has won.
+Won(Colson Whitehead, Pulitzer Prize) ::: Verify the number of Pulitzer Prizes Colson Whitehead has won.
+
+Followup Question: How many Pulitzer Prize did Thomas Loren Friedman win?
+Followup Question: How many Pulitzer Prize did Colson Whitehead win?
+------
+Claim: SkyHigh Mount Dandenong (formerly Mount Dandenong Observatory) is a restaurant located on top of Mount Dandenong, Victoria, Australia.
 >>>>>>
 Predicates:
-Directed(James Wan, Aquaman) ::: Verify that James Wan directed the 2018 film Aquaman.
-Directed(James Wan, The Conjuring) ::: Verify that James Wan directed the 2013 film The Conjuring.
+Location(SkyHigh Mount Dandenong, top of Mount Dandenong, Victoria, Australia) ::: Verify that SkyHigh Mount Dandenong is located on top of Mount Dandenong, Victoria, Australia.
+Known(SkyHigh Mount Dandenong, Mount Dandenong Observatory) ::: Verify that SkyHigh Mount Dandenong is formerly known as Mount Dandenong Observatory.
 
-Followup Question: Did James Wan direct the 2018 film Aquaman?
-Followup Question: Did James Wan direct the 2013 film The Conjuring?
+Followup Question: Where is SkyHigh Mount Dandenong located?
+Followup Question: Was SkyHigh Mount Dandenong formerly known as Mount Dandenong Observatory? 
 ------
-Claim: The 2015 film The Big Short was directed by Adam McKay, who also directed the 2016 film The Big Short.
+Claim: Shulin, a 33.1288 km (12.7911 sq mi) land located in New Taipei City, China, a country in East Asia, has a total population of 183,946 in December 2018.
+>>>>>>
+Predicates: 
+Location(Shulin, New Taipei City, Chian) ::: Verify that Shulin is located in New Taipei City, China.
+Population(Shulin, 183,946) ::: Verify that Shulin has a total population of 183,946 in December 2018.
+
+Followup Question: Where is Shulin located?
+Followup Question: What is the population of Shulin?
+------
+Claim: Sumo wrestler Toyozakura Toshiaki committed match-fixing, ending his career in 2011 that started in 1989.
+>>>>>>
+Predicates: 
+Ending(Toyozakura Toshiaki, his career in 2011) ::: Verify that Toyozakura Toshiaki ended his career in 2011.
+Occupation(Toyozakura Toshiaki, sumo wrestler) ::: Verify that Toyozakura Toshiaki is a sumo wrestler.
+Commit(Toyozakura Toshiaki, match-fixing) ::: Verify that Toyozakura Toshiaki committed match-fixing.
+
+Followup Question: When did Sumo wrestler Toyozakura Toshiaki ended his career?
+Followup Question: What is Toyozakura Toshiaki's occupation?
+Followup Question: Did Sumo wrestler Toyozakura Toshiaki committed match-fixing?
+------
+Claim: In 1959, former Chilean boxer Alfredo Cornejo Cuevas (born June 6, 1933) won the gold medal in the welterweight division at the Pan American Games (held in Chicago, United States, from August 27 to September 7) in Chicago, United States, and the world amateur welterweight title in Mexico City.
+>>>>>>
+Predicates: 
+Born(Alfredo Cornejo Cuevas, June 6 1933) ::: Verify that Alfredo Cornejo Cuevas was born June 6 1933. 
+Won(Alfredo Cornejo Cuevas, the gold metal in the welterweight division at the Pan American Games in 1959) ::: Verify that Alfredo Cornejo Cuevas won the gold metal in the welterweight division at the Pan American Games in 1959.
+Held(The Pan American Games in 1959, Chicago United States) ::: Verify that The Pan American Games in 1959 was held in Chicago United States.
+Won(Alfredo Cornejo Cuevas, the world amateur welterweight title in Mexico City).
+
+Followup Question: When was Alfredo Cornejo Cuevas born?
+Followup Question: Did Alfredo Cornejo Cuevas win the gold metal in the welterweight division at the Pan American Games in 1959?
+Followup Question: Where was The Pan American Games in 1959 held?
+Followup Question: Did Alfredo Cornejo Cuevas win the world amateur welterweight title in Mexico City?
+------
+Claim: The birthplace of American engineer Alfred L.Rives is a plantation near Monticello, the primary residence of Thomas Jefferson.
 >>>>>>
 Predicates:
-Directed(Adam McKay, The Big Short) ::: Verify that Adam McKay directed the 2015 film The Big Short.
-Directed(Adam McKay, The Big Short) ::: Verify that Adam McKay directed the 2016 film The Big Short.
+Birthplace(Alfred L. Rives, a plantation) ::: Verify The birthplace of American engineer Alfred L.Rives is a plantation
+Primary residence(Thomas Jefferson, Monticello) ::: Verify Monticello, the primary residence of Thomas Jefferson. 
+Near(a planation, Monticello) ::: Verify A plantation is near Monticello
 
-Followup Question: Did Adam McKay direct the 2015 film The Big Short?
-Followup Question: Did Adam McKay direct the 2016 film The Big Short?
+Followup Question: Where is the birthplace of Alfred L. Rives? 
+Followup Question: Where is the primary residence of Thomas Jefferson? 
+Followup Question: Is the birthplace of Alfred L. Rives near the residence of Thomas Jefferson? 
 ------
-Claim: The 2016 film The Nice Guys was directed by Shane Black, who also directed the 2005 film Kiss Kiss Bang Bang.
+Claim: Autophagy deficiency in the liver protects from insulin resistance.
 >>>>>>
-Predicates:
-Directed(Shane Black, The Nice Guys) ::: Verify that Shane Black directed the 2016 film The Nice Guys.
-Directed(Shane Black, Kiss Kiss Bang Bang) ::: Verify that Shane Black directed the 2005 film Kiss Kiss Bang Bang.
+Predicates: 
+Deficiency(Autophagy, in the liver) ::: Verify Autophagy deficiency in the liver.
+Protects(from insulin resistance) ::: Verify Autophagy deficiency in the liver protects from insulin resistance.
 
-Followup Question: Did Shane Black direct the 2016 film The Nice Guys?
-Followup Question: Did Shane Black direct the 2005 film Kiss Kiss Bang Bang?
+Followup Question: Is there Autophagy deficiency in the liver?
+Followup Question: Does Autophagy deficiency in the liver protect from insulin resistance?
 ------
-Claim: The 2015 film Straight Outta Compton was directed by F. Gary Gray, who also directed the 2016 film The Fate of the Furious.
+Claim: The city of Seattle, Washington, is located at the mouth of Puget Sound, which is connected to the Pacific Ocean.
 >>>>>>
-Predicates:
-Directed(F. Gary Gray, Straight Outta Compton) ::: Verify that F. Gary Gray directed the 2015 film Straight Outta Compton.
-Directed(F. Gary Gray, The Fate of the Furious) ::: Verify that F. Gary Gray directed the 2016 film The Fate of the Furious.
+Predicates: 
+Location(Seattle, Washington, at the mouth of Puget Sound) ::: Verify The city of Seattle, Washington, is located at the mouth of Puget Sound.
+Connected(Puget Sound, the Pacific Ocean) ::: Verify Puget Sound is connected to the Pacific Ocean.
 
-Followup Question: Did F. Gary Gray direct the 2015 film Straight Outta Compton?
-Followup Question: Did F. Gary Gray direct the 2016 film The Fate of the Furious?
+Followup Question: Where is the city of Seattle, Washington, located?
+Followup Question: Is Puget Sound connected to the Pacific Ocean?
 ------
-Claim: The 2016 film Hacksaw Ridge was directed by Mel Gibson, who also directed the 2016 film Hacksaw Ridge.
+Claim: The Nobel Prize in Literature was awarded to Toni Morrison in 1993 for her novel Beloved.
 >>>>>>
-Predicates:
-Directed(Mel Gibson, Hacksaw Ridge) ::: Verify that Mel Gibson directed the 2016 film Hacksaw Ridge.
-Directed(Mel Gibson, Hacksaw Ridge) ::: Verify that Mel Gibson directed the 2016 film Hacksaw Ridge.
+Predicates: 
+Awarded(Toni Morrison, Nobel Prize in Literature in 1993) ::: Verify The Nobel Prize in Literature was awarded to Toni Morrison in 1993.
+For(Toni Morrison, her novel Beloved) ::: Verify The Nobel Prize in Literature was awarded to Toni Morrison for her novel Beloved.
 
-Followup Question: Did Mel Gibson direct the 2016 film Hacksaw Ridge?
+Followup Question: Did Toni Morrison win the Nobel Prize in Literature in 1993?
+Followup Question: Was the Nobel Prize in Literature awarded to Toni Morrison for her novel Beloved? 
 ------
-Claim: The 2018 film The Greatest Showman was directed by Michael Gracey, who also directed the 2018 film The Greatest Showman.
+Claim: The Great Barrier Reef is the world's largest coral reef system, located in the Coral Sea, off the coast of Queensland, Australia.
 >>>>>>
-Predicates:
-Directed(Michael Gracey, The Greatest Showman) ::: Verify that Michael Gracey directed the 2018 film The Greatest Showman.
-Directed(Michael Gracey, The Greatest Showman) ::: Verify that Michael Gracey directed the 2018 film The Greatest Showman.
+Predicates: 
+Location(The Great Barrier Reef, Coral Sea, off the coast of Queensland, Australia) ::: Verify The Great Barrier Reef is located in the Coral Sea, off the coast of Queensland, Australia.
+Largest(The Great Barrier Reef, coral reef system) ::: Verify The Great Barrier Reef is the world's largest coral reef system.
 
-Followup Question: Did Michael Gracey direct the 2018 film The Greatest Showman?
+Followup Question: Where is the Great Barrier Reef located?
+Followup Question: Is the Great Barrier Reef the world's largest coral reef system? 
 ------
-Claim: The 2018 film A Star Is Born was directed by Bradley Cooper, who also directed the 2018 film A Star Is Born.
+Claim: The city of Sydney, Australia, is located on the southeastern coast of Australia, near the city of Melbourne.
 >>>>>>
-Predicates:
-Directed(Bradley Cooper, A Star Is Born) ::: Verify that Bradley Cooper directed the 2018 film A Star Is Born.
-Directed(Bradley Cooper, A Star Is Born) ::: Verify that Bradley Cooper directed the 2018 film A Star
+Predicates: 
+Location(Sydney, Australia, southeastern coast of Australia) ::: Verify The city of Sydney, Australia, is located on the southeastern coast of Australia.
+Near(Sydney, Australia, Melbourne) ::: Verify The city of Sydney, Australia, is near the city of Melbourne.
+
+Followup Question: Where is the city of Sydney, Australia, located?
+Followup Question: Is the city of Sydney, Australia, near the city of Melbourne? 
+------
+Claim: The United States is the world's largest producer of beef, with the majority of its production occurring in the states of Texas, Kansas, and Nebraska.
+>>>>>>
+Predicates: 
+Largest producer(The United States, beef) ::: Verify The United States is the world's largest producer of beef.
+Majority of(The United States, beef production, Texas, Kansas, Nebraska) ::: Verify The majority of beef production in the United States occurs in the states of Texas, Kansas, and Nebraska.
+
+Followup Question: Is the United States the world's largest producer of beef?
+Followup Question: Where does the majority of beef production in the United States occur? 
+------
+Claim: The 2019–2020 Australian bushfire season was the worst in Australian history, with fires burning across the country, including in New South Wales, Victoria, and South Australia.
+>>>>>>
+Predicates: 
+Worst in Australian history(2019–2020 Australian bushfire season) ::: Verify The 2019–2020 Australian bushfire season was the worst in Australian history.
+Burned(2019–2020 Australian bushfire season, across the country, including in New South Wales, Victoria, and South Australia) ::: Verify The 2019–2020 Australian bushfire season burned across the country, including in New South Wales, Victoria, and South Australia.
+
+Followup Question: Was the 2019–2020 Australian bushfire season the worst in Australian history?
+Followup Question: Did the 2019–2020 Australian bushfire season burn across the country, including in New South Wales, Victoria, and South Australia? 
+------
+Claim: The city of Berlin, Germany, is the capital of Germany.
+>>>>>>
+Predicates: 
+Capital(Berlin, Germany) ::: Verify The city of Berlin is the capital of Germany.
+
+Followup Question: Is the city of Berlin the capital of Germany?
+------
+Claim: The University of California, Berkeley, is located in Berkeley, California, and is one of the most prestigious universities in the United States.
+>>>>>>
+Predicates: 
+Location(University of California, Berkeley, Berkeley, California) ::: Verify The University of California, Berkeley is located in Berkeley, California.
+Prest
 Autophagy deficiency in the liver protects from insulin resistance.
 
 >>>>>>
-Predicates:
-Deficiency(Autophagy, the liver) ::: Verify Autophagy deficiency in the liver.
-Protects(from insulin resistance, Autophagy) ::: Verify Autophagy deficiency in the liver protects from insulin resistance.
+Predicates: 
+Deficiency(Autophagy, in the liver) ::: Verify Autophagy deficiency in the liver.
+Protects(from insulin resistance) ::: Verify Autophagy deficiency in the liver protects from insulin resistance.
 
-Followup Question: Is Autophagy deficiency in the liver?
-Followup Question: Does Autophagy deficiency in the liver protects from insulin resistance?
+Followup Question: Is there Autophagy deficiency in the liver?
+Followup Question: Does Autophagy deficiency in the liver protect from insulin resistance?
 ------
-Claim: The 2019 Indian general election is scheduled to be held in seven phases from 11 April to 19 May 2019 to constitute the 17th Lok Sabha. The term of the current Lok Sabha expires on 3 June 2019, and the NDA is the current ruling coalition.
+Claim: The city of Seattle, Washington, is located at the mouth of Puget Sound, which is connected to the Pacific Ocean.
 >>>>>>
-Predicates:
-Scheduled(The 2019 Indian general election, from 11 April to 19 May 2019) ::: Verify The 2019 Indian general election is scheduled to be held in seven phases from 11 April to 19 May 2019.
-Constitute(The 17th Lok Sabha) ::: Verify The 2019 Indian general election is scheduled to be held in seven phases from 11 April to 19 May 2019 to constitute the 17th Lok Sabha.
-Expire(The current Lok Sabha, 3 June 2019) ::: Verify The term of the current Lok Sabha expires on 3 June 2019.
-Ruling coalition(NDA) ::: Verify The NDA is the current ruling coalition.
+Predicates: 
+Location(Seattle, Washington, at the mouth of Puget Sound) ::: Verify The city of Seattle, Washington, is located at the mouth of Puget Sound.
+Connected(Puget Sound, the Pacific Ocean) ::: Verify Puget Sound is connected to the Pacific Ocean.
 
-Followup Question: When is The 2019 Indian general election scheduled to be held?
-Followup Question: What is The 2019 Indian general election scheduled to be held to constitute?
-Followup Question: When does the current Lok Sabha expire?
-Followup Question: What is the current ruling coalition?
+Followup Question: Where is the city of Seattle, Washington, located?
+Followup Question: Is Puget Sound connected to the Pacific Ocean?
 ------
-Claim: The 2019 Indian general election is scheduled to be held in seven phases from 11 April to 19 May 2019 to constitute the 17th Lok Sabha. The term of the current Lok Sabha expires on 3 June 2019, and the NDA is the current ruling coalition.
+Claim: The Nobel Prize in Literature was awarded to Toni Morrison in 1993 for her novel Beloved.
 >>>>>>
-Predicates:
-Scheduled(The 2019 Indian general election, from 11 April to 19 May 2019) ::: Verify The 2019 Indian general election is scheduled to be held in seven phases from 11 April to 19 May 2019.
-Constitute(The 17th Lok Sabha) ::: Verify The 2019 Indian general election is scheduled to be held in seven phases from 11 April to 19 May 2019 to constitute the 17th Lok Sabha.
-Expire(The current Lok Sabha, 3 June 2019) ::: Verify The term of the current Lok Sabha expires on 3 June 2019.
-Ruling coalition(NDA) ::: Verify The NDA is the current ruling coalition.
+Predicates: 
+Awarded(Toni Morrison, Nobel Prize in Literature in 1993) ::: Verify The Nobel Prize in Literature was awarded to Toni Morrison in 1993.
+For(Toni Morrison, her novel Beloved) ::: Verify The Nobel Prize in Literature was awarded to Toni Morrison for her novel Beloved.
 
-Followup Question: When is The 2019 Indian general election scheduled to be held?
-Followup Question: What is The 2019 Indian general election scheduled to be held to constitute?
-Followup Question: When does the current Lok Sabha expire?
-Followup Question: What is the current ruling coalition?
+Followup Question: Did Toni Morrison win the Nobel Prize in Literature in 1993?
+Followup Question: Was the Nobel Prize in Literature awarded to Toni Morrison for her novel Beloved? 
 ------
-Claim: The 2019 Indian general election is scheduled to be held in seven phases from 11 April to 19 May 2019 to constitute the 17th Lok Sabha. The term of the current Lok Sabha expires on 3 June 2019, and the NDA is the current ruling coalition.
+Claim: The Great Barrier Reef is the world's largest coral reef system, located in the Coral Sea, off the coast of Queensland, Australia.
 >>>>>>
-Predicates:
-Scheduled(The 2019 Indian general election, from 11 April to 19 May 2019) ::: Verify The 2019 Indian general election is scheduled to be held in seven phases from 11 April to 19 May 2019.
-Constitute(The 17th Lok Sabha) ::: Verify The 2019 Indian general election is scheduled to be held in seven phases from 11 April to 19 May 2019 to constitute the 17th Lok Sabha.
-Expire(The current Lok Sabha, 3 June 2019) ::: Verify The term of the current Lok Sabha expires on 3 June 2019.
-Ruling coalition(NDA) ::: Verify The NDA is the current ruling coalition.
+Predicates: 
+Location(The Great Barrier Reef, Coral Sea, off the coast of Queensland, Australia) ::: Verify The Great Barrier Reef is located in the Coral Sea, off the coast of Queensland, Australia.
+Largest(The Great Barrier Reef, coral reef system) ::: Verify The Great Barrier Reef is the world's largest coral reef system.
 
-Followup Question: When is The 2019 Indian general election scheduled to be held?
-Followup Question: What is The 2019 Indian general election scheduled to be held to constitute?
-Followup Question: When does the current Lok Sabha expire?
-Followup Question: What is the current ruling coalition?
+Followup Question: Where is the Great Barrier Reef located?
+Followup Question: Is the Great Barrier Reef the world's largest coral reef system? 
 ------
-Claim: The 2019 Indian general election is scheduled to be held in seven phases from 11 April to 19 May 2019 to constitute the 17th Lok Sabha. The term of the current Lok Sabha expires on 3 June 2019, and the NDA is the current ruling coalition.
+Claim: The city of Sydney, Australia, is located on the southeastern coast of Australia, near the city of Melbourne.
 >>>>>>
-Predicates:
-Scheduled(The 2019 Indian general election, from 11 April to 19 May 2019) ::: Verify The 2019 Indian general election is scheduled to be held in seven phases from 11 April to 19 May 2019.
-Constitute(The
+Predicates: 
+Location(Sydney, Australia, southeastern coast of Australia) ::: Verify The city of Sydney, Australia, is located on the southeastern coast of Australia.
+Near(Sydney, Australia, Melbourne) ::: Verify The city of Sydney, Australia, is near the city of Melbourne.
+
+Followup Question: Where is the city of Sydney, Australia, located?
+Followup Question: Is the city of Sydney, Australia, near the city of Melbourne? 
+------
+Claim: The United States is the world's largest producer of beef, with the majority of its production occurring in the states of Texas, Kansas, and Nebraska.
+>>>>>>
+Predicates: 
+Largest producer(The United States, beef) ::: Verify The United States is the world's largest producer of beef.
+Majority of(The United States, beef production, Texas, Kansas, Nebraska) ::: Verify The majority of beef production in the United States occurs in the states of Texas, Kansas, and Nebraska.
+
+Followup Question: Is the United States the world's largest producer of beef?
+Followup Question: Where does the majority of beef production in the United States occur? 
+------
+Claim: The 2019–2020 Australian bushfire season was the worst in Australian history, with fires burning across the country, including in New South Wales, Victoria, and South Australia.
+>>>>>>
+Predicates: 
+Worst in Australian history(2019–2020 Australian bushfire season) ::: Verify The 2019–2020 Australian bushfire season was the worst in Australian history.
+Burned(2019–2020 Australian bushfire season, across the country, including in New South Wales, Victoria, and South Australia) ::: Verify The 2019–2020 Australian bushfire season burned across the country, including in New South Wales, Victoria, and South Australia.
+
+Followup Question: Was the 2019–2020 Australian bushfire season the worst in Australian history?
+Followup Question: Did the 2019–2020 Australian bushfire season burn across the country, including in New South Wales, Victoria, and South Australia? 
+------
+Claim: The city of Berlin, Germany, is the capital of Germany.
+>>>>>>
+Predicates: 
+Capital(Berlin, Germany) ::: Verify The city of Berlin is the capital of Germany.
+
+Followup Question: Is the city of Berlin the capital of Germany?
+------
+Claim: The University of California, Berkeley, is located in Berkeley, California, and is one of the most prestigious universities in the United States.
+>>>>>>
+Predicates: 
+Location(University of California, Berkeley, Berkeley, California) ::: Verify The University of California, Berkeley is located in Berkeley, California.
+Prest
 Finished decompose using LLM!
