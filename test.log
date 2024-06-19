@@ -1,59 +1,802 @@
-Namespace(dataset='scifact', hover_num_hop='two', feverous_challenge='reasoning', prompt_strategy='logic', version='V.Test', model='gpt-3.5-turbo', device_map='auto', temperature=0.7, max_token=1024)
-excuating the main function
-decompose scifact
+Namespace(dataset='scifact', hover_num_hop='two', feverous_challenge='reasoning', prompt_strategy='logic', version='V.Test', model='llama-30b', device_map='auto', temperature=0.7, max_token=1024)
 read dataset
-Predicates:
-Cause(Deficiency of Tetraspanin-3, impaired stem cell-renewal) ::: Verify that deficiency of Tetraspanin-3 causes impaired stem cell-renewal.
-Cause(Deficiency of Tetraspanin-3, disease propagation) ::: Verify that deficiency of Tetraspanin-3 causes disease propagation.
+uid success
+claim success
+Deficiency of Tetraspanin-3 causes impaired stem cell-renewal and disease propagation.
 
-Followup Question: What does a deficiency of Tetraspanin-3 cause?
-Followup Question: How is stem cell-renewal affected by a deficiency of Tetraspanin-3?
-Followup Question: What is the impact of a deficiency of Tetraspanin-3 on disease propagation?
+>>>>>>
 Predicates:
-Deficiency(Folate) ::: Verify a deficiency of folate.
-Decreases(Blood levels of homocysteine) ::: Verify that a deficiency of folate decreases blood levels of homocysteine.
+Deficiency(Tetraspanin-3, causes impaired stem cell-renewal and disease propagation) ::: Verify that Deficiency of Tetraspanin-3 causes impaired stem cell-renewal and disease propagation.
+Causes(Deficiency of Tetraspanin-3, impaired stem cell-renewal) ::: Verify that Deficiency of Tetraspanin-3 causes impaired stem cell-renewal.
+Causes(Deficiency of Tetraspanin-3, disease propagation) ::: Verify that Deficiency of Tetraspanin-3 causes disease propagation.
 
-Followup Question: What happens with a deficiency of folate?
-Followup Question: What happens to blood levels of homocysteine when there is a deficiency of folate?
+Followup Question: What is the cause of Deficiency of Tetraspanin-3?
+Followup Question: What is the cause of Deficiency of Tetraspanin-3 with respect to impaired stem cell-renewal?
+Followup Question: What is the cause of Deficiency of Tetraspanin-3 with respect to disease propagation?
+------
+Claim: In 2015, the population of the United States was 321,418,820.
+>>>>>>
 Predicates:
-Prevent(KLF4, VSMCs from acquiring genetic characteristics of other cell types within atherosclerotic lesions) ::: Verify that KLF4 prevents VSMCs from acquiring genetic characteristics of other cell types within atherosclerotic lesions.
+Population(The United States, 321,418,820) ::: Verify that the population of the United States was 321,418,820 in 2015.
+In 2015 ::: Verify that the population of the United States was 321,418,820 in 2015.
 
-Followup Question: What does KLF4 prevent VSMCs from acquiring within atherosclerotic lesions?
+Followup Question: What is the population of the United States in 2015?
+------
+Claim: In 2015, the population of the United States was 321,418,820.
+>>>>>>
 Predicates:
-Effect(Serotonin receptors, depression) ::: Verify the effect of serotonin receptors on depression
+Population(The United States, 321,418,820) ::: Verify that the population of the United States was 321,418,820 in 2015.
+In 2015 ::: Verify that the population of the United States was 321,418,820 in 2015.
 
-Followup Question: What effect do serotonin receptors have on depression?
+Followup Question: What is the population of the United States in 2015?
+------
+Claim: In 2015, the population of the United States was 321,418,820.
+>>>>>>
 Predicates:
-Condition(Patients, panic anxiety) ::: Verify that patients have panic anxiety.
-CSFLevels(Patients, increased, hypocretin) ::: Verify that patients show increased CSF levels of hypocretin.
+Population(The United States, 321,418,820) ::: Verify that the population of the United States was 321,418,820 in 2015.
+In 2015 ::: Verify that the population of the United States was 321,418,820 in 2015.
 
-Followup Question: What condition do patients have?
-Followup Question: What levels are increased in patients with panic anxiety?
-
+Followup Question: What is the population of the United States in 2015?
+------
+Claim: In 2015, the population of the United States was 321,418,820.
+>>>>>>
 Predicates:
-Cause(Suboptimal nutrition, chronic disease) ::: Verify that suboptimal nutrition is a leading cause of chronic disease.
+Population(The United States, 321,418,820) ::: Verify that the population of the United States was 321,418,820 in 2015.
+In 2015 ::: Verify that the population of the United States was 321,418,820 in 2015.
 
-Followup Question: What is a leading cause of chronic disease?
+Followup Question: What is the population of the United States in 2015?
+------
+Claim: In 2015, the population of the United States was 321,418,820.
+>>>>>>
 Predicates:
-Allele(FOXO3, G) ::: Verify that the allele of FOXO3 is the minor G allele.
-Function(FOXO3, represses IL-10) ::: Verify that FOXO3 represses IL-10.
+Population(The United States, 321,418,820) ::: Verify that the population of the United States was 321,418,820 in 2015.
+In 2015 ::: Verify that the population of the United States was 321,418,820 in 2015.
 
-Followup Question: What is the allele of FOXO3 that represses IL-10?
-Followup Question: What effect does the minor G allele of FOXO3 have on IL-10?
+Followup Question: What is the population of the United States in 2015?
+------
+Claim: In 2015, the population of the United States was 321,418,820.
+>>>>>>
 Predicates:
-Uncorrelated(Cellular aging, an older appearance) ::: Verify if cellular aging is uncorrelated with an older appearance.
+Population(The United States, 321,418,820) ::: Verify that the population of the United States was 321,418,820 in 2015.
+In 2015 ::: Verify that the population of the United States was 321,418,820 in 2015.
+
+Followup Question: What is the population of the United States in 2015?
+------
+Claim: In 2015, the population of the United States was 321,418,820.
+>>>>>>
+Predicates:
+Population(The United States, 321,418,820) ::: Verify that the population of the United States was 321,418,820 in 2015.
+In 2015 ::: Verify that the population of the United States was 321,418,820 in 2015.
+
+Followup Question: What is the population of the United States in 2015?
+------
+Claim: In 2015, the population of the United States was 321,418,820.
+>>>>>>
+Predicates:
+Population(The United States, 321,418,820) ::: Verify that the population of the United States was 321,418,820 in 2015.
+In 2015 ::: Verify that the population of the United States was 321,418,820 in 2015.
+
+Followup Question: What is the population of the United States in 2015?
+------
+Claim: In 2015, the population of the United States was 321,
+A deficiency of folate decreases blood levels of homocysteine.
+
+>>>>>>
+Predicates:
+Deficiency(folate, decreases blood levels of homocysteine) ::: Verify that a deficiency of folate decreases blood levels of homocysteine.
+
+Followup Question: Does a deficiency of folate decreases blood levels of homocysteine?
+------
+Claim: The capital of the United States of America is Washington, D.C.
+>>>>>>
+Predicates:
+Capital(The United States of America, Washington D.C.) ::: Verify that the capital of The United States of America is Washington D.C.
+
+Followup Question: What is the capital of The United States of America?
+------
+Claim: The capital of the United Kingdom of Great Britain and Northern Ireland is London.
+>>>>>>
+Predicates:
+Capital(The United Kingdom of Great Britain and Northern Ireland, London) ::: Verify that the capital of The United Kingdom of Great Britain and Northern Ireland is London.
+
+Followup Question: What is the capital of The United Kingdom of Great Britain and Northern Ireland?
+------
+Claim: The capital of the People's Republic of China is Beijing.
+>>>>>>
+Predicates:
+Capital(The People's Republic of China, Beijing) ::: Verify that the capital of The People's Republic of China is Beijing.
+
+Followup Question: What is the capital of The People's Republic of China?
+------
+Claim: The capital of the Republic of India is New Delhi.
+>>>>>>
+Predicates:
+Capital(The Republic of India, New Delhi) ::: Verify that the capital of The Republic of India is New Delhi.
+
+Followup Question: What is the capital of The Republic of India?
+------
+Claim: The capital of the Republic of Indonesia is Jakarta.
+>>>>>>
+Predicates:
+Capital(The Republic of Indonesia, Jakarta) ::: Verify that the capital of The Republic of Indonesia is Jakarta.
+
+Followup Question: What is the capital of The Republic of Indonesia?
+------
+Claim: The capital of the Republic of Korea is Seoul.
+>>>>>>
+Predicates:
+Capital(The Republic of Korea, Seoul) ::: Verify that the capital of The Republic of Korea is Seoul.
+
+Followup Question: What is the capital of The Republic of Korea?
+------
+Claim: The capital of the Republic of the Philippines is Manila.
+>>>>>>
+Predicates:
+Capital(The Republic of the Philippines, Manila) ::: Verify that the capital of The Republic of the Philippines is Manila.
+
+Followup Question: What is the capital of The Republic of the Philippines?
+------
+Claim: The capital of the Russian Federation is Moscow.
+>>>>>>
+Predicates:
+Capital(The Russian Federation, Moscow) ::: Verify that the capital of The Russian Federation is Moscow.
+
+Followup Question: What is the capital of The Russian Federation?
+------
+Claim: The capital of the Kingdom of Saudi Arabia is Riyadh.
+>>>>>>
+Predicates:
+Capital(The Kingdom of Saudi Arabia, Riyadh) ::: Verify that the capital of The Kingdom of Saudi Arabia is Riyadh.
+
+Followup Question: What is the capital of The Kingdom of Saudi Arabia?
+------
+Claim: The capital of the United Arab Emirates is Abu Dhabi.
+>>>>>>
+Predicates:
+Capital(The United Arab Emirates, Abu Dhabi) ::: Verify that the capital of The United Arab Emirates is Abu Dhabi.
+
+Followup Question: What is the capital of The United Arab Emirates?
+------
+Claim: The capital of the Republic of South Africa is Pretoria.
+>>>>>>
+Predicates:
+Capital(The Republic of South Africa, Pretoria) ::: Verify that the capital of The Republic of South Africa is Pretoria.
+
+Followup Question: What is the capital of The Republic of South Africa?
+------
+Claim: The capital of the Republic of Turkey is Ankara.
+>>>>>>
+Predicates:
+Capital(The Republic of Turkey, Ankara) ::: Verify that the capital of The Republic of Turkey is Ankara.
+
+Followup Question: What is the capital of The Republic of Turkey?
+------
+Claim: The capital of the Socialist Republic of Vietnam is Hanoi.
+>>>>>>
+Predicates:
+Capital(The Socialist Republic of Vietnam, Hanoi) ::: Verify that the capital of The Socialist Republic of Vietnam is Hanoi.
+
+Followup Question: What is the capital of The Socialist Republic of Vietnam?
+------
+Claim: The capital of the Republic of Cuba is Havana.
+>>>>>>
+Predicates:
+Capital(The Republic of Cuba, Havana) ::: Verify that the capital of The Republic of Cuba is Havana.
+
+Followup Question: What is the capital of The Republic of Cuba?
+------
+Claim: The capital of the Republic of Haiti is Port-au-Prince.
+>>>>>>
+Predicates:
+Capital(The Republic of Haiti, Port-au-Prince) ::: Verify that the capital of The Republic of Haiti is Port-au-Prince.
+
+Followup Question: What is the capital of The Republic of Haiti?
+------
+Claim: The capital of the Republic of Colombia is Bogota.
+>>>>>>
+Predicates:
+Capital(The Republic of Colombia, Bogota) ::: Verify that the capital of The Republic of Colombia is Bogota.
+
+Followup Question: What is the capital of The Republic of Colombia?
+------
+Claim: The capital of the Republic of Argentina is Buenos Aires.
+>>>>>>
+Predicates:
+Capital(The Republic of Argentina, Buenos Aires) ::: Verify that the capital of The Republic of Argentina is Buenos Aires.
+
+Followup Question
+KLF4 prevents VSMCs from acquiring genetic characteristics of other cell types within atherosclerotic lesions.
+
+>>>>>>
+Predicates:
+Prevent(KLF4, VSMCs from acquiring genetic characteristics of other cell types within atherosclerotic lesions) ::: Verify KLF4 prevents VSMCs from acquiring genetic characteristics of other cell types within atherosclerotic lesions.
+Atherosclerotic lesion(atherosclerotic lesions) ::: Verify atherosclerotic lesions are atherosclerotic lesions.
+VSMC(VSMCs) ::: Verify VSMCs are VSMCs.
+
+Followup Question: Does KLF4 prevent VSMCs from acquiring genetic characteristics of other cell types within atherosclerotic lesions?
+Followup Question: Are atherosclerotic lesions atherosclerotic lesions?
+Followup Question: Are VSMCs VSMCs?
+------
+Claim: In 2019, the 2019 Copa Libertadores Finals was won by Flamengo.
+>>>>>>
+Predicates:
+Won(2019 Copa Libertadores Finals, Flamengo) ::: Verify the 2019 Copa Libertadores Finals was won by Flamengo in 2019.
+2019(2019) ::: Verify 2019 is 2019.
+Copa Libertadores Finals(2019 Copa Libertadores Finals) ::: Verify 2019 Copa Libertadores Finals is 2019 Copa Libertadores Finals.
+
+Followup Question: In 2019, did the 2019 Copa Libertadores Finals was won by Flamengo?
+Followup Question: What is 2019?
+Followup Question: What is 2019 Copa Libertadores Finals?
+------
+Claim: In 2019, the 2019 Copa Libertadores Finals was won by Flamengo.
+>>>>>>
+Predicates:
+Won(2019 Copa Libertadores Finals, Flamengo) ::: Verify the 2019 Copa Libertadores Finals was won by Flamengo in 2019.
+2019(2019) ::: Verify 2019 is 2019.
+Copa Libertadores Finals(2019 Copa Libertadores Finals) ::: Verify 2019 Copa Libertadores Finals is 2019 Copa Libertadores Finals.
+
+Followup Question: In 2019, did the 2019 Copa Libertadores Finals was won by Flamengo?
+Followup Question: What is 2019?
+Followup Question: What is 2019 Copa Libertadores Finals?
+------
+Claim: In 2019, the 2019 Copa Libertadores Finals was won by Flamengo.
+>>>>>>
+Predicates:
+Won(2019 Copa Libertadores Finals, Flamengo) ::: Verify the 2019 Copa Libertadores Finals was won by Flamengo in 2019.
+2019(2019) ::: Verify 2019 is 2019.
+Copa Libertadores Finals(2019 Copa Libertadores Finals) ::: Verify 2019 Copa Libertadores Finals is 2019 Copa Libertadores Finals.
+
+Followup Question: In 2019, did the 2019 Copa Libertadores Finals was won by Flamengo?
+Followup Question: What is 2019?
+Followup Question: What is 2019 Copa Libertadores Finals?
+------
+Claim: In 2019, the 2019 Copa Libertadores Finals was won by Flamengo.
+>>>>>>
+Predicates:
+Won(2019 Copa Libertadores Finals, Flamengo) ::: Verify the 2019 Copa Libertadores Finals was won by Flamengo in 2019.
+2019(2019) ::: Verify 2019 is 2019.
+Copa Libertadores Finals(2019 Copa Libertadores Finals) ::: Verify 2019 Copa Libertadores Finals is 2019 Copa Libertadores Finals.
+
+Followup Question: In 2019, did the 2019 Copa Libertadores Finals was won by Flamengo?
+Followup Question: What is 2019?
+Followup Question: What is 2019 Copa Libertadores Finals?
+------
+Claim: In 2019, the 2019 Copa Libertadores Finals was won by Flamengo.
+>>>>>>
+Predicates:
+Won(2019 Copa Libertadores Finals, Flamengo) ::: Verify the 2019 Copa Libertadores Finals was won by Flamengo in 2019.
+2019(2019) ::: Verify 2019 is 2019.
+Copa Libertadores Finals(2019 Copa Libertadores Finals) ::: Verify 2019 Copa Libertadores Finals is 2019 Copa Libertadores Finals.
+
+Followup Question: In 2019, did the 2019 Copa Libertadores Finals was won by Flamengo?
+Followup Question: What is 2019?
+Followup Question: What is 2019 Copa Libertadores Finals?
+------
+Claim: In 2019, the 2019 Copa Libertadores Finals was won by Flamengo.
+>>>>>>
+Predicates:
+Won(2019 Copa Libertadores Finals, Flamengo) ::: Verify the 2019 Copa Libertadores Finals was won by Flamengo in 2019.
+2019(2019) ::: Verify 2019 is 2019.
+Copa Libertadores Finals(2019 Copa Libertadores Finals) ::: Verify 2019 Copa Libertadores
+Serotonin receptors have no effect on depression
+
+>>>>>>
+Predicates:
+Receptor(Serotonin receptor, depression) ::: Verify Serotonin receptors have no effect on depression.
+Effect(Serotonin receptor, depression) ::: Verify Serotonin receptors have no effect on depression.
+
+Followup Question: Do serotonin receptors have any effect on depression?
+------
+Claim: The 2009 FIFA U-17 World Cup was hosted by Nigeria and the 2013 FIFA U-17 World Cup was hosted by the United Arab Emirates.
+>>>>>>
+Predicates:
+Hosted(The 2009 FIFA U-17 World Cup, Nigeria) ::: Verify The 2009 FIFA U-17 World Cup was hosted by Nigeria.
+Hosted(The 2013 FIFA U-17 World Cup, United Arab Emirates) ::: Verify The 2013 FIFA U-17 World Cup was hosted by the United Arab Emirates.
+
+Followup Question: Which country hosted The 2009 FIFA U-17 World Cup?
+Followup Question: Which country hosted The 2013 FIFA U-17 World Cup?
+------
+Claim: The 2014 FIFA World Cup was won by Germany.
+>>>>>>
+Predicates:
+Won(The 2014 FIFA World Cup, Germany) ::: Verify The 2014 FIFA World Cup was won by Germany.
+
+Followup Question: Who won The 2014 FIFA World Cup?
+------
+Claim: The 2013 FIFA U-17 World Cup was won by Nigeria.
+>>>>>>
+Predicates:
+Won(The 2013 FIFA U-17 World Cup, Nigeria) ::: Verify The 2013 FIFA U-17 World Cup was won by Nigeria.
+
+Followup Question: Who won The 2013 FIFA U-17 World Cup?
+------
+Claim: The 2013 FIFA U-17 World Cup was won by Nigeria.
+>>>>>>
+Predicates:
+Won(The 2013 FIFA U-17 World Cup, Nigeria) ::: Verify The 2013 FIFA U-17 World Cup was won by Nigeria.
+
+Followup Question: Who won The 2013 FIFA U-17 World Cup?
+------
+Claim: The 2013 FIFA U-17 World Cup was won by Nigeria.
+>>>>>>
+Predicates:
+Won(The 2013 FIFA U-17 World Cup, Nigeria) ::: Verify The 2013 FIFA U-17 World Cup was won by Nigeria.
+
+Followup Question: Who won The 2013 FIFA U-17 World Cup?
+------
+Claim: The 2013 FIFA U-17 World Cup was won by Nigeria.
+>>>>>>
+Predicates:
+Won(The 2013 FIFA U-17 World Cup, Nigeria) ::: Verify The 2013 FIFA U-17 World Cup was won by Nigeria.
+
+Followup Question: Who won The 2013 FIFA U-17 World Cup?
+------
+Claim: The 2013 FIFA U-17 World Cup was won by Nigeria.
+>>>>>>
+Predicates:
+Won(The 2013 FIFA U-17 World Cup, Nigeria) ::: Verify The 2013 FIFA U-17 World Cup was won by Nigeria.
+
+Followup Question: Who won The 2013 FIFA U-17 World Cup?
+------
+Claim: The 2013 FIFA U-17 World Cup was won by Nigeria.
+>>>>>>
+Predicates:
+Won(The 2013 FIFA U-17 World Cup, Nigeria) ::: Verify The 2013 FIFA U-17 World Cup was won by Nigeria.
+
+Followup Question: Who won The 2013 FIFA U-17 World Cup?
+------
+Claim: The 2013 FIFA U-17 World Cup was won by Nigeria.
+>>>>>>
+Predicates:
+Won(The 2013 FIFA U-17 World Cup, Nigeria) ::: Verify The 2013 FIFA U-17 World Cup was won by Nigeria.
+
+Followup Question: Who won The 2013 FIFA U-17 World Cup?
+------
+Claim: The 2013 FIFA U-17 World Cup was won by Nigeria.
+>>>>>>
+Predicates:
+Won(The 2013 FIFA U-17 World Cup, Nigeria) ::: Verify The 2013 FIFA U-17 World Cup was won by Nigeria.
+
+Followup Question: Who won The 2013 FIFA U-17 World Cup?
+------
+Claim: The 2013 FIFA U-17 World Cup was won by Nigeria.
+>>>>>>
+Predicates:
+Won(The 2013 FIFA U-17 World Cup, Nigeria) ::: Verify The 2013 FIFA U-17 World Cup was won by Nigeria.
+
+Followup Question: Who won The 2013 FIFA U-17 World Cup?
+------
+Claim: The 2013 FIFA U-17 World Cup was won by Nigeria.
+>>>>>>
+Predicates:
+Won(The 2013 FIFA U-17 World Cup, Nigeria) ::: Verify The 2013 FIFA U-17 World Cup was won by Nigeria.
+
+Followup Question: Who won The 2013 FIFA U-17 World Cup?
+------
+Claim: The 2013 FIFA U-17 World Cup was won by Nigeria.
+>>>>>>
+Predicates:
+Won(The 2013 FIFA U-17 World Cup, Nigeria) ::: Verify The 2013 FIFA U-17 World Cup was won by Nigeria.
+
+
+Patients with panic anxiety show increased CSF levels of hypocretin.
+
+>>>>>>
+Predicates:
+Patients with panic anxiety ::: Verify that patients with panic anxiety.
+Show ::: Verify that patients with panic anxiety show
+Increased CSF levels of hypocretin ::: Verify that CSF levels of hypocretin is increased.
+
+Followup Question: What is the patients with panic anxiety?
+Followup Question: What do the patients with panic anxiety show?
+Followup Question: What is the CSF levels of hypocretin?
+------
+Claim: The 2002–2003 academic year was the first year in which the University of Texas at Austin offered a bachelor's degree in computer science.
+>>>>>>
+Predicates:
+Offered ::: Verify that the University of Texas at Austin offered
+Year ::: Verify that the 2002–2003 academic year
+Bachelor's degree ::: Verify that the bachelor's degree
+In computer science ::: Verify that the computer science
+
+Followup Question: What did the University of Texas at Austin offer?
+Followup Question: What was the year?
+Followup Question: What is the bachelor's degree?
+Followup Question: What is the computer science?
+------
+Claim: The University of Texas at Austin is located in Austin, Texas, United States, and is a public research university.
+>>>>>>
+Predicates:
+Located ::: Verify that the University of Texas at Austin is located
+Austin, Texas, United States ::: Verify that Austin, Texas, United States
+Public research university ::: Verify that the University of Texas at Austin is a public research university
+
+Followup Question: Where is the University of Texas at Austin located?
+Followup Question: What is the University of Texas at Austin?
+------
+Claim: The 2014 FIFA World Cup Final was played at the Maracanã Stadium, Rio de Janeiro, Brazil.
+>>>>>>
+Predicates:
+Played at ::: Verify that the 2014 FIFA World Cup Final was played at
+The Maracanã Stadium, Rio de Janeiro, Brazil ::: Verify that the Maracanã Stadium, Rio de Janeiro, Brazil
+
+Followup Question: Where was the 2014 FIFA World Cup Final played at?
+------
+Claim: The 2014 FIFA World Cup Final was played at the Maracanã Stadium, Rio de Janeiro, Brazil.
+>>>>>>
+Predicates:
+Played at ::: Verify that the 2014 FIFA World Cup Final was played at
+The Maracanã Stadium, Rio de Janeiro, Brazil ::: Verify that the Maracanã Stadium, Rio de Janeiro, Brazil
+
+Followup Question: Where was the 2014 FIFA World Cup Final played at?
+------
+Claim: The 2014 FIFA World Cup Final was played at the Maracanã Stadium, Rio de Janeiro, Brazil.
+>>>>>>
+Predicates:
+Played at ::: Verify that the 2014 FIFA World Cup Final was played at
+The Maracanã Stadium, Rio de Janeiro, Brazil ::: Verify that the Maracanã Stadium, Rio de Janeiro, Brazil
+
+Followup Question: Where was the 2014 FIFA World Cup Final played at?
+------
+Claim: The 2014 FIFA World Cup Final was played at the Maracanã Stadium, Rio de Janeiro, Brazil.
+>>>>>>
+Predicates:
+Played at ::: Verify that the 2014 FIFA World Cup Final was played at
+The Maracanã Stadium, Rio de Janeiro, Brazil ::: Verify that the Maracanã Stadium, Rio de Janeiro, Brazil
+
+Followup Question: Where was the 2014 FIFA World Cup Final played at?
+------
+Claim: The 2014 FIFA World Cup Final was played at the Maracanã Stadium, Rio de Janeiro, Brazil.
+>>>>>>
+Predicates:
+Played at ::: Verify that the 2014 FIFA World Cup Final was played at
+The Maracanã Stadium, Rio de Janeiro, Brazil ::: Verify that the Maracanã Stadium, Rio de Janeiro, Brazil
+
+Followup Question: Where was the 2014 FIFA World Cup Final played at?
+------
+Claim: The 2014 FIFA World Cup Final was played at the Maracanã Stadium, Rio de Janeiro, Brazil.
+>>>>>>
+Predicates:
+Played at ::: Verify that the 2014 FIFA World Cup Final was played at
+The Maracanã Stadium, Rio de Janeiro, Brazil ::: Verify that the Maracanã Stadium, Rio de Janeiro, Brazil
+
+Followup Question: Where was the 2014 FIFA World Cup Final played at?
+------
+Claim: The 2014 FIFA World Cup Final was played at the Maracanã Stadium, Rio de Janeiro, Brazil.
+>>>>>>
+Predicates:
+Played at ::: Verify that the 2014 FIFA World Cup Final was played at
+The Maracanã Stadium, Rio de Janeiro, Brazil ::: Verify that the Maracanã Stadium, Rio de Janeiro, Brazil
+
+Followup Question: Where was the 2014 FIFA World Cup Final played at?
+------
+Claim: The 2014 FIFA World Cup Final was played at the Maracanã Stadium, Rio de Janeiro, Brazil.
+>>>>>>
+Predicates:
+Played at ::: Verify that the 2014 FIFA World Cup Final
+Suboptimal nutrition is a leading cause of chronic disease
+
+>>>>>>
+Predicates: 
+Cause(Chronic Disease, Suboptimal Nutrition) ::: Verify that Suboptimal Nutrition is a leading cause of Chronic Disease
+Leading(Cause, Suboptimal Nutrition) ::: Verify that Suboptimal Nutrition is a leading cause of Chronic Disease
+
+Followup Question: What is the leading cause of Chronic Disease?
+------
+Claim: The 2016 Summer Olympics were held in Rio de Janeiro, Brazil, from August 5 to August 21.
+>>>>>>
+Predicates: 
+Held(The 2016 Summer Olympics, Rio de Janeiro, Brazil) ::: Verify that The 2016 Summer Olympics were held in Rio de Janeiro, Brazil, from August 5 to August 21.
+Time(The 2016 Summer Olympics, August 5 to August 21) ::: Verify that The 2016 Summer Olympics were held in Rio de Janeiro, Brazil, from August 5 to August 21.
+
+Followup Question: When were the 2016 Summer Olympics held?
+Followup Question: Where were the 2016 Summer Olympics held?
+------
+Claim: The 2016 Summer Olympics were held in Rio de Janeiro, Brazil, from August 5 to August 21.
+>>>>>>
+Predicates: 
+Held(The 2016 Summer Olympics, Rio de Janeiro, Brazil) ::: Verify that The 2016 Summer Olympics were held in Rio de Janeiro, Brazil, from August 5 to August 21.
+Time(The 2016 Summer Olympics, August 5 to August 21) ::: Verify that The 2016 Summer Olympics were held in Rio de Janeiro, Brazil, from August 5 to August 21.
+
+Followup Question: When were the 2016 Summer Olympics held?
+Followup Question: Where were the 2016 Summer Olympics held?
+------
+Claim: The 2016 Summer Olympics were held in Rio de Janeiro, Brazil, from August 5 to August 21.
+>>>>>>
+Predicates: 
+Held(The 2016 Summer Olympics, Rio de Janeiro, Brazil) ::: Verify that The 2016 Summer Olympics were held in Rio de Janeiro, Brazil, from August 5 to August 21.
+Time(The 2016 Summer Olympics, August 5 to August 21) ::: Verify that The 2016 Summer Olympics were held in Rio de Janeiro, Brazil, from August 5 to August 21.
+
+Followup Question: When were the 2016 Summer Olympics held?
+Followup Question: Where were the 2016 Summer Olympics held?
+------
+Claim: The 2016 Summer Olympics were held in Rio de Janeiro, Brazil, from August 5 to August 21.
+>>>>>>
+Predicates: 
+Held(The 2016 Summer Olympics, Rio de Janeiro, Brazil) ::: Verify that The 2016 Summer Olympics were held in Rio de Janeiro, Brazil, from August 5 to August 21.
+Time(The 2016 Summer Olympics, August 5 to August 21) ::: Verify that The 2016 Summer Olympics were held in Rio de Janeiro, Brazil, from August 5 to August 21.
+
+Followup Question: When were the 2016 Summer Olympics held?
+Followup Question: Where were the 2016 Summer Olympics held?
+------
+Claim: The 2016 Summer Olympics were held in Rio de Janeiro, Brazil, from August 5 to August 21.
+>>>>>>
+Predicates: 
+Held(The 2016 Summer Olympics, Rio de Janeiro, Brazil) ::: Verify that The 2016 Summer Olympics were held in Rio de Janeiro, Brazil, from August 5 to August 21.
+Time(The 2016 Summer Olympics, August 5 to August 21) ::: Verify that The 2016 Summer Olympics were held in Rio de Janeiro, Brazil, from August 5 to August 21.
+
+Followup Question: When were the 2016 Summer Olympics held?
+Followup Question: Where were the 2016 Summer Olympics held?
+------
+Claim: The 2016 Summer Olympics were held in Rio de Janeiro, Brazil, from August 5 to August 21.
+>>>>>>
+Predicates: 
+Held(The 2016 Summer Olympics, Rio de Janeiro, Brazil) ::: Verify that The 2016 Summer Olympics were held in Rio de Janeiro, Brazil, from August 5 to August 21.
+Time(The 2016 Summer Olympics, August 5 to August 21) ::: Verify that The 2016 Summer Olympics were held in Rio de Janeiro, Brazil, from August 5 to August 21.
+
+Followup Question: When were the 2016 Summer Olympics held?
+Followup Question: Where were the 2016 Summer Olympics held?
+------
+Claim: The 2016 Summer Olympics were held in Rio de Janeiro, Brazil, from August 5 to August 21.
+>>>>>>
+Predicates: 
+Held(The 2016 Summer Olympics, Rio de Janeiro, Brazil) ::: Verify that The 2016 Summer Olympics were held in Rio de Janeiro, Brazil, from August 5 to August 21.
+Time(The 2016 Summer
+The minor G allele of FOXO3 represses IL-10.
+
+>>>>>>
+Predicates: 
+Minor(G allele, FOXO3) ::: Verify the minor G allele of FOXO3 represses IL-10.
+Repress(IL-10, the minor G allele of FOXO3) ::: Verify the minor G allele of FOXO3 represses IL-10.
+
+Followup Question: Which allele is the minor G allele of FOXO3?
+Followup Question: Does the minor G allele of FOXO3 repress IL-10?
+------
+Claim: The 2011–12 season was the 123rd season of competitive football in England. The season started on 13 August 2011 and ended on 13 May 2012.
+>>>>>>
+Predicates: 
+Started(2011–12 season, 13 August 2011) ::: Verify the 2011–12 season started on 13 August 2011.
+Ended(2011–12 season, 13 May 2012) ::: Verify the 2011–12 season ended on 13 May 2012.
+Competitive(2011–12 season, football in England) ::: Verify the 2011–12 season was the 123rd season of competitive football in England.
+
+Followup Question: When did the 2011–12 season start?
+Followup Question: When did the 2011–12 season end?
+Followup Question: Was the 2011–12 season the 123rd season of competitive football in England?
+------
+Claim: The 2011–12 season was the 123rd season of competitive football in England. The season started on 13 August 2011 and ended on 13 May 2012.
+>>>>>>
+Predicates: 
+Started(2011–12 season, 13 August 2011) ::: Verify the 2011–12 season started on 13 August 2011.
+Ended(2011–12 season, 13 May 2012) ::: Verify the 2011–12 season ended on 13 May 2012.
+Competitive(2011–12 season, football in England) ::: Verify the 2011–12 season was the 123rd season of competitive football in England.
+
+Followup Question: When did the 2011–12 season start?
+Followup Question: When did the 2011–12 season end?
+Followup Question: Was the 2011–12 season the 123rd season of competitive football in England?
+------
+Claim: The 2011–12 season was the 123rd season of competitive football in England. The season started on 13 August 2011 and ended on 13 May 2012.
+>>>>>>
+Predicates: 
+Started(2011–12 season, 13 August 2011) ::: Verify the 2011–12 season started on 13 August 2011.
+Ended(2011–12 season, 13 May 2012) ::: Verify the 2011–12 season ended on 13 May 2012.
+Competitive(2011–12 season, football in England) ::: Verify the 2011–12 season was the 123rd season of competitive football in England.
+
+Followup Question: When did the 2011–12 season start?
+Followup Question: When did the 2011–12 season end?
+Followup Question: Was the 2011–12 season the 123rd season of competitive football in England?
+------
+Claim: The 2011–12 season was the 123rd season of competitive football in England. The season started on 13 August 2011 and ended on 13 May 2012.
+>>>>>>
+Predicates: 
+Started(2011–12 season, 13 August 2011) ::: Verify the 2011–12 season started on 13 August 2011.
+Ended(2011–12 season, 13 May 2012) ::: Verify the 2011–12 season ended on 13 May 2012.
+Competitive(2011–12 season, football in England) ::: Verify the 2011–12 season was the 123rd season of competitive football in England.
+
+Followup Question: When did the 2011–12 season start?
+Followup Question: When did the 2011–12 season end?
+Followup Question: Was the 2011–12 season the 123rd season of competitive football in England?
+------
+Claim: The 2011–12 season was the 123rd season of competitive football in England. The season started on 13 August 2011 and ended on 13 May 2012.
+>>>>>>
+Predicates: 
+Started(2011–12 season, 13 August 2011) ::: Verify the 2011–12 season started on 13 August 2011.
+Ended(2011–12 season, 13 May 2012) ::: Verify the 2011–12 season ended on 13 May 2012.
+Competitive(2011–12 season, football
+Cellular aging is uncorrelated with an older appearance.
+
+>>>>>>
+Predicates:
+Aging(cellular aging, uncorrelated with an older appearance) ::: Verify cellular aging is uncorrelated with an older appearance.
+Appearance(older appearance, uncorrelated with cellular aging) ::: Verify an older appearance is uncorrelated with cellular aging.
 
 Followup Question: Is cellular aging correlated with an older appearance?
+Followup Question: Is an older appearance correlated with cellular aging?
+------
+Claim: The number of years a person has lived is not the same as the number of years a person has been alive.
+>>>>>>
 Predicates:
-Combine(phosphatidylinositide 3-kinase inhibitor, MEK 1/2 inhibitor) ::: Verify the combination of phosphatidylinositide 3-kinase and MEK 1/2 inhibitors.
-Effectiveness(phosphatidylinositide 3-kinase inhibitor, MEK 1/2 inhibitor, treating KRAS mutant tumors) ::: Verify the effectiveness of combining phosphatidylinositide 3-kinase and MEK 1/2 inhibitors in treating KRAS mutant tumors.
+Lived(the number of years a person has lived) ::: Verify the number of years a person has lived.
+Alive(the number of years a person has been alive) ::: Verify the number of years a person has been alive.
+Same(the number of years a person has lived, the number of years a person has been alive) ::: Verify the number of years a person has lived is the same as the number of years a person has been alive.
 
-Followup Question: What happens when phosphatidylinositide 3-kinase and MEK 1/2 inhibitors are combined?
-Followup Question: Is the combination of phosphatidylinositide 3-kinase and MEK 1/2 inhibitors effective in treating KRAS mutant tumors?
+Followup Question: Is the number of years a person has lived the same as the number of years a person has been alive?
+------
+Claim: The number of years a person has lived is not the same as the number of years a person has been alive.
+>>>>>>
 Predicates:
-Deficiency(Autophagy, in the liver) ::: Verify that there is a deficiency of autophagy in the liver.
-Protects(Deficiency of autophagy in the liver, from insulin resistance) ::: Verify that a deficiency of autophagy in the liver protects from insulin resistance.
+Lived(the number of years a person has lived) ::: Verify the number of years a person has lived.
+Alive(the number of years a person has been alive) ::: Verify the number of years a person has been alive.
+Same(the number of years a person has lived, the number of years a person has been alive) ::: Verify the number of years a person has lived is the same as the number of years a person has been alive.
 
-Followup Question: What is the impact of autophagy deficiency in the liver?
-Followup Question: How does autophagy deficiency in the liver relate to insulin resistance?
+Followup Question: Is the number of years a person has lived the same as the number of years a person has been alive?
+------
+Claim: The number of years a person has lived is not the same as the number of years a person has been alive.
+>>>>>>
+Predicates:
+Lived(the number of years a person has lived) ::: Verify the number of years a person has lived.
+Alive(the number of years a person has been alive) ::: Verify the number of years a person has been alive.
+Same(the number of years a person has lived, the number of years a person has been alive) ::: Verify the number of years a person has lived is the same as the number of years a person has been alive.
+
+Followup Question: Is the number of years a person has lived the same as the number of years a person has been alive?
+------
+Claim: The number of years a person has lived is not the same as the number of years a person has been alive.
+>>>>>>
+Predicates:
+Lived(the number of years a person has lived) ::: Verify the number of years a person has lived.
+Alive(the number of years a person has been alive) ::: Verify the number of years a person has been alive.
+Same(the number of years a person has lived, the number of years a person has been alive) ::: Verify the number of years a person has lived is the same as the number of years a person has been alive.
+
+Followup Question: Is the number of years a person has lived the same as the number of years a person has been alive?
+------
+Claim: The number of years a person has lived is not the same as the number of years a person has been alive.
+>>>>>>
+Predicates:
+Lived(the number of years a person has lived) ::: Verify the number of years a person has lived.
+Alive(the number of years a person has been alive) ::: Verify the number of years a person has been alive.
+Same(the number of years a person has lived, the number of years a person has been alive) ::: Verify the number of years a person has lived is the same as the number of years a person has been alive.
+
+Followup Question: Is the number of years a person has lived the same as the number of years a person has been alive?
+------
+Claim: The number of years a person has lived is not the same as the number of years a person has been alive.
+>>>>>>
+Predicates:
+Lived(the number of years a person has lived) ::: Verify the number of years a person has lived.
+Alive(the number of years a person has been alive) ::: Verify the number of years a person has been alive.
+Same(the number of years a person has lived, the number of years a person has been alive) ::: Verify the number of years a person has lived is the same as the number of years a person has been alive.
+
+Followup Question: Is the number of years a person has lived the same as the number of years a person has been alive?
+------
+Claim: The number of years a person has lived is not the same as the number of years a person has been alive.
+>>>>>>
+Predicates:
+Lived(the number of years a person has lived) ::: Verify the number of years a person has lived.
+Alive(the number of years a person has been alive) ::: Verify the
+Combining phosphatidylinositide 3-kinase and MEK 1/2 inhibitors is ineffective at treating KRAS mutant tumors.
+
+>>>>>>
+Predicates: 
+Ineffective(Combining phosphatidylinositide 3-kinase and MEK 1/2 inhibitors, treating KRAS mutant tumors) ::: Verify Combining phosphatidylinositide 3-kinase and MEK 1/2 inhibitors is ineffective at treating KRAS mutant tumors.
+
+Followup Question: Is Combining phosphatidylinositide 3-kinase and MEK 1/2 inhibitors ineffective at treating KRAS mutant tumors?
+------
+Claim: The 2009 film The Hangover was directed by Todd Phillips, who also directed the 2013 film The Hangover Part III.
+>>>>>>
+Predicates:
+Directed(Todd Phillips, The Hangover) ::: Verify that Todd Phillips directed the 2009 film The Hangover.
+Directed(Todd Phillips, The Hangover Part III) ::: Verify that Todd Phillips directed the 2013 film The Hangover Part III.
+
+Followup Question: Did Todd Phillips direct the 2009 film The Hangover?
+Followup Question: Did Todd Phillips direct the 2013 film The Hangover Part III?
+------
+Claim: The 2018 film Aquaman was directed by James Wan, who also directed the 2013 film The Conjuring.
+>>>>>>
+Predicates:
+Directed(James Wan, Aquaman) ::: Verify that James Wan directed the 2018 film Aquaman.
+Directed(James Wan, The Conjuring) ::: Verify that James Wan directed the 2013 film The Conjuring.
+
+Followup Question: Did James Wan direct the 2018 film Aquaman?
+Followup Question: Did James Wan direct the 2013 film The Conjuring?
+------
+Claim: The 2015 film The Big Short was directed by Adam McKay, who also directed the 2016 film The Big Short.
+>>>>>>
+Predicates:
+Directed(Adam McKay, The Big Short) ::: Verify that Adam McKay directed the 2015 film The Big Short.
+Directed(Adam McKay, The Big Short) ::: Verify that Adam McKay directed the 2016 film The Big Short.
+
+Followup Question: Did Adam McKay direct the 2015 film The Big Short?
+Followup Question: Did Adam McKay direct the 2016 film The Big Short?
+------
+Claim: The 2016 film The Nice Guys was directed by Shane Black, who also directed the 2005 film Kiss Kiss Bang Bang.
+>>>>>>
+Predicates:
+Directed(Shane Black, The Nice Guys) ::: Verify that Shane Black directed the 2016 film The Nice Guys.
+Directed(Shane Black, Kiss Kiss Bang Bang) ::: Verify that Shane Black directed the 2005 film Kiss Kiss Bang Bang.
+
+Followup Question: Did Shane Black direct the 2016 film The Nice Guys?
+Followup Question: Did Shane Black direct the 2005 film Kiss Kiss Bang Bang?
+------
+Claim: The 2015 film Straight Outta Compton was directed by F. Gary Gray, who also directed the 2016 film The Fate of the Furious.
+>>>>>>
+Predicates:
+Directed(F. Gary Gray, Straight Outta Compton) ::: Verify that F. Gary Gray directed the 2015 film Straight Outta Compton.
+Directed(F. Gary Gray, The Fate of the Furious) ::: Verify that F. Gary Gray directed the 2016 film The Fate of the Furious.
+
+Followup Question: Did F. Gary Gray direct the 2015 film Straight Outta Compton?
+Followup Question: Did F. Gary Gray direct the 2016 film The Fate of the Furious?
+------
+Claim: The 2016 film Hacksaw Ridge was directed by Mel Gibson, who also directed the 2016 film Hacksaw Ridge.
+>>>>>>
+Predicates:
+Directed(Mel Gibson, Hacksaw Ridge) ::: Verify that Mel Gibson directed the 2016 film Hacksaw Ridge.
+Directed(Mel Gibson, Hacksaw Ridge) ::: Verify that Mel Gibson directed the 2016 film Hacksaw Ridge.
+
+Followup Question: Did Mel Gibson direct the 2016 film Hacksaw Ridge?
+------
+Claim: The 2018 film The Greatest Showman was directed by Michael Gracey, who also directed the 2018 film The Greatest Showman.
+>>>>>>
+Predicates:
+Directed(Michael Gracey, The Greatest Showman) ::: Verify that Michael Gracey directed the 2018 film The Greatest Showman.
+Directed(Michael Gracey, The Greatest Showman) ::: Verify that Michael Gracey directed the 2018 film The Greatest Showman.
+
+Followup Question: Did Michael Gracey direct the 2018 film The Greatest Showman?
+------
+Claim: The 2018 film A Star Is Born was directed by Bradley Cooper, who also directed the 2018 film A Star Is Born.
+>>>>>>
+Predicates:
+Directed(Bradley Cooper, A Star Is Born) ::: Verify that Bradley Cooper directed the 2018 film A Star Is Born.
+Directed(Bradley Cooper, A Star Is Born) ::: Verify that Bradley Cooper directed the 2018 film A Star
+Autophagy deficiency in the liver protects from insulin resistance.
+
+>>>>>>
+Predicates:
+Deficiency(Autophagy, the liver) ::: Verify Autophagy deficiency in the liver.
+Protects(from insulin resistance, Autophagy) ::: Verify Autophagy deficiency in the liver protects from insulin resistance.
+
+Followup Question: Is Autophagy deficiency in the liver?
+Followup Question: Does Autophagy deficiency in the liver protects from insulin resistance?
+------
+Claim: The 2019 Indian general election is scheduled to be held in seven phases from 11 April to 19 May 2019 to constitute the 17th Lok Sabha. The term of the current Lok Sabha expires on 3 June 2019, and the NDA is the current ruling coalition.
+>>>>>>
+Predicates:
+Scheduled(The 2019 Indian general election, from 11 April to 19 May 2019) ::: Verify The 2019 Indian general election is scheduled to be held in seven phases from 11 April to 19 May 2019.
+Constitute(The 17th Lok Sabha) ::: Verify The 2019 Indian general election is scheduled to be held in seven phases from 11 April to 19 May 2019 to constitute the 17th Lok Sabha.
+Expire(The current Lok Sabha, 3 June 2019) ::: Verify The term of the current Lok Sabha expires on 3 June 2019.
+Ruling coalition(NDA) ::: Verify The NDA is the current ruling coalition.
+
+Followup Question: When is The 2019 Indian general election scheduled to be held?
+Followup Question: What is The 2019 Indian general election scheduled to be held to constitute?
+Followup Question: When does the current Lok Sabha expire?
+Followup Question: What is the current ruling coalition?
+------
+Claim: The 2019 Indian general election is scheduled to be held in seven phases from 11 April to 19 May 2019 to constitute the 17th Lok Sabha. The term of the current Lok Sabha expires on 3 June 2019, and the NDA is the current ruling coalition.
+>>>>>>
+Predicates:
+Scheduled(The 2019 Indian general election, from 11 April to 19 May 2019) ::: Verify The 2019 Indian general election is scheduled to be held in seven phases from 11 April to 19 May 2019.
+Constitute(The 17th Lok Sabha) ::: Verify The 2019 Indian general election is scheduled to be held in seven phases from 11 April to 19 May 2019 to constitute the 17th Lok Sabha.
+Expire(The current Lok Sabha, 3 June 2019) ::: Verify The term of the current Lok Sabha expires on 3 June 2019.
+Ruling coalition(NDA) ::: Verify The NDA is the current ruling coalition.
+
+Followup Question: When is The 2019 Indian general election scheduled to be held?
+Followup Question: What is The 2019 Indian general election scheduled to be held to constitute?
+Followup Question: When does the current Lok Sabha expire?
+Followup Question: What is the current ruling coalition?
+------
+Claim: The 2019 Indian general election is scheduled to be held in seven phases from 11 April to 19 May 2019 to constitute the 17th Lok Sabha. The term of the current Lok Sabha expires on 3 June 2019, and the NDA is the current ruling coalition.
+>>>>>>
+Predicates:
+Scheduled(The 2019 Indian general election, from 11 April to 19 May 2019) ::: Verify The 2019 Indian general election is scheduled to be held in seven phases from 11 April to 19 May 2019.
+Constitute(The 17th Lok Sabha) ::: Verify The 2019 Indian general election is scheduled to be held in seven phases from 11 April to 19 May 2019 to constitute the 17th Lok Sabha.
+Expire(The current Lok Sabha, 3 June 2019) ::: Verify The term of the current Lok Sabha expires on 3 June 2019.
+Ruling coalition(NDA) ::: Verify The NDA is the current ruling coalition.
+
+Followup Question: When is The 2019 Indian general election scheduled to be held?
+Followup Question: What is The 2019 Indian general election scheduled to be held to constitute?
+Followup Question: When does the current Lok Sabha expire?
+Followup Question: What is the current ruling coalition?
+------
+Claim: The 2019 Indian general election is scheduled to be held in seven phases from 11 April to 19 May 2019 to constitute the 17th Lok Sabha. The term of the current Lok Sabha expires on 3 June 2019, and the NDA is the current ruling coalition.
+>>>>>>
+Predicates:
+Scheduled(The 2019 Indian general election, from 11 April to 19 May 2019) ::: Verify The 2019 Indian general election is scheduled to be held in seven phases from 11 April to 19 May 2019.
+Constitute(The
 Finished decompose using LLM!

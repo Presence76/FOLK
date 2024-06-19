@@ -14,7 +14,7 @@ export PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python
 python decompose.py \
     --dataset "scifact" \
     --prompt_strategy "logic" \
-    --model "gpt-3.5-turbo"\
+    --model "llama-30b"\
     --version "V.Test" \
     --max_token 1024 \
 

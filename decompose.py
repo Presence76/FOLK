@@ -3,23 +3,25 @@ import pandas as pd
 import json
 import re
 from tqdm import tqdm
-
+import accelerate
+from accelerate import init_empty_weights
 import sentencepiece
 import torch
 from transformers import AutoModelForCausalLM, LlamaTokenizer, BitsAndBytesConfig, LlamaForCausalLM, AutoTokenizer
-
+import numpy as np
 
 import openai
 from args import *
 from prompt_library import *
 from keys import *
-
+os.environ['CUDA_VISIBLE_DEVICES']='0'
 if args.model == "llama-7b":
-    model_path = "decapoda-research/llama-7b-hf"
+    model_path = "baffo32/decapoda-research-llama-7B-hf"
     tokenizer = LlamaTokenizer.from_pretrained(model_path)
     model = AutoModelForCausalLM.from_pretrained(
-        model_path, torch_dtype=torch.float16, device_map=args.device_map
+        model_path, torch_dtype=torch.float16, low_cpu_mem_usage=True,device_map="auto"
     )
+    model.to("cuda")
 if args.model == "llama-13b":
     model_path = "decapoda-research/llama-13b-hf"
     tokenizer = LlamaTokenizer.from_pretrained(model_path)
@@ -31,8 +33,9 @@ if args.model == "llama-30b":
     
     tokenizer = AutoTokenizer.from_pretrained("meta-llama/Meta-Llama-3-8B")
     model = AutoModelForCausalLM.from_pretrained("meta-llama/Meta-Llama-3-8B",
-                                                 torch_dtype=torch.float16, device_map=args.device_map
+                                                 torch_dtype=torch.float16,device_map="auto"
     )
+    
 
 if args.model == "text-davinci" or args.model == "gpt-3.5-turbo":
     openai.api_key = OPENAI_KEY
@@ -46,8 +49,9 @@ def query_single(claim):
         or args.model == "llama-13b"
         or args.model == "llama-30b"
     ):
-        input_ids = tokenizer(full_prompt, return_tensors="pt").input_ids
-        generation_output = model.generate(
+        input_ids = tokenizer(full_prompt, return_tensors="pt",padding=True,truncation=True,pad_to_max_length=True).input_ids
+        input_ids = input_ids.to("cuda")
+        generation_output = model(
             input_ids=input_ids, max_new_tokens=args.max_token
         )
         output = tokenizer.decode(generation_output[0])
@@ -75,11 +79,15 @@ def query_multiple(id_list, claim_list, label_list):
             or args.model == "llama-13b"
             or args.model == "llama-30b"
         ):
-            input_ids = tokenizer(full_prompt, return_tensors="pt").input_ids
 
+            input = tokenizer(full_prompt, return_tensors="pt")
+            input = input.to("cuda")
+            input_ids = input.input_ids
+            
             generation_output = model.generate(
                 input_ids=input_ids, max_new_tokens=args.max_token
             )
+            
             output = tokenizer.decode(generation_output[0])
             # response = re.findall(r'>>>>>>(?s:.*?)------', output)[3]
             response = output.split(claim, 1)[1]
@@ -160,9 +168,9 @@ if __name__ == "__main__":
 
         """ Multiple """
         df = pd.read_pickle(f"./FeverousDev/processed/{args.feverous_challenge}_df.pkl")
-        id_list = df["uid"]
-        claim_list = df["claim"]
-        label_list = df["label"]
+        id_list = df["uid"].to("cuda")
+        claim_list = df["claim"].to("cuda")
+        label_list = df["label"].to("cuda")
 
         out = query_multiple(id_list, claim_list, label_list)
         with open(
@@ -190,10 +198,12 @@ if __name__ == "__main__":
 
         """ Multiple """
         df = pd.read_pickle(f"./SciFact-Open/processed/df_new.pkl")
-
+        
         print("read dataset")
-        id_list = df["uid"]
+        id_list = df['uid']
+        print("uid success")
         claim_list = df["claim"]
+        print("claim success")
         label_list = df["label"]
         #id_list = torch.tensor(id_list).to("cuda")
         #claim_list = torch.tensor(claim_list).to("cuda")
