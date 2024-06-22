@@ -1,8 +1,0 @@
-usage: evaluation.py [-h] [--dataset DATASET] [--hover_num_hop HOVER_NUM_HOP]
-                     [--feverous_challenge FEVEROUS_CHALLENGE]
-                     [--prompt_strategy PROMPT_STRATEGY] [--version VERSION]
-                     [--model MODEL] [--device_map DEVICE_MAP]
-                     [--temperature TEMPERATURE] [--max_token MAX_TOKEN]
-evaluation.py: error: unrecognized arguments:  
-/cm/local/apps/slurm/var/spool/job208722/slurm_script: line 15: --dataset: command not found
-/cm/local/apps/slurm/var/spool/job208722/slurm_script: line 16: --model: command not found

@@ -5,7 +5,7 @@ import pickle
 from tqdm import tqdm
 
 import torch
-from transformers import AutoModelForCausalLM, LlamaTokenizer, BitsAndBytesConfig
+from transformers import AutoModelForCausalLM, LlamaTokenizer, BitsAndBytesConfig, LlamaForCausalLM, AutoTokenizer
 import openai
 from args import *
 from prompt_library import *
@@ -25,10 +25,10 @@ if args.model == "llama-13b":
         model_path, torch_dtype=torch.float16, device_map=args.device_map
     )
 if args.model == "llama-30b":
-    model_path = "/data/haoran/llama-30b-hf"
-    tokenizer = LlamaTokenizer.from_pretrained(model_path)
+    model_path = "meta-llama/Meta-Llama-3-8B-Instruct"
+    tokenizer = AutoTokenizer.from_pretrained(model_path)
     model = AutoModelForCausalLM.from_pretrained(
-        model_path, device_map=args.device_map, load_in_8bit=True
+        model_path, device_map=args.device_map,torch_dtype=torch.float16
     )
 if args.model == "text-davinci" or args.model == "gpt-3.5-turbo":
     openai.api_key = OPENAI_KEY
@@ -91,12 +91,14 @@ def query_multiple(id_list, claim_list, label_list, context_list, full_prompt_li
             or args.model == "llama-13b"
             or args.model == "llama-30b"
         ):
-            input_ids = tokenizer(full_prompt, return_tensors="pt").input_ids
+            input = tokenizer(full_prompt, return_tensors="pt")
+            input = input.to("cuda")
+            input_ids = input.input_ids
             generation_output = model.generate(
                 input_ids=input_ids, max_new_tokens=args.max_token
             )
             output = tokenizer.decode(generation_output[0])
-            response = output.split(context, 1)[1]
+            response = output.split(context, 1)
             print(response)
         if args.model == "text-davinci":
             try:
@@ -230,6 +232,7 @@ if __name__ == "__main__":
         df = pd.read_pickle(
             f"./FeverousDev/out/grounding/{args.model}_grounded_{args.prompt_strategy}_{args.feverous_challenge}_{args.version}.pkl"
         )
+        print("read dataset")
         id_list = df["id"]
         claim_list = df["claim"]
         label_list = df["label"]
@@ -284,6 +287,7 @@ if __name__ == "__main__":
         df = pd.read_pickle(
             f"./SciFact-Open/out/grounding/{args.model}_grounded_{args.prompt_strategy}_{args.version}.pkl"
         )
+        print("read dataset")
         id_list = df["id"]
         claim_list = df["claim"]
         label_list = df["label"]

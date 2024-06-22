@@ -1,0 +1,2 @@
+Namespace(dataset='[scifact]', hover_num_hop='two', feverous_challenge='reasoning', prompt_strategy='[logic]', version='Test_o', model='[llama-30b]', device_map='auto', temperature=0.7, max_token=1024)
+Finished aggregate using LLM!
