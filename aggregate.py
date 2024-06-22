@@ -97,8 +97,12 @@ def query_multiple(id_list, claim_list, label_list, context_list, full_prompt_li
             generation_output = model.generate(
                 input_ids=input_ids, max_new_tokens=args.max_token
             )
+            
             output = tokenizer.decode(generation_output[0])
-            response = output.split(context, 1)
+            
+            
+            response = output.split(context, 1)[-1]
+            
             print(response)
         if args.model == "text-davinci":
             try:
@@ -131,7 +135,7 @@ def query_multiple(id_list, claim_list, label_list, context_list, full_prompt_li
                 "id": uid,
                 "label": label,
                 "claim": claim,
-                "prompt": full_prompt,
+                
                 "response": response,
             }
         )
