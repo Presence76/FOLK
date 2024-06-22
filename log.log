@@ -1,4 +1,4 @@
-Namespace(dataset='scifact', hover_num_hop='two', feverous_challenge='reasoning', prompt_strategy='logic', version='Test_o', model='llama-30b', device_map='auto', temperature=0.7, max_token=1024)
+Namespace(dataset='scifact', hover_num_hop='two', feverous_challenge='reasoning', prompt_strategy='logic', version='Test_o', model='llama-30b', device_map='auto', temperature=0.7, max_token=2048)
 read dataset
 
 >>>>>>
@@ -9,117 +9,199 @@ Cause(Deficiency of Tetraspanin-3, impaired stem cell-renewal) && Cause(Deficien
 The claim is [SUPPORTED].
 
 Explanation:
-Deficiency of Tetraspanin-3 (Tspan3) is a causative factor in the development of acute myelogenous leukemia (AML), which is a type of blood cancer. It leads to an impaired stem cell-renewal and disease propagation.
+Tspan3 was also found to be a causative factor in the development of acute myelogenous leukemia (AML) and deficiency of Tspan3 led to an impaired stem cell-renewal and disease propagation [22].
 ------
-Question:
-Is it true that The first female athlete to win a gold medal in the Olympics was the American swimmer Gertrude Ederle.?
+Question: 
+Is it true that The writer of the song Girl Talk and Park So-yeon have both been members of a girl group.?
 
 Context:
-Athlete(Gertrude Ederle)
-First(Gertrude Ederle, win a gold medal in the Olympics) ::: Verify that Gertrude Ederle was the first female athlete to win a gold medal in the Olympics.
-Nationality(Gertrude Ederle, American)
+Write(the writer, the song Girl Talk) ::: Verify that the writer of the song Girl Talk
+Member(Park So-yeon, a girl group) ::: Verify that Park So-yeon is a memeber of a girl group
+Member(the writer, a girl group) ::: Verify that the writer of the song Girl Talk is a member of a gril group
 
-Who was the first female athlete to win a gold medal in the Olympics? Gertrude Ederle won the first gold medal in the Olympics.
-What is Gertrude Ederle nationality? Gertrude Ederle was an American swimmer.
+Who is the writer of the song Girl Talk? Tionne Watkins is the writer of the song Girl Talk.
+Is Park So-yeon a member of a girl group? Park Soyeon is a South Korean singer. She is a former member of the kids girl group I& Girls.
+Is the writer of the song Girl Talk a member of a girl group? Watkins rose to fame in the early 1990s as a member of the girl-group TLC
 >>>>>>
 Prediction:
-Athlete(Gertrude Ederle) is True because Gertrude Ederle was an American swimmer.
-First(Gertrude Ederle, win a gold medal in the Olympics) is True because Gertrude Ederle won the first gold medal in the Olympics.
-Nationality(Gertrude Ederle, American) is True because Gertrude Ederle was an American swimmer.
-Athlete(Gertrude Ederle) && First(Gertrude Ederle, win a gold medal in the Olympics) && Nationality(Gertrude Ederle, American) is True.
+Write(Tionne Watkins, the song Girl Talk) is True because Tionne Watkins is the writer of the song Girl Talk.
+Member(Park So-yeon, a girl group) is True because Park Soyeon is a South Korean singer. She is a former member of the kids girl group I& Girls.
+Member(Tionne Watkins, a girl group) is True because Watkins rose to fame in the early 1990s as a member of the girl-group TLC
+Write(Tionne Watkins, the song Girl Talk) && Member(Park So-yeon, a girl group) && Member(Tionne Watkins, a girl group) is True.
 The claim is [SUPPORTED].
 
 Explanation:
-Gertrude Ederle was the first female athlete to win a gold medal in the Olympics, which she did in the 1924 Olympics. She was also an American swimmer.
+Tionne Watkins, a member of the girl group TLC in the 1990s, is the writer of the song "Girl Talk." 
+Park Soyeon, a South Korean singer, was formerly part of the girl group I& Girls. 
+Therefore, both Watkins and Park Soyeon have been members of girl groups in their respective careers.
 ------
 Question:
-Is it true that The first female athlete to win a gold medal in the Olympics was the American swimmer Gertrude Ederle.?
+Is it true that A hockey team calls the 70,000 capacity Madison Square Garden it's home. That team, along with the New York Islanders, and the New Jersey Devils NHL franchise, are popular in the New York metropolitan area.?
 
 Context:
-Athlete(Gertrude Ederle)
-First(Gertrude Ederle, win a gold medal in the Olympics) ::: Verify that Gertrude Ederle was the first female athlete to win a gold medal in the Olympics.
-Nationality(Gertrude Ederle, American)
+Home(a hocky team, Madison Square Garden) ::: Verify that a hockey team calls Madison Square Garden its home.
+Capacity(Madison Square Garden, 70,000) ::: Verify that Madison Square Garden has capacity of 70,000.
+Popular(New York Islanders, New York Metropolitan area) ::: Verify that New York Islanders are popular in the New York metropolitan area.
 
-Who was the first female athlete to win a gold medal in the Olympics? Gertrude Ederle won the first gold medal in the Olympics.
-What is Gertrude Ederle nationality? Gertrude Ederle was an American swimmer.
+Which hocky team calls Madison Square Garden Home? Madison Square Garden hosts approximately 320 events a year. It is the home to the New York Rangers of the National Hockey League
+What is the capacity of Madison Square Garden? Madison Square Garden has a capacity of 19.500.
+Is New York Islanders popular in New York Metropolitan area? The New York Islanders are a professional ice hockey team based in Elmont, New York.... 
 >>>>>>
 Prediction:
-Athlete(Gertrude Ederle) is True because Gertrude Ederle was an American swimmer.
-First(Gertrude Ederle, win a gold medal in the Olympics) is True because Gertrude Ederle won the first gold medal in the Olympics.
-Nationality(Gertrude Ederle, American) is True because Gertrude Ederle was an American swimmer.
-Athlete(Gertrude Ederle) && First(Gertrude Ederle, win a gold medal in the Olympics) && Nationality(Gertrude Ederle, American) is True.
+Home(New York Rangers, Madison Square Garden) is True because Madison Square Garden hosts approximately 320 events a year. It is the home to the New York Rangers of the National Hockey League
+Capacity(Madison Square Garden, 70,000) is False because Madison Square Garden has a capacity of 19.500.
+Popular(New York Islanders, New York Metropolitan area) is True because The New York Islanders are a professional ice hockey team based in Elmont, New York....
+Home(New York Rangers, Madison Square Garden) && Capacity(Madison Square Garden, 70,000) && Popular(New York Islanders, New York Metropolitan area) is False.
+The claim is [NOT_SUPPORTED].
+
+Explanation:
+The New York Rangers, along with the New York Islanders and the New Jersey Devils, are popular National Hockey League (NHL) teams in the New York metropolitan area. 
+Madison Square Garden, a well-known venue in New York City, has a capacity of approximately 19,500, not 70,000.
+------
+Question: 
+Is it true that Werner Gunter Jaffé Fellner was born in Frankfurt in the German state of Hesse and the fifth-largest city in Germany.?
+
+Context:
+Born(Werner Gunter Jaffé Fellner, Frankfurt)
+State(Frankfurt, the German state of Hesse)
+
+Where was Werner Gunter Jaffé Fellner born? Werner Gunter Jaffé Fellner was born in Frankfurt.
+Which state is Frankfurt in? Frankfurt is in the German state of Hesse.
+>>>>>>
+Prediction:
+Born(Werner Gunter Jaffé Fellner, Frankfurt) is True because Werner Gunter Jaffé Fellner was born in Frankfurt.
+State(Frankfurt, the German state of Hesse) is True because Frankfurt is in the German state of Hesse.
+Born(Werner Gunter Jaffé Fellner, Frankfurt) && State(Frankfurt, the German state of Hesse) is True.
 The claim is [SUPPORTED].
 
 Explanation:
-Gertrude Ederle was the first female athlete to win a gold medal in the Olympics, which she did in the 1924 Olympics. She was also an American swimmer.
+Werner Gunter Jaffé Fellner was born in Frankfurt, which is both in the German state of Hesse and the fifth-largest city in Germany.
 ------
 Question:
-Is it true that The first female athlete to win a gold medal in the Olympics was the American swimmer Gertrude Ederle.?
+Is it true that The American lyricist Tom Jones,  born in 1928, co-authored the screenplay for the musical film The Fantastics.?
 
 Context:
-Athlete(Gertrude Ederle)
-First(Gertrude Ederle, win a gold medal in the Olympics) ::: Verify that Gertrude Ederle was the first female athlete to win a gold medal in the Olympics.
-Nationality(Gertrude Ederle, American)
+Born(Tom Jones, 1928)
+Nationality(Tom Jones, American)
+Co-author(Tome Jones, the musical film The Fantastics)
 
-Who was the first female athlete to win a gold medal in the Olympics? Gertrude Ederle won the first gold medal in the Olympics.
-What is Gertrude E
+When was Tom Jones born? Thomas Jones Woodward was born in Pontypridd, South Wales, Great Britain on June 7, 1940
+What is Tome Jones nationality? Sir Thomas Jones Woodward OBE is a Welsh singer. 
+Who co-author the musical film The Fantastics? Tome Jones co-authored the musical film The Fantastics.
+>>>>>>
+Prediction:
+Born(Tom Jones, 1928) is False because Thomas Jones Woodward was born in Pontypridd, South Wales, Great Britain on June 7, 1940
+Nationality(Tom Jones, American) is False because Thomas Jones Woodward is a British singer. 
+Co-author(Tome Jones, the musical film The Fantastics) is True because Tome Jones co-authored the musical film The Fantastics.
+Born(Tom Jones, 1928) && Nationality(Tom Jones, American) && Co-author(Tome Jones, the musical film The Fantastics) is False.
+The claim is [NOT_SUPPORTED].
+
+Explanation:
+Thomas Jones Woodward was born in Pontypridd, South Wales, Great Britain on June 7, 1940. He is a british singer.
+Thomas Jones co-authored the musical film The Fantastics.
+------
+Question: Is it true that Deficiency of Tetraspanin-3 causes impaired stem cell-renewal and disease propagation.?
+
+Context: 
+Cause(Deficiency of Tetraspanin-3, impaired stem cell-renewal) ::: Verify that Deficiency of Tetraspanin-3 causes impaired stem cell-renewal.
+Cause(Deficiency of Tetraspanin-3, disease propagation) ::: Verify that Deficiency of Tetraspanin-3 causes disease propagation.
+
+Does Deficiency of Tetraspanin-3 cause impaired stem cell-renewal?
+Tspan3 was also found to be a causative factor in the development of acute myelogenous leukemia (AML) and deficiency of Tspan3 led to an impaired stem cell-renewal and disease propagation [22].
+Does Deficiency of Tetraspanin-3 cause disease propagation?
+Tspan3 was also found to be a causative factor in the development of acute myelogenous leukemia (AML) and deficiency of Tspan3 led to an impaired stem cell-renewal and disease propagation [22].
+>>>>>>
+Prediction:
+Cause(Deficiency of Tetraspanin-3, impaired stem cell-renewal) is True because Tspan3 was also found to be a causative factor in the development of acute myelogenous leukemia (AML) and deficiency of Tspan3 led to an impaired stem cell-renewal and disease propagation [22].
+Cause(Deficiency of Tetraspanin-3, disease propagation) is True because Tspan3 was also found to be a causative factor in the development of acute myelogenous leukemia (AML) and deficiency of Tspan3 led to an impaired stem cell-renewal and disease propagation [22].
+Cause(Deficiency of Tetraspanin-3, impaired stem cell-renewal) && Cause(Deficiency of Tetraspanin-3, disease propagation) is True.
+The claim is [SUPPORTED].
+
+Explanation:
+Tspan3 was also found to be a causative factor in the development of acute myelogenous leukemia (AML
 
 >>>>>>
 Prediction:
 Decreases(folate deficiency, blood levels of homocysteine) is True because Folate deficiency causes increased homocysteine accumulation, which has been associated with neural tube defects in the fetus and an estimated 10% of US heart disease, both of which could be eliminated by folate supplements, food fortification, or better diets [28–34].
+Decreases(folate deficiency, blood levels of homocysteine) is True.
 The claim is [SUPPORTED].
 
 Explanation:
-Folate deficiency is a medical condition caused by a low level of folate in the body. It is associated with a variety of health problems, including an increased risk of heart disease, birth defects, and anemia. One of the key ways in which folate deficiency can affect the body is by decreasing blood levels of homocysteine. Homocysteine is an amino acid that can be harmful to the body if it builds up to high levels. Folate helps to break down homocysteine, and a deficiency of folate can lead to an accumulation of homocysteine in the blood. This can increase the risk of heart disease and other health problems. In conclusion, a deficiency of folate can decrease blood levels of homocysteine, which can lead to a variety of health problems.
+A deficiency of folate decreases blood levels of homocysteine, which can lead to neural tube defects in the fetus and an estimated 10% of US heart disease.
 ------
-Question: 
-Is it true that The United States is a federal constitutional republic, a representative democracy in which the president is both the head of state and the head of government and of a two-party system.
+Question: Is it true that The National Basketball Association team, the Phoenix Suns, is a professional basketball team based in Phoenix, Arizona.?
 
-Context:
-Federal(constitutional republic, the United States) ::: Verify that the United States is a federal constitutional republic.
-Head of state and government( the president, the United States) ::: Verify that the president is both the head of state and the head of government in the United States.
-Two-party system(the United States) ::: Verify that the United States is a two-party system.
-
-What type of government does the United States have? The United States is a federal constitutional republic, a representative democracy in which the president is both the head of state and the head of government and of a two-party system.
-Who is the head of state and the head of government in the United States? The President of the United States is both the head of state and head of government of the United States.
-What type of system does the United States have? The United States is a two-party system.
->>>>>>
-Prediction:
-Federal(constitutional republic, the United States) is True because The United States is a federal constitutional republic, a representative democracy in which the president is both the head of state and the head of government and of a two-party system.
-Head of state and government( the president, the United States) is True because The President of the United States is both the head of state and head of government of the United States.
-Two-party system(the United States) is True because The United States is a two-party system.
-Federal(constitutional republic, the United States) && Head of state and government( the president, the United States) && Two-party system(the United States) is True.
-The claim is [SUPPORTED].
-
-Explanation:
-The United States is a federal constitutional republic, a representative democracy in which the president is both the head of state and the head of government and of a two-party system.
-The President of the United States is both the head of state and head of government of the United States.
-The United States is a two-party system.
-------
-Question:
-Is it true that The New York City borough of Manhattan has the highest population density in the United States.?
-
-Context:
-Highest(population density, Manhattan) ::: Verify that Manhattan has the highest population density in the United States.
-Population density(Manhattan, the United States) ::: Verify that Manhattan has the highest population density in the United States.
-
-What is the population density of Manhattan? The population density of Manhattan is 72,033.5 people per square mile.
-Is Manhattan in the United States? Manhattan is a borough of New York City, New York, United States.
->>>>>>
-Prediction:
-Highest(population density, Manhattan) is True because The population density of Manhattan is 72,033.5 people per square mile.
-Population density(Manhattan, the United States) is True because Manhattan is a borough of New York City, New York, United States.
-Highest(population density, Manhattan) && Population density(Manhattan, the United States) is True.
-The claim is [SUPPORTED].
-
-Explanation:
-Manhattan is a borough of New York City, New York, United States. It is the most densely populated borough in the city, and the second-most densely populated county in the United States. The population density of Manhattan is 72,033.5 people per square mile, making it the highest in the United States.
-------
-Question:
-Is it true that The United States is a federal constitutional republic, a representative democracy in which the president is both the head of state and the head of government and of a two-party system.?
-
-Context:
-Federal(constitutional republic, the United States) ::: Verify that the United States is a
+Context: 
+Team(Phoenix Suns, the National Basketball Association) ::: Verify that the Phoenix Suns is a professional basketball team based in Phoenix, Arizona.
+Team(Phoenix Suns, the National Basketball Association) ::: Verify that the Phoenix Suns is a professional basketball team based in Phoenix, Arizona.
+Team(Phoenix Suns, the National Basketball Association) ::: Verify that the Phoenix Suns is a professional basketball team based in Phoenix, Arizona.
+Team(Phoenix Suns, the National Basketball Association) ::: Verify that the Phoenix Suns is a professional basketball team based in Phoenix, Arizona.
+Team(Phoenix Suns, the National Basketball Association) ::: Verify that the Phoenix Suns is a professional basketball team based in Phoenix, Arizona.
+Team(Phoenix Suns, the National Basketball Association) ::: Verify that the Phoenix Suns is a professional basketball team based in Phoenix, Arizona.
+Team(Phoenix Suns, the National Basketball Association) ::: Verify that the Phoenix Suns is a professional basketball team based in Phoenix, Arizona.
+Team(Phoenix Suns, the National Basketball Association) ::: Verify that the Phoenix Suns is a professional basketball team based in Phoenix, Arizona.
+Team(Phoenix Suns, the National Basketball Association) ::: Verify that the Phoenix Suns is a professional basketball team based in Phoenix, Arizona.
+Team(Phoenix Suns, the National Basketball Association) ::: Verify that the Phoenix Suns is a professional basketball team based in Phoenix, Arizona.
+Team(Phoenix Suns, the National Basketball Association) ::: Verify that the Phoenix Suns is a professional basketball team based in Phoenix, Arizona.
+Team(Phoenix Suns, the National Basketball Association) ::: Verify that the Phoenix Suns is a professional basketball team based in Phoenix, Arizona.
+Team(Phoenix Suns, the National Basketball Association) ::: Verify that the Phoenix Suns is a professional basketball team based in Phoenix, Arizona.
+Team(Phoenix Suns, the National Basketball Association) ::: Verify that the Phoenix Suns is a professional basketball team based in Phoenix, Arizona.
+Team(Phoenix Suns, the National Basketball Association) ::: Verify that the Phoenix Suns is a professional basketball team based in Phoenix, Arizona.
+Team(Phoenix Suns, the National Basketball Association) ::: Verify that the Phoenix Suns is a professional basketball team based in Phoenix, Arizona.
+Team(Phoenix Suns, the National Basketball Association) ::: Verify that the Phoenix Suns is a professional basketball team based in Phoenix, Arizona.
+Team(Phoenix Suns, the National Basketball Association) ::: Verify that the Phoenix Suns is a professional basketball team based in Phoenix, Arizona.
+Team(Phoenix Suns, the National Basketball Association) ::: Verify that the Phoenix Suns is a professional basketball team based in Phoenix, Arizona.
+Team(Phoenix Suns, the National Basketball Association) ::: Verify that the Phoenix Suns is a professional basketball team based in Phoenix, Arizona.
+Team(Phoenix Suns, the National Basketball Association) ::: Verify that the Phoenix Suns is a professional basketball team based in Phoenix, Arizona.
+Team(Phoenix Suns, the National Basketball Association) ::: Verify that the Phoenix Suns is a professional basketball team based in Phoenix, Arizona.
+Team(Phoenix Suns, the National Basketball Association) ::: Verify that the Phoenix Suns is a professional basketball team based in Phoenix, Arizona.
+Team(Phoenix Suns, the National Basketball Association) ::: Verify that the Phoenix Suns is a professional basketball team based in Phoenix, Arizona.
+Team(Phoenix Suns, the National Basketball Association) ::: Verify that the Phoenix Suns is a professional basketball team based in Phoenix, Arizona.
+Team(Phoenix Suns, the National Basketball Association) ::: Verify that the Phoenix Suns is a professional basketball team based in Phoenix, Arizona.
+Team(Phoenix Suns, the National Basketball Association) ::: Verify that the Phoenix Suns is a professional basketball team based in Phoenix, Arizona.
+Team(Phoenix Suns, the National Basketball Association) ::: Verify that the Phoenix Suns is a professional basketball team based in Phoenix, Arizona.
+Team(Phoenix Suns, the National Basketball Association) ::: Verify that the Phoenix Suns is a professional basketball team based in Phoenix, Arizona.
+Team(Phoenix Suns, the National Basketball Association) ::: Verify that the Phoenix Suns is a professional basketball team based in Phoenix, Arizona.
+Team(Phoenix Suns, the National Basketball Association) ::: Verify that the Phoenix Suns is a professional basketball team based in Phoenix, Arizona.
+Team(Phoenix Suns, the National Basketball Association) ::: Verify that the Phoenix Suns is a professional basketball team based in Phoenix, Arizona.
+Team(Phoenix Suns, the National Basketball Association) ::: Verify that the Phoenix Suns is a professional basketball team based in Phoenix, Arizona.
+Team(Phoenix Suns, the National Basketball Association) ::: Verify that the Phoenix Suns is a professional basketball team based in Phoenix, Arizona.
+Team(Phoenix Suns, the National Basketball Association) ::: Verify that the Phoenix Suns is a professional basketball team based in Phoenix, Arizona.
+Team(Phoenix Suns, the National Basketball Association) ::: Verify that the Phoenix Suns is a professional basketball team based in Phoenix, Arizona.
+Team(Phoenix Suns, the National Basketball Association) ::: Verify that the Phoenix Suns is a professional basketball team based in Phoenix, Arizona.
+Team(Phoenix Suns, the National Basketball Association) ::: Verify that the Phoenix Suns is a professional basketball team based in Phoenix, Arizona.
+Team(Phoenix Suns, the National Basketball Association) ::: Verify that the Phoenix Suns is a professional basketball team based in Phoenix, Arizona.
+Team(Phoenix Suns, the National Basketball Association) ::: Verify that the Phoenix Suns is a professional basketball team based in Phoenix, Arizona.
+Team(Phoenix Suns, the National Basketball Association) ::: Verify that the Phoenix Suns is a professional basketball team based in Phoenix, Arizona.
+Team(Phoenix Suns, the National Basketball Association) ::: Verify that the Phoenix Suns is a professional basketball team based in Phoenix, Arizona.
+Team(Phoenix Suns, the National Basketball Association) ::: Verify that the Phoenix Suns is a professional basketball team based in Phoenix, Arizona.
+Team(Phoenix Suns, the National Basketball Association) ::: Verify that the Phoenix Suns is a professional basketball team based in Phoenix, Arizona.
+Team(Phoenix Suns, the National Basketball Association) ::: Verify that the Phoenix Suns is a professional basketball team based in Phoenix, Arizona.
+Team(Phoenix Suns, the National Basketball Association) ::: Verify that the Phoenix Suns is a professional basketball team based in Phoenix, Arizona.
+Team(Phoenix Suns, the National Basketball Association) ::: Verify that the Phoenix Suns is a professional basketball team based in Phoenix, Arizona.
+Team(Phoenix Suns, the National Basketball Association) ::: Verify that the Phoenix Suns is a professional basketball team based in Phoenix, Arizona.
+Team(Phoenix Suns, the National Basketball Association) ::: Verify that the Phoenix Suns is a professional basketball team based in Phoenix, Arizona.
+Team(Phoenix Suns, the National Basketball Association) ::: Verify that the Phoenix Suns is a professional basketball team based in Phoenix, Arizona.
+Team(Phoenix Suns, the National Basketball Association) ::: Verify that the Phoenix Suns is a professional basketball team based in Phoenix, Arizona.
+Team(Phoenix Suns, the National Basketball Association) ::: Verify that the Phoenix Suns is a professional basketball team based in Phoenix, Arizona.
+Team(Phoenix Suns, the National Basketball Association) ::: Verify that the Phoenix Suns is a professional basketball team based in Phoenix, Arizona.
+Team(Phoenix Suns, the National Basketball Association) ::: Verify that the Phoenix Suns is a professional basketball team based in Phoenix, Arizona.
+Team(Phoenix Suns, the National Basketball Association) ::: Verify that the Phoenix Suns is a professional basketball team based in Phoenix, Arizona.
+Team(Phoenix Suns, the National Basketball Association) ::: Verify that the Phoenix Suns is a professional basketball team based in Phoenix, Arizona.
+Team(Phoenix Suns, the National Basketball Association) ::: Verify that the Phoenix Suns is a professional basketball team based in Phoenix, Arizona.
+Team(Phoenix Suns, the National Basketball Association) ::: Verify that the Phoenix Suns is a professional basketball team based in Phoenix, Arizona.
+Team(Phoenix Suns, the National Basketball Association) ::: Verify that the Phoenix Suns is a professional basketball team based in Phoenix, Arizona.
+Team(Phoenix Suns, the National Basketball Association) ::: Verify that the Phoenix Suns is a professional basketball team based in Phoenix, Arizona.
+Team(Phoenix Suns, the National Basketball Association) ::: Verify that the Phoenix Suns is a professional basketball team based in Phoenix, Arizona.
+Team(Phoenix Suns, the National Basketball Association) ::: Verify that the Phoenix Suns is a professional basketball team based in Phoenix, Arizona.
+Team(Phoenix Suns, the National Basketball Association) ::: Verify that the Phoenix Suns is a professional basketball team based in Phoenix, Arizona.
+Team(Phoenix Suns, the National Basketball Association) ::: Verify that the Phoenix Suns is a professional basketball team based in Phoenix, Arizona.
+Team(Phoenix Suns, the National Basketball Association) ::: Verify that the Phoenix Suns is a professional basketball team based in Phoenix, Arizona.
+Team(Phoenix Suns, the National Basketball Association) ::: Verify that the Phoenix Suns is a professional basketball team based in Phoenix, Arizona.
+Team(Phoenix Suns, the National Basketball Association) ::: Verify that the Phoenix Suns is a professional basketball team based in Phoenix, Arizona.
+Team(Phoenix Suns, the National Basketball Association) ::: Verify that the Phoenix Suns is a professional basketball team based in Phoenix, Arizona.
+Team(Phoenix Suns, the National Basketball Association) ::: Verify that the Phoenix Suns is a professional basketball team based in Phoenix, Arizona.
+Team(Phoenix Suns, the National Basketball Association) ::: Verify that
 
 >>>>>>
 Prediction:
@@ -128,138 +210,271 @@ Prevents(KLF4, VSMCs from acquiring genetic characteristics of other cell types 
 The claim is [SUPPORTED].
 
 Explanation:
-KLF4 is a transcription factor that plays a key role in regulating the phenotype of vascular smooth muscle cells (VSMCs). 
-In atherosclerotic lesions, KLF4 upregulation accompanies VSMCs phenotypic switching to an inflammatory phenotype, which can contribute to the development of atherosclerosis.
+KLF4 is a transcription factor that is known to regulate cell fate decisions and prevent cells from acquiring genetic characteristics of other cell types.
 ------
 Question:
-Is it true that The English singer and songwriter Tom Jones, born in 1940, is a Welsh singer.?
-
-Context:
-Born(Tom Jones, 1940)
-Nationality(Tom Jones, English)
-Singer(Tom Jones)
-Songwriter(Tom Jones)
-
-When was Tom Jones born? Thomas Jones Woodward was born in Pontypridd, South Wales, Great Britain on June 7, 1940
-What is Tome Jones nationality? Sir Thomas Jones Woodward OBE is a Welsh singer. 
-Is Tom Jones a singer? Sir Thomas Jones Woodward OBE is a Welsh singer. 
-Is Tom Jones a songwriter? Sir Thomas Jones Woodward OBE is a Welsh singer. 
->>>>>>
-Prediction:
-Born(Tom Jones, 1940) is True because Thomas Jones Woodward was born in Pontypridd, South Wales, Great Britain on June 7, 1940
-Nationality(Tom Jones, English) is False because Thomas Jones Woodward is a British singer. 
-Singer(Tom Jones) is True because Sir Thomas Jones Woodward OBE is a Welsh singer. 
-Songwriter(Tom Jones) is True because Sir Thomas Jones Woodward OBE is a Welsh singer. 
-Born(Tom Jones, 1940) && Nationality(Tom Jones, English) && Singer(Tom Jones) && Songwriter(Tom Jones) is False.
-The claim is [NOT_SUPPORTED].
-
-Explanation:
-Thomas Jones Woodward was born in Pontypridd, South Wales, Great Britain on June 7, 1940. He is a british singer and songwriter.
-------
-Question:
-Is it true that The American singer and songwriter Tom Jones, born in 1928, is a Welsh singer.?
+Is it true that The American lyricist Tom Jones, born in 1928, co-authored the screenplay for the musical film The Fantastics.?
 
 Context:
 Born(Tom Jones, 1928)
 Nationality(Tom Jones, American)
-Singer(Tom Jones)
-Songwriter(Tom Jones)
+Co-author(Tome Jones, the musical film The Fantastics)
 
 When was Tom Jones born? Thomas Jones Woodward was born in Pontypridd, South Wales, Great Britain on June 7, 1940
 What is Tome Jones nationality? Sir Thomas Jones Woodward OBE is a Welsh singer. 
-Is Tom Jones a singer? Sir Thomas Jones Woodward OBE is a Welsh singer. 
-Is Tom Jones a songwriter? Sir Thomas Jones Woodward OBE is a Welsh singer. 
+Who co-author the musical film The Fantastics? Tome Jones co-authored the musical film The Fantastics.
 >>>>>>
 Prediction:
 Born(Tom Jones, 1928) is False because Thomas Jones Woodward was born in Pontypridd, South Wales, Great Britain on June 7, 1940
 Nationality(Tom Jones, American) is False because Thomas Jones Woodward is a British singer. 
-Singer(Tom Jones) is True because Sir Thomas Jones Woodward OBE is a Welsh singer. 
-Songwriter(Tom Jones) is True because Sir Thomas Jones Woodward OBE is a Welsh singer. 
-Born(Tom Jones, 1928) && Nationality(Tom Jones, American) && Singer(Tom Jones) && Songwriter(Tom Jones) is False.
+Co-author(Tome Jones, the musical film The Fantastics) is True because Tome Jones co-authored the musical film The Fantastics.
+Born(Tom Jones, 1928) && Nationality(Tom Jones, American) && Co-author(Tome Jones, the musical film The Fantastics) is False.
 The claim is [NOT_SUPPORTED].
 
 Explanation:
-Thomas Jones Woodward was born in Pontypridd, South Wales, Great Britain on June 7, 1940. He is a british singer and songwriter.
+Thomas Jones Woodward was born in Pontypridd, South Wales, Great Britain on June 7, 1940. He is a british singer.
+Thomas Jones co-authored the musical film The Fantastics.
 ------
 Question:
-Is it true that The American singer and songwriter Tom Jones, born in 1940, is a Welsh singer.?
+Is it true that KLF4 prevents VSMCs from acquiring genetic characteristics of other cell types within atherosclerotic lesions.?
 
-Context:
-Born(Tom Jones, 1940)
-Nationality(Tom Jones, American)
-Singer(Tom Jones)
-Songwriter(Tom Jones)
+Context: 
+Prevents(KLF4, VSMCs from acquiring genetic characteristics of other cell types within atherosclerotic lesions) ::: Verify KLF4 prevents VSMCs from acquiring genetic characteristics of other cell types within atherosclerotic lesions.
 
-When was Tom Jones born? Thomas Jones Woodward was born in Pontypridd, South Wales, Great Britain on June 7, 1940
-What is Tome Jones nationality? Sir Thomas Jones Woodward OBE is a Welsh singer. 
-Is Tom Jones a singer? Sir Thomas Jones Woodward OBE is a Welsh singer. 
-Is Tom Jones a songwriter? Sir Thomas Jones Woodward OBE is a Welsh singer. 
+Does KLF4 prevent VSMCs from acquiring genetic characteristics of other cell types within atherosclerotic lesions?
+Here, we show that KLF4 upregulation accompanies VSMCs phenotypic switching in atherosclerotic lesions.
 >>>>>>
 Prediction:
-Born(Tom Jones, 1940) is True because Thomas Jones Woodward was born in Pontypridd, South Wales, Great Britain on June 7, 1940
-Nationality(Tom Jones, American) is False because Thomas Jones Woodward is a British singer. 
-Singer(Tom Jones) is True because Sir Thomas Jones Woodward OBE is a
-
->>>>>>
-Prediction:
-No effect(Serotonin receptors, depression) is True because While the 5-HT 1B receptor is best known for its role in regulating aggressive and impulsive behavior, it also plays an important role in modulating depression. Activation of the 5-HT 1B receptor decreases serotonin levels in the brain through effects on release, synthesis, and reuptake 33, 80, 81.
-No effect(Serotonin receptors, depression) is True.
+Prevents(KLF4, VSMCs from acquiring genetic characteristics of other cell types within atherosclerotic lesions) is True because Here, we show that KLF4 upregulation accompanies VSMCs phenotypic switching in atherosclerotic lesions.
+Prevents(KLF4, VSMCs from acquiring genetic characteristics of other cell types within atherosclerotic lesions) is True.
 The claim is [SUPPORTED].
 
 Explanation:
-Serotonin receptors are a group of G protein-coupled receptors that are classified into 14 subtypes. 
-These receptors are activated by the neurotransmitter serotonin, and they play a role in regulating various physiological processes, including mood, appetite, and sleep. 
-However, there is no evidence to suggest that serotonin receptors have any effect on depression.
+KLF4 is a transcription factor that is known to regulate cell fate decisions and prevent cells from acquiring genetic characteristics of other cell types.
 ------
-Question: Is it true that The composer of the song The Last Time was born in 1948.?
+Question:
+Is it true that The American lyricist Tom Jones, born in 1928, co-authored the screenplay for the musical film The Fantastics.?
 
-Context: 
-Born(Keith Richards, 1948) ::: Verify that the composer of the song The Last Time was born in 1948.
-Composer(Keith Richards, the song The Last Time) ::: Verify that the composer of the song The Last Time was Keith Richards
+Context:
+Born(Tom Jones, 1928)
+Nationality(Tom Jones, American)
+Co-author(Tome Jones, the musical film The Fantastics)
 
-When was Keith Richards born? Keith Richards was born on 18 December 1943 in Dartford, Kent, England.
-Who composed the song The Last Time? The Last Time is a song written by Mick Jagger and Keith Richards of the Rolling Stones.
+When was Tom Jones born? Thomas Jones Woodward was born in Pontypridd, South Wales, Great Britain on June 7, 1940
+What is Tome Jones nationality? Sir Thomas Jones Woodward OBE is a Welsh singer. 
+Who co-author the musical film The Fantastics? Tome Jones co-authored the musical film The Fantastics.
 >>>>>>
 Prediction:
-Born(Keith Richards, 1948) is False because Keith Richards was born on 18 December 1943 in Dartford, Kent, England.
-Composer(Keith Richards, the song The Last Time) is True because The Last Time is a song written by Mick Jagger and Keith Richards of the Rolling Stones.
-Born(Keith Richards, 1948) && Composer(Keith Richards, the song The Last Time) is False.
+Born(Tom Jones, 1928) is False because Thomas Jones Woodward was born in Pontypridd, South Wales, Great Britain on June 7, 1940
+Nationality(Tom Jones, American) is False because Thomas Jones Woodward is a British singer. 
+Co-author(Tome Jones, the musical film The Fantastics) is True because Tome Jones co-authored the musical film The Fantastics.
+Born(Tom Jones, 1928) && Nationality(Tom Jones, American) && Co-author(Tome Jones, the musical film The Fantastics) is False.
 The claim is [NOT_SUPPORTED].
 
 Explanation:
-Keith Richards, the co-founder and guitarist of the Rolling Stones, was born on 18 December 1943 in Dartford, Kent, England. 
-He is a British musician and songwriter, and he co-wrote the song The Last Time with Mick Jagger.
+Thomas Jones Woodward was born in Pontypridd, South Wales, Great Britain on June 7, 1940. He is a british singer.
+Thomas Jones co-authored the musical film The Fantastics.
 ------
-Question: Is it true that The artist who created the artwork The Starry Night was born in 1883.?
+Question:
+Is it true that KLF4 prevents VSMCs from acquiring genetic characteristics of other cell types within atherosclerotic lesions.?
 
 Context: 
-Born(Vincent van Gogh, 1883) ::: Verify that the artist who created the artwork The Starry Night was born in 1883.
-Artist(Vincent van Gogh, The Starry Night) ::: Verify that the artist who created the artwork The Starry Night was Vincent van Gogh
+Prevents(KLF4, VSMCs from acquiring genetic characteristics of other cell types within atherosclerotic lesions) ::: Verify KLF4 prevents VSMCs from acquiring genetic characteristics of other cell types within atherosclerotic lesions.
 
-When was Vincent van Gogh born? Vincent Willem van Gogh was born on 30 March 1853 in Zundert, Netherlands.
-Who created the artwork The Starry Night? The Starry Night is an oil on canvas painting by the Dutch post-impressionist painter Vincent van Gogh.
+Does KLF4 prevent VSMCs from acquiring genetic characteristics of other cell types within atherosclerotic lesions?
+Here, we show that KLF4 upregulation accompanies VSMCs phenotypic switching in atherosclerotic lesions.
 >>>>>>
 Prediction:
-Born(Vincent van Gogh, 1883) is False because Vincent Willem van Gogh was born on 30 March 1853 in Zundert, Netherlands.
-Artist(Vincent van Gogh, The Starry Night) is True because The Starry Night is an oil on canvas painting by the Dutch post-impressionist painter Vincent van Gogh.
-Born(Vincent van Gogh, 1883) && Artist(Vincent van Gogh, The Starry Night) is False.
+Prevents(KLF4, VSMCs from acquiring genetic characteristics of other cell types within atherosclerotic lesions) is True because Here, we show that KLF4 upregulation accompanies VSMCs phenotypic switching in atherosclerotic lesions.
+Prevents(KLF4, VSMCs from acquiring genetic characteristics of other cell types within atherosclerotic lesions) is True.
+The claim is [SUPPORTED].
+
+Explanation:
+KLF4 is a transcription factor that is known to regulate cell fate decisions and prevent cells from acquiring genetic characteristics of other cell types.
+------
+Question:
+Is it true that The American lyricist Tom Jones, born in 1928, co-authored the screenplay for the musical film The Fantastics.?
+
+Context:
+Born(Tom Jones, 1928)
+Nationality(Tom Jones, American)
+Co-author(Tome Jones, the musical film The Fantastics)
+
+When was Tom Jones born? Thomas Jones Woodward was born in Pontypridd, South Wales, Great Britain on June 7, 1940
+What is Tome Jones nationality? Sir Thomas Jones Woodward OBE is a Welsh singer. 
+Who co-author the musical film The Fantastics? Tome Jones co-authored the musical film The Fantastics.
+>>>>>>
+Prediction:
+Born(Tom Jones, 1928) is False because Thomas Jones Woodward was born in Pontypridd, South Wales, Great Britain on June 7, 1940
+Nationality(Tom Jones, American) is False because Thomas Jones Woodward is a British singer. 
+Co-author(Tome Jones, the musical film The Fantastics) is True because Tome Jones co-authored the musical film The Fantastics.
+Born(Tom Jones, 1928) && Nationality(Tom Jones, American) && Co-author(Tome Jones, the musical film The Fantastics) is False.
 The claim is [NOT_SUPPORTED].
 
 Explanation:
-Vincent van Gogh was born on 30 March 1853 in Zundert, Netherlands. He was a Dutch post-impressionist painter who created the artwork The Starry Night.
+Thomas Jones Woodward was born in Pontypridd, South Wales, Great Britain on June 7, 1940. He is a british singer.
+Thomas Jones co-authored the musical film The Fantastics.
 ------
-Question: Is it true that The actor who played the role of Mr. Darcy in the film Pride and Prejudice was born in 1990.?
+Question:
+Is it true that KLF4 prevents VSMCs from acquiring genetic characteristics of other cell types within atherosclerotic lesions.?
 
 Context: 
-Born(Matthew Macfadyen, 1990) ::: Verify that the actor who played the role of Mr. Darcy in the film Pride and Prejudice was born in 1990.
-Actor(Matthew Macfadyen, Mr. Darcy) ::: Verify that the actor who played the role of Mr. Darcy in the film Pride and Prejudice was Matthew Macfadyen
+Prevents(KLF4, VSMCs from acquiring genetic characteristics of other cell types within atherosclerotic lesions) ::: Verify KLF4 prevents VSMCs from acquiring genetic characteristics of other cell types within atherosclerotic lesions.
 
-When was Matthew Macfadyen born? Matthew Macfadyen was born on 17 October 1974 in Great Yarmouth, Norfolk, England.
-Who played the role of Mr. Darcy in the film Pride and Prejudice? Matthew Macfadyen played the role of Mr. Darcy in the film Pride and Prejudice.
+Does KLF4 prevent VSMCs from acquiring genetic characteristics of other cell types within atherosclerotic lesions?
+Here, we show that KLF4 upregulation accompanies VSMCs phenotypic switching in atherosclerotic lesions.
 >>>>>>
 Prediction:
-Born(Matthew Macfadyen, 1990) is False because Matthew Macfadyen was born on 17 October 1974 in Great Yarmouth, Norfolk, England.
-Actor(Matthew Macfadyen, Mr. Darcy) is True because
+Prevents(KLF4, VSMCs from acquiring genetic characteristics of other cell types within atherosclerotic lesions) is True because Here, we show that KLF4 upregulation accompanies VSMCs phenotypic switching in atherosclerotic lesions.
+Prevents(KLF4, VSMCs from acquiring genetic characteristics of other cell types within atherosclerotic lesions) is True.
+The claim is [SUPPORTED].
+
+Explanation:
+KLF4 is a transcription factor that is known to regulate cell fate decisions and prevent cells from acquiring genetic characteristics of other cell types.
+------
+Question:
+Is it true that The American lyricist Tom Jones, born in 1928, co-authored the screenplay for the musical film The Fantastics.?
+
+Context:
+Born(Tom Jones, 1928)
+Nationality(Tom Jones, American)
+Co-author(Tome Jones, the musical film The Fantastics)
+
+When was Tom Jones born? Thomas Jones Woodward was born in Pontypridd, South Wales, Great Britain on June 7, 1940
+What is Tome Jones nationality? Sir Thomas Jones Woodward OBE is a Welsh singer. 
+Who co-author the musical film The Fantastics? Tome Jones co-authored the musical film The Fantastics.
+>>>>>>
+Prediction:
+Born(Tom Jones, 1928) is False because Thomas Jones Woodward was born in Pontypridd, South Wales, Great Britain on June 7, 1940
+Nationality(Tom Jones, American) is False because Thomas Jones Woodward is a British singer. 
+Co-author(Tome Jones, the musical film The Fantastics) is True because Tome Jones co-authored the musical film The Fantastics.
+Born(Tom
+
+>>>>>>
+Prediction:
+No effect(Serotonin receptors, depression) is False because While the 5-HT 1B receptor is best known for its role in regulating aggressive and impulsive behavior, it also plays an important role in modulating depression. Activation of the 5-HT 1B receptor decreases serotonin levels in the brain through effects on release, synthesis, and reuptake 33, 80, 81.
+No effect(Serotonin receptors, depression) is False.
+The claim is [NOT_SUPPORTED].
+
+Explanation:
+While the 5-HT 1B receptor is best known for its role in regulating aggressive and impulsive behavior, it also plays an important role in modulating depression. Activation of the 5-HT 1B receptor decreases serotonin levels in the brain through effects on release, synthesis, and reuptake 33, 80, 81.
+------
+Question: 
+Is it true that The writer of the song Girl Talk and Park So-yeon have both been members of a girl group.?
+
+Context:
+Write(the writer, the song Girl Talk) ::: Verify that the writer of the song Girl Talk
+Member(Park So-yeon, a girl group) ::: Verify that Park So-yeon is a memeber of a girl group
+Member(the writer, a girl group) ::: Verify that the writer of the song Girl Talk is a member of a gril group
+
+Who is the writer of the song Girl Talk? Tionne Watkins is the writer of the song Girl Talk.
+Is Park So-yeon a member of a girl group? Park Soyeon is a South Korean singer. She is a former member of the kids girl group I& Girls.
+Is the writer of the song Girl Talk a member of a girl group? Watkins rose to fame in the early 1990s as a member of the girl-group TLC
+>>>>>>
+Prediction:
+Write(Tionne Watkins, the song Girl Talk) is True because Tionne Watkins is the writer of the song Girl Talk.
+Member(Park So-yeon, a girl group) is True because Park Soyeon is a South Korean singer. She is a former member of the kids girl group I& Girls.
+Member(Tionne Watkins, a girl group) is True because Watkins rose to fame in the early 1990s as a member of the girl-group TLC
+Write(Tionne Watkins, the song Girl Talk) && Member(Park So-yeon, a girl group) && Member(Tionne Watkins, a girl group) is True.
+The claim is [SUPPORTED].
+
+Explanation:
+Tionne Watkins, a member of the girl group TLC in the 1990s, is the writer of the song "Girl Talk." 
+Park Soyeon, a South Korean singer, was formerly part of the girl group I& Girls. 
+Therefore, both Watkins and Park Soyeon have been members of girl groups in their respective careers.
+------
+Question:
+Is it true that A hockey team calls the 70,000 capacity Madison Square Garden it's home. That team, along with the New York Islanders, and the New Jersey Devils NHL franchise, are popular in the New York metropolitan area.?
+
+Context:
+Home(a hocky team, Madison Square Garden) ::: Verify that a hockey team calls Madison Square Garden its home.
+Capacity(Madison Square Garden, 70,000) ::: Verify that Madison Square Garden has capacity of 70,000.
+Popular(New York Islanders, New York Metropolitan area) ::: Verify that New York Islanders are popular in the New York metropolitan area.
+
+Which hocky team calls Madison Square Garden Home? Madison Square Garden hosts approximately 320 events a year. It is the home to the New York Rangers of the National Hockey League
+What is the capacity of Madison Square Garden? Madison Square Garden has a capacity of 19.500.
+Is New York Islanders popular in New York Metropolitan area? The New York Islanders are a professional ice hockey team based in Elmont, New York.... 
+>>>>>>
+Prediction:
+Home(New York Rangers, Madison Square Garden) is True because Madison Square Garden hosts approximately 320 events a year. It is the home to the New York Rangers of the National Hockey League
+Capacity(Madison Square Garden, 70,000) is False because Madison Square Garden has a capacity of 19.500.
+Popular(New York Islanders, New York Metropolitan area) is True because The New York Islanders are a professional ice hockey team based in Elmont, New York....
+Home(New York Rangers, Madison Square Garden) && Capacity(Madison Square Garden, 70,000) && Popular(New York Islanders, New York Metropolitan area) is False.
+The claim is [NOT_SUPPORTED].
+
+Explanation:
+The New York Rangers, along with the New York Islanders and the New Jersey Devils, are popular National Hockey League (NHL) teams in the New York metropolitan area. 
+Madison Square Garden, a well-known venue in New York City, has a capacity of approximately 19,500, not 70,000.
+------
+Question: 
+Is it true that Werner Gunter Jaffé Fellner was born in Frankfurt in the German state of Hesse and the fifth-largest city in Germany.?
+
+Context:
+Born(Werner Gunter Jaffé Fellner, Frankfurt)
+State(Frankfurt, the German state of Hesse)
+
+Where was Werner Gunter Jaffé Fellner born? Werner Gunter Jaffé Fellner was born in Frankfurt.
+Which state is Frankfurt in? Frankfurt is in the German state of Hesse.
+>>>>>>
+Prediction:
+Born(Werner Gunter Jaffé Fellner, Frankfurt) is True because Werner Gunter Jaffé Fellner was born in Frankfurt.
+State(Frankfurt, the German state of Hesse) is True because Frankfurt is in the German state of Hesse.
+Born(Werner Gunter Jaffé Fellner, Frankfurt) && State(Frankfurt, the German state of Hesse) is True.
+The claim is [SUPPORTED].
+
+Explanation:
+Werner Gunter Jaffé Fellner was born in Frankfurt, which is both in the German state of Hesse and the fifth-largest city in Germany.
+------
+Question:
+Is it true that The American lyricist Tom Jones,  born in 1928, co-authored the screenplay for the musical film The Fantastics.?
+
+Context:
+Born(Tom Jones, 1928)
+Nationality(Tom Jones, American)
+Co-author(Tome Jones, the musical film The Fantastics)
+
+When was Tom Jones born? Thomas Jones Woodward was born in Pontypridd, South Wales, Great Britain on June 7, 1940
+What is Tome Jones nationality? Sir Thomas Jones Woodward OBE is a Welsh singer. 
+Who co-author the musical film The Fantastics? Tome Jones co-authored the musical film The Fantastics.
+>>>>>>
+Prediction:
+Born(Tom Jones, 1928) is False because Thomas Jones Woodward was born in Pontypridd, South Wales, Great Britain on June 7, 1940
+Nationality(Tom Jones, American) is False because Thomas Jones Woodward is a British singer. 
+Co-author(Tome Jones, the musical film The Fantastics) is True because Tome Jones co-authored the musical film The Fantastics.
+Born(Tom Jones, 1928) && Nationality(Tom Jones, American) && Co-author(Tome Jones, the musical film The Fantastics) is False.
+The claim is [NOT_SUPPORTED].
+
+Explanation:
+Thomas Jones Woodward was born in Pontypridd, South Wales, Great Britain on June 7, 1940. He is a british singer.
+Thomas Jones co-authored the musical film The Fantastics.
+------
+Question: Is it true that Serotonin receptors have no effect on depression?
+
+Context: 
+No effect(Serotonin receptors, depression) ::: Verify that Serotonin receptors have no effect on depression
+
+Do Serotonin receptors have any effect on depression?
+While the 5-HT 1B receptor is best known for its role in regulating aggressive and impulsive behavior, it also plays an important role in modulating depression. Activation of the 5-HT 1B receptor decreases serotonin levels in the brain through effects on release, synthesis, and reuptake 33, 80, 81.
+>>>>>>
+Prediction:
+No effect(Serotonin receptors, depression) is False because While the 5-HT 1B receptor is best known for its role in regulating aggressive and impulsive behavior, it also plays an important role in modulating depression. Activation of the 5-HT 1B receptor decreases serotonin levels in the brain through effects on release, synthesis, and reuptake 33, 80, 81.
+No effect(Serotonin receptors, depression) is False.
+The claim is [NOT_SUPPORTED].
+
+Explanation:
+While the 5-HT 1B receptor is best known for its role in regulating aggressive and impulsive behavior, it also plays an important role in modulating depression. Activation of the 5-HT 1B receptor decreases serotonin levels in the brain through effects on release, synthesis, and reuptake 33, 80, 81.
+------
+Question: 
+Is it true that The writer of the song Girl Talk and Park So-yeon have both been members of a girl group.?
+
+Context:
+Write(the writer, the song Girl Talk) ::: Verify that the writer of the song Girl Talk
+Member(Park So-yeon, a girl group) ::: Verify that Park So-yeon is a memeber of a girl group
+Member(the writer, a girl group) ::: Verify that the writer of the song Girl Talk is a member of a gril group
+
+Who is the writer of the song Girl Talk? Tionne Watkins is the writer of the song Girl Talk.
+Is Park So-yeon a member of a girl group? Park Soyeon is a South Korean singer. She is a former member of the kids girl group I& Girls.
+Is the writer of the song Girl Talk a member
 <|begin_of_text|>
 Given a question and a context, provide a [SUPPORTED] or [NOT_SUPPORTED] answer and explain why.
 
@@ -366,65 +581,155 @@ Show(Patients with panic anxiety, increased CSF levels of hypocretin) is True.
 The claim is [SUPPORTED].
 
 Explanation:
-Patients with panic anxiety show increased CSF levels of hypocretin, according to a clinical study. 
+Patients with panic anxiety show increased CSF levels of hypocretin, as shown in a clinical study.
 ------
 Question:
-Is it true that The German philosopher and mathematician Gottfried Wilhelm Leibniz was born in Leipzig in the German state of Saxony.?
+Is it true that The American lyricist Tom Jones,  born in 1928, co-authored the screenplay for the musical film The Fantastics.?
 
 Context:
-Born(Gottfried Wilhelm Leibniz, Leipzig)
-State(Leipzig, the German state of Saxony)
+Born(Tom Jones, 1928)
+Nationality(Tom Jones, American)
+Co-author(Tome Jones, the musical film The Fantastics)
 
-When was Gottfried Wilhelm Leibniz born? Gottfried Wilhelm Leibniz was born on July 1, 1646 in Leipzig, Germany.
-Which state is Leipzig in? Leipzig is in the German state of Saxony.
+When was Tom Jones born? Thomas Jones Woodward was born in Pontypridd, South Wales, Great Britain on June 7, 1940
+What is Tome Jones nationality? Sir Thomas Jones Woodward OBE is a Welsh singer. 
+Who co-author the musical film The Fantastics? Tome Jones co-authored the musical film The Fantastics.
 >>>>>>
 Prediction:
-Born(Gottfried Wilhelm Leibniz, Leipzig) is True because Gottfried Wilhelm Leibniz was born on July 1, 1646 in Leipzig, Germany.
-State(Leipzig, the German state of Saxony) is True because Leipzig is in the German state of Saxony.
-Born(Gottfried Wilhelm Leibniz, Leipzig) && State(Leipzig, the German state of Saxony) is True.
-The claim is [SUPPORTED].
+Born(Tom Jones, 1928) is False because Thomas Jones Woodward was born in Pontypridd, South Wales, Great Britain on June 7, 1940
+Nationality(Tom Jones, American) is False because Thomas Jones Woodward is a British singer. 
+Co-author(Tome Jones, the musical film The Fantastics) is True because Tome Jones co-authored the musical film The Fantastics.
+Born(Tom Jones, 1928) && Nationality(Tom Jones, American) && Co-author(Tome Jones, the musical film The Fantastics) is False.
+The claim is [NOT_SUPPORTED].
 
 Explanation:
-Gottfried Wilhelm Leibniz was born in Leipzig, which is both in the German state of Saxony and the city with the largest university in Germany.
+Thomas Jones Woodward was born in Pontypridd, South Wales, Great Britain on June 7, 1940. He is a british singer.
+Thomas Jones co-authored the musical film The Fantastics.
 ------
-Question:
-Is it true that The writer of the song Girl Talk and Park So-yeon have both been members of a girl group.?
+Question: 
+Is it true that The American lyricist Tom Jones,  born in 1928, co-authored the screenplay for the musical film The Fantastics.?
 
 Context:
-Write(the writer, the song Girl Talk) ::: Verify that the writer of the song Girl Talk
-Member(Park So-yeon, a girl group) ::: Verify that Park So-yeon is a memeber of a girl group
-Member(the writer, a girl group) ::: Verify that the writer of the song Girl Talk is a member of a gril group
+Born(Tom Jones, 1928)
+Nationality(Tom Jones, American)
+Co-author(Tome Jones, the musical film The Fantastics)
 
-Who is the writer of the song Girl Talk? Tionne Watkins is the writer of the song Girl Talk.
-Is Park So-yeon a member of a girl group? Park Soyeon is a South Korean singer. She is a former member of the kids girl group I& Girls.
-Is the writer of the song Girl Talk a member of a girl group? Watkins rose to fame in the early 1990s as a member of the girl-group TLC
+When was Tom Jones born? Thomas Jones Woodward was born in Pontypridd, South Wales, Great Britain on June 7, 1940
+What is Tome Jones nationality? Sir Thomas Jones Woodward OBE is a Welsh singer. 
+Who co-author the musical film The Fantastics? Tome Jones co-authored the musical film The Fantastics.
 >>>>>>
 Prediction:
-Write(Tionne Watkins, the song Girl Talk) is True because Tionne Watkins is the writer of the song Girl Talk.
-Member(Park So-yeon, a girl group) is True because Park Soyeon is a South Korean singer. She is a former member of the kids girl group I& Girls.
-Member(Tionne Watkins, a girl group) is True because Watkins rose to fame in the early 1990s as a member of the girl-group TLC
-Write(Tionne Watkins, the song Girl Talk) && Member(Park So-yeon, a girl group) && Member(Tionne Watkins, a girl group) is True.
-The claim is [SUPPORTED].
+Born(Tom Jones, 1928) is False because Thomas Jones Woodward was born in Pontypridd, South Wales, Great Britain on June 7, 1940
+Nationality(Tom Jones, American) is False because Thomas Jones Woodward is a British singer. 
+Co-author(Tome Jones, the musical film The Fantastics) is True because Tome Jones co-authored the musical film The Fantastics.
+Born(Tom Jones, 1928) && Nationality(Tom Jones, American) && Co-author(Tome Jones, the musical film The Fantastics) is False.
+The claim is [NOT_SUPPORTED].
 
 Explanation:
-Tionne Watkins, a member of the girl group TLC in the 1990s, is the writer of the song "Girl Talk." 
-Park Soyeon, a South Korean singer, was formerly part of the girl group I& Girls. 
-Therefore, both Watkins and Park Soyeon have been members of girl groups in their respective careers.
+Thomas Jones Woodward was born in Pontypridd, South Wales, Great Britain on June 7, 1940. He is a british singer.
+Thomas Jones co-authored the musical film The Fantastics.
 ------
-Question:
-Is it true that A hockey team calls the 70,000 capacity Madison Square Garden it's home. That team, along with the New York Islanders, and the New Jersey Devils NHL franchise, are popular in the New York metropolitan area.?
+Question: 
+Is it true that The American lyricist Tom Jones,  born in 1928, co-authored the screenplay for the musical film The Fantastics.?
 
 Context:
-Home(a hocky team, Madison Square Garden) ::: Verify that a hockey team calls Madison Square Garden its home.
-Capacity(Madison Square Garden, 70,000) ::: Verify that Madison Square Garden has capacity of 70,000.
-Popular(New York Islanders, New York Metropolitan area) ::: Verify that New York Islanders are popular in the New York metropolitan area.
+Born(Tom Jones, 1928)
+Nationality(Tom Jones, American)
+Co-author(Tome Jones, the musical film The Fantastics)
 
-Which hocky team calls Madison Square Garden Home? Madison Square Garden hosts approximately 320 events a year. It is the home to the New York Rangers of the National Hockey League
-What is the capacity of Madison Square Garden? Madison Square Garden has a capacity of 19.500.
-Is New York Islanders popular in New York Metropolitan area? The New York Islanders are a professional ice hockey team based in Elmont, New York.... 
+When was Tom Jones born? Thomas Jones Woodward was born in Pontypridd, South Wales, Great Britain on June 7, 1940
+What is Tome Jones nationality? Sir Thomas Jones Woodward OBE is a Welsh singer. 
+Who co-author the musical film The Fantastics? Tome Jones co-authored the musical film The Fantastics.
 >>>>>>
 Prediction:
-Home(New York Rangers, Madison Square Garden) is True because Madison Square Garden hosts approximately 320 events a year. It is the home to the
+Born(Tom Jones, 1928) is False because Thomas Jones Woodward was born in Pontypridd, South Wales, Great Britain on June 7, 1940
+Nationality(Tom Jones, American) is False because Thomas Jones Woodward is a British singer. 
+Co-author(Tome Jones, the musical film The Fantastics) is True because Tome Jones co-authored the musical film The Fantastics.
+Born(Tom Jones, 1928) && Nationality(Tom Jones, American) && Co-author(Tome Jones, the musical film The Fantastics) is False.
+The claim is [NOT_SUPPORTED].
+
+Explanation:
+Thomas Jones Woodward was born in Pontypridd, South Wales, Great Britain on June 7, 1940. He is a british singer.
+Thomas Jones co-authored the musical film The Fantastics.
+------
+Question: 
+Is it true that The American lyricist Tom Jones,  born in 1928, co-authored the screenplay for the musical film The Fantastics.?
+
+Context:
+Born(Tom Jones, 1928)
+Nationality(Tom Jones, American)
+Co-author(Tome Jones, the musical film The Fantastics)
+
+When was Tom Jones born? Thomas Jones Woodward was born in Pontypridd, South Wales, Great Britain on June 7, 1940
+What is Tome Jones nationality? Sir Thomas Jones Woodward OBE is a Welsh singer. 
+Who co-author the musical film The Fantastics? Tome Jones co-authored the musical film The Fantastics.
+>>>>>>
+Prediction:
+Born(Tom Jones, 1928) is False because Thomas Jones Woodward was born in Pontypridd, South Wales, Great Britain on June 7, 1940
+Nationality(Tom Jones, American) is False because Thomas Jones Woodward is a British singer. 
+Co-author(Tome Jones, the musical film The Fantastics) is True because Tome Jones co-authored the musical film The Fantastics.
+Born(Tom Jones, 1928) && Nationality(Tom Jones, American) && Co-author(Tome Jones, the musical film The Fantastics) is False.
+The claim is [NOT_SUPPORTED].
+
+Explanation:
+Thomas Jones Woodward was born in Pontypridd, South Wales, Great Britain on June 7, 1940. He is a british singer.
+Thomas Jones co-authored the musical film The Fantastics.
+------
+Question: 
+Is it true that The American lyricist Tom Jones,  born in 1928, co-authored the screenplay for the musical film The Fantastics.?
+
+Context:
+Born(Tom Jones, 1928)
+Nationality(Tom Jones, American)
+Co-author(Tome Jones, the musical film The Fantastics)
+
+When was Tom Jones born? Thomas Jones Woodward was born in Pontypridd, South Wales, Great Britain on June 7, 1940
+What is Tome Jones nationality? Sir Thomas Jones Woodward OBE is a Welsh singer. 
+Who co-author the musical film The Fantastics? Tome Jones co-authored the musical film The Fantastics.
+>>>>>>
+Prediction:
+Born(Tom Jones, 1928) is False because Thomas Jones Woodward was born in Pontypridd, South Wales, Great Britain on June 7, 1940
+Nationality(Tom Jones, American) is False because Thomas Jones Woodward is a British singer. 
+Co-author(Tome Jones, the musical film The Fantastics) is True because Tome Jones co-authored the musical film The Fantastics.
+Born(Tom Jones, 1928) && Nationality(Tom Jones, American) && Co-author(Tome Jones, the musical film The Fantastics) is False.
+The claim is [NOT_SUPPORTED].
+
+Explanation:
+Thomas Jones Woodward was born in Pontypridd, South Wales, Great Britain on June 7, 1940. He is a british singer.
+Thomas Jones co-authored the musical film The Fantastics.
+------
+Question: 
+Is it true that The American lyricist Tom Jones,  born in 1928, co-authored the screenplay for the musical film The Fantastics.?
+
+Context:
+Born(Tom Jones, 1928)
+Nationality(Tom Jones, American)
+Co-author(Tome Jones, the musical film The Fantastics)
+
+When was Tom Jones born? Thomas Jones Woodward was born in Pontypridd, South Wales, Great Britain on June 7, 1940
+What is Tome Jones nationality? Sir Thomas Jones Woodward OBE is a Welsh singer. 
+Who co-author the musical film The Fantastics? Tome Jones co-authored the musical film The Fantastics.
+>>>>>>
+Prediction:
+Born(Tom Jones, 1928) is False because Thomas Jones Woodward was born in Pontypridd, South Wales, Great Britain on June 7, 1940
+Nationality(Tom Jones, American) is False because Thomas Jones Woodward is a British singer. 
+Co-author(Tome Jones, the musical film The Fantastics) is True because Tome Jones co-authored the musical film The Fantastics.
+Born(Tom Jones, 1928) && Nationality(Tom Jones, American) && Co-author(Tome Jones, the musical film The Fantastics) is False.
+The claim is [NOT_SUPPORTED].
+
+Explanation:
+Thomas Jones Woodward was born in Pontypridd, South Wales, Great Britain on June 7, 1940. He is a british singer.
+Thomas Jones co-authored the musical film The Fantastics.
+------
+Question: 
+Is it true that The American lyricist Tom Jones,  born in 1928, co-authored the screenplay for the musical film The Fantastics.?
+
+Context:
+Born(Tom Jones, 1928)
+Nationality(Tom Jones, American)
+Co-author(Tome Jones, the musical film The Fantastics)
+
+When was Tom Jones born? Thomas Jones Woodward was born in
 <|begin_of_text|>
 Given a question and a context, provide a [SUPPORTED] or [NOT_SUPPORTED] answer and explain why.
 
@@ -531,64 +836,164 @@ Cause(Chronic disease, Suboptimal nutrition) is True.
 The claim is [SUPPORTED].
 
 Explanation:
-Suboptimal nutrition is a leading cause of chronic disease. This is because nutrient deficiencies or suboptimal nutritional status can contribute to the development of diseases and/or health problems. 
+Suboptimal nutrition is a leading cause of chronic disease. This is because nutrient deficiencies or suboptimal nutritional status can contribute to the development of diseases and/or health problems. For example, inadequate vitamin D and/or calcium status can impact bone development/maintenance, while inadequate vitamin K status can affect bone health.
 ------
-Question:
-Is it true that The singer-songwriter of the song "Girl Talk" was born in 1970 and is from the United States.?
+Question: 
+Is it true that The New York Knicks are a professional basketball team based in New York City.?
 
 Context:
-Born(the singer-songwriter of the song "Girl Talk", 1970)
-Nationality(the singer-songwriter of the song "Girl Talk", United States)
+Based(New York Knicks, New York City)
+Professional(New York Knicks)
+Team(New York Knicks)
 
-When was the singer-songwriter of the song "Girl Talk" born? Tionne Tenese Watkins was born on April 26, 1970, in Des Moines, Iowa, U.S.
-What is the nationality of the singer-songwriter of the song "Girl Talk"? Watkins is an American singer, rapper, actress, and television host.
+Where is New York Knicks based? The New York Knicks are an American professional basketball team based in the New York City borough of Manhattan.
+Are New York Knicks a professional basketball team? The New York Knicks are a professional basketball team based in New York City.
+Is New York Knicks a team? The New York Knicks are a professional basketball team based in New York City.
 >>>>>>
 Prediction:
-Born(the singer-songwriter of the song "Girl Talk", 1970) is True because Tionne Tenese Watkins was born on April 26, 1970, in Des Moines, Iowa, U.S.
-Nationality(the singer-songwriter of the song "Girl Talk", United States) is True because Watkins is an American singer, rapper, actress, and television host.
-Born(the singer-songwriter of the song "Girl Talk", 1970) && Nationality(the singer-songwriter of the song "Girl Talk", United States) is True.
+Based(New York Knicks, New York City) is True because The New York Knicks are an American professional basketball team based in the New York City borough of Manhattan.
+Professional(New York Knicks) is True because The New York Knicks are a professional basketball team based in New York City.
+Team(New York Knicks) is True because The New York Knicks are a professional basketball team based in New York City.
+Based(New York Knicks, New York City) && Professional(New York Knicks) && Team(New York Knicks) is True.
 The claim is [SUPPORTED].
 
 Explanation:
-Tionne Tenese Watkins, the singer-songwriter of the song "Girl Talk," was born in 1970 and is from the United States.
+The New York Knicks are a professional basketball team based in New York City. They are a member of the Atlantic Division of the Eastern Conference in the National Basketball Association (NBA).
 ------
 Question:
-Is it true that The American singer-songwriter of the song "Girl Talk" was born in 1970 and is from the United States.?
+Is it true that The New York Knicks are a professional basketball team based in New York City.?
 
 Context:
-Born(the American singer-songwriter of the song "Girl Talk", 1970)
-Nationality(the American singer-songwriter of the song "Girl Talk", United States)
+Based(New York Knicks, New York City)
+Professional(New York Knicks)
+Team(New York Knicks)
 
-When was the American singer-songwriter of the song "Girl Talk" born? Tionne Tenese Watkins was born on April 26, 1970, in Des Moines, Iowa, U.S.
-What is the nationality of the American singer-songwriter of the song "Girl Talk"? Watkins is an American singer, rapper, actress, and television host.
+Where is New York Knicks based? The New York Knicks are an American professional basketball team based in the New York City borough of Manhattan.
+Are New York Knicks a professional basketball team? The New York Knicks are a professional basketball team based in New York City.
+Is New York Knicks a team? The New York Knicks are a professional basketball team based in New York City.
 >>>>>>
 Prediction:
-Born(the American singer-songwriter of the song "Girl Talk", 1970) is True because Tionne Tenese Watkins was born on April 26, 1970, in Des Moines, Iowa, U.S.
-Nationality(the American singer-songwriter of the song "Girl Talk", United States) is True because Watkins is an American singer, rapper, actress, and television host.
-Born(the American singer-songwriter of the song "Girl Talk", 1970) && Nationality(the American singer-songwriter of the song "Girl Talk", United States) is True.
+Based(New York Knicks, New York City) is True because The New York Knicks are an American professional basketball team based in the New York City borough of Manhattan.
+Professional(New York Knicks) is True because The New York Knicks are a professional basketball team based in New York City.
+Team(New York Knicks) is True because The New York Knicks are a professional basketball team based in New York City.
+Based(New York Knicks, New York City) && Professional(New York Knicks) && Team(New York Knicks) is True.
 The claim is [SUPPORTED].
 
 Explanation:
-Tionne Tenese Watkins, the American singer-songwriter of the song "Girl Talk," was born in 1970 and is from the United States.
+The New York Knicks are a professional basketball team based in New York City. They are a member of the Atlantic Division of the Eastern Conference in the National Basketball Association (NBA).
 ------
 Question:
-Is it true that The American singer-songwriter of the song "Girl Talk" was born in 1970 and is from the United States.?
+Is it true that The New York Knicks are a professional basketball team based in New York City.?
 
 Context:
-Born(the American singer-songwriter of the song "Girl Talk", 1970)
-Nationality(the American singer-songwriter of the song "Girl Talk", United States)
+Based(New York Knicks, New York City)
+Professional(New York Knicks)
+Team(New York Knicks)
 
-When was the American singer-songwriter of the song "Girl Talk" born? Tionne Tenese Watkins was born on April 26, 1970, in Des Moines, Iowa, U.S.
-What is the nationality of the American singer-songwriter of the song "Girl Talk"? Watkins is an American singer, rapper, actress, and television host.
+Where is New York Knicks based? The New York Knicks are an American professional basketball team based in the New York City borough of Manhattan.
+Are New York Knicks a professional basketball team? The New York Knicks are a professional basketball team based in New York City.
+Is New York Knicks a team? The New York Knicks are a professional basketball team based in New York City.
 >>>>>>
 Prediction:
-Born(the American singer-songwriter of the song "Girl Talk", 1970) is True because Tionne Tenese Watkins was born on April 26, 1970, in Des Moines, Iowa, U.S.
-Nationality(the American singer-songwriter of the song "Girl Talk", United States) is True because Watkins is an American singer, rapper, actress, and television host.
-Born(the American singer-songwriter of the song "Girl Talk", 1970) && Nationality(the American singer-songwriter of the song "Girl Talk", United States) is True.
+Based(New York Knicks, New York City) is True because The New York Knicks are an American professional basketball team based in the New York City borough of Manhattan.
+Professional(New York Knicks) is True because The New York Knicks are a professional basketball team based in New York City.
+Team(New York Knicks) is True because The New York Knicks are a professional basketball team based in New York City.
+Based(New York Knicks, New York City) && Professional(New York Knicks) && Team(New York Knicks) is True.
 The claim is [SUPPORTED].
 
 Explanation:
-Tionne Tenese Watkins, the American singer-songwriter of the song "Girl Talk,"
+The New York Knicks are a professional basketball team based in New York City. They are a member of the Atlantic Division of the Eastern Conference in the National Basketball Association (NBA).
+------
+Question:
+Is it true that The New York Knicks are a professional basketball team based in New York City.?
+
+Context:
+Based(New York Knicks, New York City)
+Professional(New York Knicks)
+Team(New York Knicks)
+
+Where is New York Knicks based? The New York Knicks are an American professional basketball team based in the New York City borough of Manhattan.
+Are New York Knicks a professional basketball team? The New York Knicks are a professional basketball team based in New York City.
+Is New York Knicks a team? The New York Knicks are a professional basketball team based in New York City.
+>>>>>>
+Prediction:
+Based(New York Knicks, New York City) is True because The New York Knicks are an American professional basketball team based in the New York City borough of Manhattan.
+Professional(New York Knicks) is True because The New York Knicks are a professional basketball team based in New York City.
+Team(New York Knicks) is True because The New York Knicks are a professional basketball team based in New York City.
+Based(New York Knicks, New York City) && Professional(New York Knicks) && Team(New York Knicks) is True.
+The claim is [SUPPORTED].
+
+Explanation:
+The New York Knicks are a professional basketball team based in New York City. They are a member of the Atlantic Division of the Eastern Conference in the National Basketball Association (NBA).
+------
+Question:
+Is it true that The New York Knicks are a professional basketball team based in New York City.?
+
+Context:
+Based(New York Knicks, New York City)
+Professional(New York Knicks)
+Team(New York Knicks)
+
+Where is New York Knicks based? The New York Knicks are an American professional basketball team based in the New York City borough of Manhattan.
+Are New York Knicks a professional basketball team? The New York Knicks are a professional basketball team based in New York City.
+Is New York Knicks a team? The New York Knicks are a professional basketball team based in New York City.
+>>>>>>
+Prediction:
+Based(New York Knicks, New York City) is True because The New York Knicks are an American professional basketball team based in the New York City borough of Manhattan.
+Professional(New York Knicks) is True because The New York Knicks are a professional basketball team based in New York City.
+Team(New York Knicks) is True because The New York Knicks are a professional basketball team based in New York City.
+Based(New York Knicks, New York City) && Professional(New York Knicks) && Team(New York Knicks) is True.
+The claim is [SUPPORTED].
+
+Explanation:
+The New York Knicks are a professional basketball team based in New York City. They are a member of the Atlantic Division of the Eastern Conference in the National Basketball Association (NBA).
+------
+Question:
+Is it true that The New York Knicks are a professional basketball team based in New York City.?
+
+Context:
+Based(New York Knicks, New York City)
+Professional(New York Knicks)
+Team(New York Knicks)
+
+Where is New York Knicks based? The New York Knicks are an American professional basketball team based in the New York City borough of Manhattan.
+Are New York Knicks a professional basketball team? The New York Knicks are a professional basketball team based in New York City.
+Is New York Knicks a team? The New York Knicks are a professional basketball team based in New York City.
+>>>>>>
+Prediction:
+Based(New York Knicks, New York City) is True because The New York Knicks are an American professional basketball team based in the New York City borough of Manhattan.
+Professional(New York Knicks) is True because The New York Knicks are a professional basketball team based in New York City.
+Team(New York Knicks) is True because The New York Knicks are a professional basketball team based in New York City.
+Based(New York Knicks, New York City) && Professional(New York Knicks) && Team(New York Knicks) is True.
+The claim is [SUPPORTED].
+
+Explanation:
+The New York Knicks are a professional basketball team based in New York City. They are a member of the Atlantic Division of the Eastern Conference in the National Basketball Association (NBA).
+------
+Question:
+Is it true that The New York Knicks are a professional basketball team based in New York City.?
+
+Context:
+Based(New York Knicks, New York City)
+Professional(New York Knicks)
+Team(New York Knicks)
+
+Where is New York Knicks based? The New York Knicks are an American professional basketball team based in the New York City borough of Manhattan.
+Are New York Knicks a professional basketball team? The New York Knicks are a professional basketball team based in New York City.
+Is New York Knicks a team? The New York Knicks are a professional basketball team based in New York City.
+>>>>>>
+Prediction:
+Based(New York Knicks, New York City) is True because The New York Knicks are an American professional basketball team based in the New York City borough of Manhattan.
+Professional(New York Knicks) is True because The New York Knicks are a professional basketball team based in New York City.
+Team(New York Knicks) is True because The New York Knicks are a professional basketball team based in New York City.
+Based(New York Knicks, New York City) && Professional(New York Knicks) && Team(New York Knicks) is True.
+The claim is [SUPPORTED].
+
+Explanation:
+The New York Knicks are a professional basketball team based in New York City. They are a member of the Atlantic Division of the Eastern Conference in the National Basketball Association (NBA).
+------
+Question:
+Is it true that The New York Knicks are a
 <|begin_of_text|>
 Given a question and a context, provide a [SUPPORTED] or [NOT_SUPPORTED] answer and explain why.
 
@@ -699,32 +1104,72 @@ Repress(FOXO3, IL-10) && Minor allele(FOXO3, G) is True.
 The claim is [SUPPORTED].
 
 Explanation:
-The minor G allele of FOXO3 represses IL-10. This is supported by the fact that minor allele carriage is shown to limit inflammatory responses in monocytes via a FOXO3-driven pathway, which through TGFβ1 reduces production of IL-10. Additionally, the minor allele of FOXO3 SNP rs12212067 is associated with a milder course of the inflammatory conditions Crohn's disease and rheumatoid arthritis.
+The minor G allele of FOXO3 represses IL-10. The minor allele of FOXO3 SNP rs12212067 is associated with a milder course of the inflammatory conditions Crohn's disease and rheumatoid arthritis.
 ------
 Question:
-Is it true that The American lyricist Tom Jones,  born in 1928, co-authored the screenplay for the musical film The Fantastics.?
+Is it true that The minor A allele of FOXO3 represses IL-10.?
 
-Context:
-Born(Tom Jones, 1928)
-Nationality(Tom Jones, American)
-Co-author(Tome Jones, the musical film The Fantastics)
+Context: 
+Repress(FOXO3, IL-10) ::: Verify that the minor A allele of FOXO3 represses IL-10.
+Minor allele(FOXO3, A) ::: Verify that the minor allele of FOXO3 is A.
 
-When was Tom Jones born? Thomas Jones Woodward was born in Pontypridd, South Wales, Great Britain on June 7, 1940
-What is Tome Jones nationality? Sir Thomas Jones Woodward OBE is a Welsh singer. 
-Who co-author the musical film The Fantastics? Tome Jones co-authored the musical film The Fantastics.
+Does the minor A allele of FOXO3 repress IL-10?
+Minor allele carriage is shown to limit inflammatory responses in monocytes via a FOXO3-driven pathway, which through TGFβ1 reduces production of...
+What is the minor allele of FOXO3?
+The minor allele of FOXO3 SNP rs12212067 is associated with a milder course of the inflammatory conditions Crohn's disease and rheumatoid...
 >>>>>>
 Prediction:
-Born(Tom Jones, 1928) is False because Thomas Jones Woodward was born in Pontypridd, South Wales, Great Britain on June 7, 1940
-Nationality(Tom Jones, American) is False because Thomas Jones Woodward is a British singer. 
-Co-author(Tome Jones, the musical film The Fantastics) is True because Tome Jones co-authored the musical film The Fantastics.
-Born(Tom Jones, 1928) && Nationality(Tom Jones, American) && Co-author(Tome Jones, the musical film The Fantastics) is False.
-The claim is [NOT_SUPPORTED].
+Repress(FOXO3, IL-10) is True because Minor allele carriage is shown to limit inflammatory responses in monocytes via a FOXO3-driven pathway, which through TGFβ1 reduces production of...
+Minor allele(FOXO3, A) is True because The minor allele of FOXO3 SNP rs12212067 is associated with a milder course of the inflammatory conditions Crohn's disease and rheumatoid...
+Repress(FOXO3, IL-10) && Minor allele(FOXO3, A) is True.
+The claim is [SUPPORTED].
 
 Explanation:
-Thomas Jones Woodward was born in Pontypridd, South Wales, Great Britain on June 7, 1940. He is a british singer.
-Thomas Jones co-authored the musical film The Fantastics.
+The minor A allele of FOXO3 represses IL-10. The minor allele of FOXO3 SNP rs12212067 is associated with a milder course of the inflammatory conditions Crohn's disease and rheumatoid arthritis.
+------
+Question: 
+Is it true that The minor C allele of FOXO3 represses IL-10.?
+
+Context: 
+Repress(FOXO3, IL-10) ::: Verify that the minor C allele of FOXO3 represses IL-10.
+Minor allele(FOXO3, C) ::: Verify that the minor allele of FOXO3 is C.
+
+Does the minor C allele of FOXO3 repress IL-10?
+Minor allele carriage is shown to limit inflammatory responses in monocytes via a FOXO3-driven pathway, which through TGFβ1 reduces production of...
+What is the minor allele of FOXO3?
+The minor allele of FOXO3 SNP rs12212067 is associated with a milder course of the inflammatory conditions Crohn's disease and rheumatoid...
+>>>>>>
+Prediction:
+Repress(FOXO3, IL-10) is True because Minor allele carriage is shown to limit inflammatory responses in monocytes via a FOXO3-driven pathway, which through TGFβ1 reduces production of...
+Minor allele(FOXO3, C) is True because The minor allele of FOXO3 SNP rs12212067 is associated with a milder course of the inflammatory conditions Crohn's disease and rheumatoid...
+Repress(FOXO3, IL-10) && Minor allele(FOXO3, C) is True.
+The claim is [SUPPORTED].
+
+Explanation:
+The minor C allele of FOXO3 represses IL-10. The minor allele of FOXO3 SNP rs12212067 is associated with a milder course of the inflammatory conditions Crohn's disease and rheumatoid arthritis.
 ------
 Question:
+Is it true that The minor T allele of FOXO3 represses IL-10.?
+
+Context: 
+Repress(FOXO3, IL-10) ::: Verify that the minor T allele of FOXO3 represses IL-10.
+Minor allele(FOXO3, T) ::: Verify that the minor allele of FOXO3 is T.
+
+Does the minor T allele of FOXO3 repress IL-10?
+Minor allele carriage is shown to limit inflammatory responses in monocytes via a FOXO3-driven pathway, which through TGFβ1 reduces production of...
+What is the minor allele of FOXO3?
+The minor allele of FOXO3 SNP rs12212067 is associated with a milder course of the inflammatory conditions Crohn's disease and rheumatoid...
+>>>>>>
+Prediction:
+Repress(FOXO3, IL-10) is True because Minor allele carriage is shown to limit inflammatory responses in monocytes via a FOXO3-driven pathway, which through TGFβ1 reduces production of...
+Minor allele(FOXO3, T) is True because The minor allele of FOXO3 SNP rs12212067 is associated with a milder course of the inflammatory conditions Crohn's disease and rheumatoid...
+Repress(FOXO3, IL-10) && Minor allele(FOXO3, T) is True.
+The claim is [SUPPORTED].
+
+Explanation:
+The minor T allele of FOXO3 represses IL-10. The minor allele of FOXO3 SNP rs12212067 is associated with a milder course of the inflammatory conditions Crohn's disease and rheumatoid arthritis.
+------
+Question: 
 Is it true that The minor G allele of FOXO3 represses IL-10.?
 
 Context: 
@@ -743,18 +1188,43 @@ Repress(FOXO3, IL-10) && Minor allele(FOXO3, G) is True.
 The claim is [SUPPORTED].
 
 Explanation:
-The minor G allele of FOXO3 represses IL-10. This is supported by the fact that minor allele carriage is shown to limit inflammatory responses in monocytes via a FOXO3-driven pathway, which through TGFβ1 reduces production of IL-10. Additionally, the minor allele of FOXO3 SNP rs12212067 is associated with a milder course of the inflammatory conditions Crohn's disease and rheumatoid arthritis.
+The minor G allele of FOXO3 represses IL-10. The minor allele of FOXO3 SNP rs12212067 is associated with a milder course of the inflammatory conditions Crohn's disease and rheumatoid arthritis.
 ------
 Question:
-Is it true that The minor G allele of FOXO3 represses IL-10.?
+Is it true that The minor A allele of FOXO3 represses IL-10.?
 
 Context: 
-Repress(FOXO3, IL-10) ::: Verify that the minor G allele of FOXO3 represses IL-10.
-Minor allele(FOXO3, G) ::: Verify that the minor allele of FOXO3 is G.
+Repress(FOXO3, IL-10) ::: Verify that the minor A allele of FOXO3 represses IL-10.
+Minor allele(FOXO3, A) ::: Verify that the minor allele of FOXO3 is A.
 
-Does the minor G allele of FOXO3 repress IL-10?
+Does the minor A allele of FOXO3 repress IL-10?
 Minor allele carriage is shown to limit inflammatory responses in monocytes via a FOXO3-driven pathway, which through TGFβ1 reduces production of...
+What is the minor allele of FOXO3?
+The minor allele of FOXO3 SNP rs12212067 is associated with a milder course of the inflammatory conditions Crohn's disease and rheumatoid...
+>>>>>>
+Prediction:
+Repress(FOXO3, IL-10) is True because Minor allele carriage is shown to limit inflammatory responses in monocytes via a FOXO3-driven pathway, which through TGFβ1 reduces production of...
+Minor allele(FOXO3, A) is True because The minor allele of FOXO3 SNP rs12212067 is associated with a milder course of the inflammatory conditions Crohn's disease and rheumatoid...
+Repress(FOXO3, IL-10) && Minor allele(FOXO3, A) is True.
+The claim is [SUPPORTED].
 
+Explanation:
+The minor A allele of FOXO3 represses IL-10. The minor allele of FOXO3 SNP rs12212067 is associated with a milder course of the inflammatory conditions Crohn's disease and rheumatoid arthritis.
+------
+Question: 
+Is it true that The minor C allele of FOXO3 represses IL-10.?
+
+Context: 
+Repress(FOXO3, IL-10) ::: Verify that the minor C allele of FOXO3 represses IL-10.
+Minor allele(FOXO3, C) ::: Verify that the minor allele of FOXO3 is C.
+
+Does the minor C allele of FOXO3 repress IL-10?
+Minor allele carriage is shown to limit inflammatory responses in monocytes via a FOXO3-driven pathway, which through TGFβ1 reduces production of...
+What is the minor allele of FOXO3?
+The minor allele of FOXO3 SNP rs12212067 is associated with a milder course of the inflammatory conditions Crohn's disease and rheumatoid...
+>>>>>>
+Prediction:
+Repress(FOXO3, IL-10) is True because Minor allele carriage is shown to limit
 <|begin_of_text|>
 Given a question and a context, provide a [SUPPORTED] or [NOT_SUPPORTED] answer and explain why.
 
@@ -856,83 +1326,207 @@ Is cellular aging correlated with an older appearance?
 At the cellular level, aging is associated with impaired proteostasis and an accumulation of macromolecular damage, genomic instability, chromatin...
 >>>>>>
 Prediction:
-Uncorrelated(cellular aging, an older appearance) is False because At the cellular level, aging is associated with impaired proteostasis and an accumulation of macromolecular damage, genomic instability, chromatin...
-The claim is [NOT_SUPPORTED].
+Uncorrelated(cellular aging, an older appearance) is True because At the cellular level, aging is associated with impaired proteostasis and an accumulation of macromolecular damage, genomic instability, chromatin...
+Uncorrelated(cellular aging, an older appearance) is True.
+The claim is [SUPPORTED].
 
 Explanation:
-Cellular aging is correlated with an older appearance. At the cellular level, aging is associated with impaired proteostasis and an accumulation of macromolecular damage, genomic instability, chromatin alterations, and epigenetic changes that contribute to the progressive decline in cellular function and viability that occurs with aging.
+Cellular aging is associated with an accumulation of macromolecular damage, genomic instability, chromatin alterations, and epigenetic changes. These changes are uncorrelated with an older appearance.
 ------
-Question:
-Is it true that The American lyricist Tom Jones,  born in 1928, co-authored the screenplay for the musical film The Fantastics.?
-
-Context:
-Born(Tom Jones, 1928)
-Nationality(Tom Jones, American)
-Co-author(Tome Jones, the musical film The Fantastics)
-
-When was Tom Jones born? Thomas Jones Woodward was born in Pontypridd, South Wales, Great Britain on June 7, 1940
-What is Tome Jones nationality? Sir Thomas Jones Woodward OBE is a Welsh singer. 
-Who co-author the musical film The Fantastics? Tome Jones co-authored the musical film The Fantastics.
->>>>>>
-Prediction:
-Born(Tom Jones, 1928) is False because Thomas Jones Woodward was born in Pontypridd, South Wales, Great Britain on June 7, 1940
-Nationality(Tom Jones, American) is False because Thomas Jones Woodward is a British singer. 
-Co-author(Tome Jones, the musical film The Fantastics) is True because Tome Jones co-authored the musical film The Fantastics.
-Born(Tom Jones, 1928) && Nationality(Tom Jones, American) && Co-author(Tome Jones, the musical film The Fantastics) is False.
-The claim is [NOT_SUPPORTED].
-
-Explanation:
-Thomas Jones Woodward was born in Pontypridd, South Wales, Great Britain on June 7, 1940. He is a british singer.
-Thomas Jones co-authored the musical film The Fantastics.
-------
-Question: 
-Is it true that Cellular aging is uncorrelated with an older appearance.?
+Question: Is it true that The United States has the most billionaires in the world.?
 
 Context: 
-Uncorrelated(cellular aging, an older appearance) ::: Verify cellular aging is uncorrelated with an older appearance.
+Most(billionaires, the United States)
+Country(billionaires, the United States)
 
-Is cellular aging correlated with an older appearance?
-At the cellular level, aging is associated with impaired proteostasis and an accumulation of macromolecular damage, genomic instability, chromatin...
+What country has the most billionaires? The United States has the most billionaires in the world.
 >>>>>>
 Prediction:
-Uncorrelated(cellular aging, an older appearance) is False because At the cellular level, aging is associated with impaired proteostasis and an accumulation of macromolecular damage, genomic instability, chromatin...
-The claim is [NOT_SUPPORTED].
+Most(billionaires, the United States) is True because The United States has the most billionaires in the world.
+Country(billionaires, the United States) is True because The United States has the most billionaires in the world.
+Most(billionaires, the United States) && Country(billionaires, the United States) is True.
+The claim is [SUPPORTED].
 
 Explanation:
-Cellular aging is correlated with an older appearance. At the cellular level, aging is associated with impaired proteostasis and an accumulation of macromolecular damage, genomic instability, chromatin alterations, and epigenetic changes that contribute to the progressive decline in cellular function and viability that occurs with aging.
+The United States has the most billionaires in the world, and they are all from the United States.
 ------
-Question: 
-Is it true that Cellular aging is uncorrelated with an older appearance.?
+Question: Is it true that The first two women to be elected to the United States Congress were both Republicans.?
 
 Context: 
-Uncorrelated(cellular aging, an older appearance) ::: Verify cellular aging is uncorrelated with an older appearance.
+Elected(the first two women, the United States Congress)
+Party(the first two women, Republicans)
 
-Is cellular aging correlated with an older appearance?
-At the cellular level, aging is associated with impaired proteostasis and an accumulation of macromolecular damage, genomic instability, chromatin...
+Who were the first two women elected to the United States Congress? The first two women elected to the United States Congress were both Republicans.
 >>>>>>
 Prediction:
-Uncorrelated(cellular aging, an older appearance) is False because At the cellular level, aging is associated with impaired proteostasis and an accumulation of macromolecular damage, genomic instability, chromatin...
-The claim is [NOT_SUPPORTED].
+Elected(the first two women, the United States Congress) is True because The first two women elected to the United States Congress were both Republicans.
+Party(the first two women, Republicans) is True because The first two women elected to the United States Congress were both Republicans.
+Elected(the first two women, the United States Congress) && Party(the first two women, Republicans) is True.
+The claim is [SUPPORTED].
 
 Explanation:
-Cellular aging is correlated with an older appearance. At the cellular level, aging is associated with impaired proteostasis and an accumulation of macromolecular damage, genomic instability, chromatin alterations, and epigenetic changes that contribute to the progressive decline in cellular function and viability that occurs with aging.
+The first two women elected to the United States Congress were both Republicans.
 ------
-Question:
-Is it true that The American lyricist Tom Jones,  born in 1928, co-authored the screenplay for the musical film The Fantastics.?
+Question: Is it true that The largest city in the United States is New York City.?
 
-Context:
-Born(Tom Jones, 1928)
-Nationality(Tom Jones, American)
-Co-author(Tome Jones, the musical film The Fantastics)
+Context: 
+Largest(city, New York City)
+City(New York City)
 
-When was Tom Jones born? Thomas Jones Woodward was born in Pontypridd, South Wales, Great Britain on June 7, 1940
-What is Tome Jones nationality? Sir Thomas Jones Woodward OBE is a Welsh singer. 
-Who co-author the musical film The Fantastics? Tome Jones co-authored the musical film The Fantastics.
+Which city is the largest in the United States? The largest city in the United States is New York City.
 >>>>>>
 Prediction:
-Born(Tom Jones, 1928) is False because Thomas Jones Woodward was born in Pontypridd, South Wales, Great Britain on June 7, 1940
-Nationality(Tom Jones, American) is False because Thomas Jones Woodward is a British singer. 
-Co-author(Tome Jones,
+Largest(city, New York City) is True because The largest city in the United States is New York City.
+City(New York City) is True because The largest city in the United States is New York City.
+Largest(city, New York City) && City(New York City) is True.
+The claim is [SUPPORTED].
+
+Explanation:
+The largest city in the United States is New York City.
+------
+Question: Is it true that The first woman to be elected to the United States Congress was a Democrat.?
+
+Context: 
+Elected(the first woman, the United States Congress)
+Party(the first woman, Democrat)
+
+Who was the first woman elected to the United States Congress? The first woman elected to the United States Congress was a Democrat.
+>>>>>>
+Prediction:
+Elected(the first woman, the United States Congress) is True because The first woman elected to the United States Congress was a Democrat.
+Party(the first woman, Democrat) is True because The first woman elected to the United States Congress was a Democrat.
+Elected(the first woman, the United States Congress) && Party(the first woman, Democrat) is True.
+The claim is [SUPPORTED].
+
+Explanation:
+The first woman elected to the United States Congress was a Democrat.
+------
+Question: Is it true that The first woman to be elected to the United States Congress was a Republican.?
+
+Context: 
+Elected(the first woman, the United States Congress)
+Party(the first woman, Republican)
+
+Who was the first woman elected to the United States Congress? The first woman elected to the United States Congress was a Republican.
+>>>>>>
+Prediction:
+Elected(the first woman, the United States Congress) is True because The first woman elected to the United States Congress was a Republican.
+Party(the first woman, Republican) is True because The first woman elected to the United States Congress was a Republican.
+Elected(the first woman, the United States Congress) && Party(the first woman, Republican) is True.
+The claim is [SUPPORTED].
+
+Explanation:
+The first woman elected to the United States Congress was a Republican.
+------
+Question: Is it true that The first two women to be elected to the United States Congress were both Democrats.?
+
+Context: 
+Elected(the first two women, the United States Congress)
+Party(the first two women, Democrats)
+
+Who were the first two women elected to the United States Congress? The first two women elected to the United States Congress were both Democrats.
+>>>>>>
+Prediction:
+Elected(the first two women, the United States Congress) is True because The first two women elected to the United States Congress were both Democrats.
+Party(the first two women, Democrats) is True because The first two women elected to the United States Congress were both Democrats.
+Elected(the first two women, the United States Congress) && Party(the first two women, Democrats) is True.
+The claim is [SUPPORTED].
+
+Explanation:
+The first two women elected to the United States Congress were both Democrats.
+------
+Question: Is it true that The first two women to be elected to the United States Congress were both Republicans.?
+
+Context: 
+Elected(the first two women, the United States Congress)
+Party(the first two women, Republicans)
+
+Who were the first two women elected to the United States Congress? The first two women elected to the United States Congress were both Republicans.
+>>>>>>
+Prediction:
+Elected(the first two women, the United States Congress) is True because The first two women elected to the United States Congress were both Republicans.
+Party(the first two women, Republicans) is True because The first two women elected to the United States Congress were both Republicans.
+Elected(the first two women, the United States Congress) && Party(the first two women, Republicans) is True.
+The claim is [SUPPORTED].
+
+Explanation:
+The first two women elected to the United States Congress were both Republicans.
+------
+Question: Is it true that The first two women to be elected to the United States Congress were both Democrats.?
+
+Context: 
+Elected(the first two women, the United States Congress)
+Party(the first two women, Democrats)
+
+Who were the first two women elected to the United States Congress? The first two women elected to the United States Congress were both Democrats.
+>>>>>>
+Prediction:
+Elected(the first two women, the United States Congress) is True because The first two women elected to the United States Congress were both Democrats.
+Party(the first two women, Democrats) is True because The first two women elected to the United States Congress were both Democrats.
+Elected(the first two women, the United States Congress) && Party(the first two women, Democrats) is True.
+The claim is [SUPPORTED].
+
+Explanation:
+The first two women elected to the United States Congress were both Democrats.
+------
+Question: Is it true that The first two women to be elected to the United States Congress were both Republicans.?
+
+Context: 
+Elected(the first two women, the United States Congress)
+Party(the first two women, Republicans)
+
+Who were the first two women elected to the United States Congress? The first two women elected to the United States Congress were both Republicans.
+>>>>>>
+Prediction:
+Elected(the first two women, the United States Congress) is True because The first two women elected to the United States Congress were both Republicans.
+Party(the first two women, Republicans) is True because The first two women elected to the United States Congress were both Republicans.
+Elected(the first two women, the United States Congress) && Party(the first two women, Republicans) is True.
+The claim is [SUPPORTED].
+
+Explanation:
+The first two women elected to the United States Congress were both Republicans.
+------
+Question: Is it true that The first two women to be elected to the United States Congress were both Democrats.?
+
+Context: 
+Elected(the first two women, the United States Congress)
+Party(the first two women, Democrats)
+
+Who were the first two women elected to the United States Congress? The first two women elected to the United States Congress were both Democrats.
+>>>>>>
+Prediction:
+Elected(the first two women, the United States Congress) is True because The first two women elected to the United States Congress were both Democrats.
+Party(the first two women, Democrats) is True because The first two women elected to the United States Congress were both Democrats.
+Elected(the first two women, the United States Congress) && Party(the first two women, Democrats) is True.
+The claim is [SUPPORTED].
+
+Explanation:
+The first two women elected to the United States Congress were both Democrats.
+------
+Question: Is it true that The first two women to be elected to the United States Congress were both Republicans.?
+
+Context: 
+Elected(the first two women, the United States Congress)
+Party(the first two women, Republicans)
+
+Who were the first two women elected to the United States Congress? The first two women elected to the United States Congress were both Republicans.
+>>>>>>
+Prediction:
+Elected(the first two women, the United States Congress) is True because The first two women elected to the United States Congress were both Republicans.
+Party(the first two women, Republicans) is True because The first two women elected to the United States Congress were both Republicans.
+Elected(the first two women, the United States Congress) && Party(the first two women, Republicans) is True.
+The claim is [SUPPORTED].
+
+Explanation:
+The first two women elected to the United States Congress were both Republicans.
+------
+Question: Is it true that The first two women to be elected to the United States Congress were both Democrats.?
+
+Context: 
+Elected(the first two women, the United States Congress)
+Party(the first two women, Democrats)
+
+Who were the first two women elected
 <|begin_of_text|>
 Given a question and a context, provide a [SUPPORTED] or [NOT_SUPPORTED] answer and explain why.
 
@@ -1037,52 +1631,140 @@ What is the treatment of KRAS mutant tumors?
 There is now a targeted therapy pill (also called a KRAS inhibitor) for patients with KRAS G12C. If a patient's cancer stops responding to chemotherapy or immunotherapy (or a combination), they may be able to go on a targeted therapy pill called sotorasib.
 >>>>>>
 Prediction:
-Combining(Phosphatidylinositide 3-kinase inhibitor, MEK 1/2 inhibitor) is False because These in vivo studies suggest that inhibitors of the PI3K/mTOR pathway may be active in cancers with PIK3CA mutations, and, when combined with MEK inhibitors,...
-Treat(Combining(Phosphatidylinositide 3-kinase inhibitor, MEK 1/2 inhibitor), KRAS mutant tumors) is True because There is now a targeted therapy pill (also called a KRAS inhibitor) for patients with KRAS G12C. If a patient's cancer stops responding to chemotherapy or immunotherapy (or a combination), they may be able to go on a targeted therapy pill called sotorasib.
+Combining(Phosphatidylinositide 3-kinase inhibitor, MEK 1/2 inhibitor) is True because These in vivo studies suggest that inhibitors of the PI3K/mTOR pathway may be active in cancers with PIK3CA mutations, and, when combined with MEK inhibitors,...
+Treat(Combining(Phosphatidylinositide 3-kinase inhibitor, MEK 1/2 inhibitor), KRAS mutant tumors) is False because There is now a targeted therapy pill (also called a KRAS inhibitor) for patients with KRAS G12C. If a patient's cancer stops responding to chemotherapy or immunotherapy (or a combination), they may be able to go on a targeted therapy pill called sotorasib.
 Combining(Phosphatidylinositide 3-kinase inhibitor, MEK 1/2 inhibitor) && Treat(Combining(Phosphatidylinositide 3-kinase inhibitor, MEK 1/2 inhibitor), KRAS mutant tumors) is False.
 The claim is [NOT_SUPPORTED].
 
 Explanation:
-Combining Phosphatidylinositide 3-kinase and MEK 1/2 inhibitors may be active in cancers with PIK3CA mutations, and, when combined with MEK inhibitors, may be active in cancers with KRAS mutations.
-There is now a targeted therapy pill (also called a KRAS inhibitor) for patients with KRAS G12C. If a patient's cancer stops responding to chemotherapy or immunotherapy (or a combination), they may be able to go on a targeted therapy pill called sotorasib.
+Combining Phosphatidylinositide 3-kinase and MEK 1/2 inhibitors may be active in cancers with PIK3CA mutations, and, when combined with MEK inhibitors, they may be effective at treating KRAS mutant tumors.
 ------
-Question: Is it true that The 2006 World Champion Pittsburgh Penguins were led by the captain Sidney Crosby and the coach Michel Therrien.?
+Question:
+Is it true that The singer and songwriter Tom Jones was born in Pontypridd, Wales in 1940.?
 
-Context: 
-Led(The 2006 World Champion Pittsburgh Penguins, Sidney Crosby)
-Coach(The 2006 World Champion Pittsburgh Penguins, Michel Therrien)
+Context:
+Born(Tom Jones, Pontypridd)
+Nationality(Tom Jones, Welsh)
+Born(Tom Jones, 1940)
 
-Who led the 2006 World Champion Pittsburgh Penguins? Sidney Crosby is a Canadian professional ice hockey player. He is the captain of the Pittsburgh Penguins of the National Hockey League (NHL).
-Who was the coach of the 2006 World Champion Pittsburgh Penguins? Michel Therrien is a Canadian ice hockey coach and former player. He is the current head coach of the Montreal Canadiens of the National Hockey League (NHL).
+When was Tom Jones born? Thomas Jones Woodward was born in Pontypridd, South Wales, Great Britain on June 7, 1940
+What is Tome Jones nationality? Sir Thomas Jones Woodward OBE is a Welsh singer. 
+What year was Tom Jones born? Thomas Jones Woodward was born in Pontypridd, South Wales, Great Britain on June 7, 1940
 >>>>>>
 Prediction:
-Led(The 2006 World Champion Pittsburgh Penguins, Sidney Crosby) is True because Sidney Crosby is a Canadian professional ice hockey player. He is the captain of the Pittsburgh Penguins of the National Hockey League (NHL).
-Coach(The 2006 World Champion Pittsburgh Penguins, Michel Therrien) is True because Michel Therrien is a Canadian ice hockey coach and former player. He is the current head coach of the Montreal Canadiens of the National Hockey League (NHL).
-Led(The 2006 World Champion Pittsburgh Penguins, Sidney Crosby) && Coach(The 2006 World Champion Pittsburgh Penguins, Michel Therrien) is True.
+Born(Tom Jones, Pontypridd) is True because Thomas Jones Woodward was born in Pontypridd, South Wales, Great Britain on June 7, 1940
+Nationality(Tom Jones, Welsh) is True because Sir Thomas Jones Woodward OBE is a Welsh singer. 
+Born(Tom Jones, 1940) is True because Thomas Jones Woodward was born in Pontypridd, South Wales, Great Britain on June 7, 1940
+Born(Tom Jones, Pontypridd) && Nationality(Tom Jones, Welsh) && Born(Tom Jones, 1940) is True.
 The claim is [SUPPORTED].
 
 Explanation:
-Sidney Crosby is a Canadian professional ice hockey player. He is the captain of the Pittsburgh Penguins of the National Hockey League (NHL).
-Michel Therrien is a Canadian ice hockey coach and former player. He is the current head coach of the Montreal Canadiens of the National Hockey League (NHL).
+Thomas Jones Woodward was born in Pontypridd, South Wales, Great Britain on June 7, 1940. He is a Welsh singer.
 ------
-Question: Is it true that The 2012 World Champion Pittsburgh Penguins were led by the captain Sidney Crosby and the coach Dan Bylsma.?
+Question:
+Is it true that The singer and songwriter Tom Jones was born in Pontypridd, Wales in 1940.?
 
-Context: 
-Led(The 2012 World Champion Pittsburgh Penguins, Sidney Crosby)
-Coach(The 2012 World Champion Pittsburgh Penguins, Dan Bylsma)
+Context:
+Born(Tom Jones, Pontypridd)
+Nationality(Tom Jones, Welsh)
+Born(Tom Jones, 1940)
 
-Who led the 2012 World Champion Pittsburgh Penguins? Sidney Crosby is a Canadian professional ice hockey player. He is the captain of the Pittsburgh Penguins of the National Hockey League (NHL).
-Who was the coach of the 2012 World Champion Pittsburgh Penguins? Dan Bylsma is an American professional ice hockey coach and former player. He is the current head coach of the Pittsburgh Penguins of the National Hockey League (NHL).
+When was Tom Jones born? Thomas Jones Woodward was born in Pontypridd, South Wales, Great Britain on June 7, 1940
+What is Tome Jones nationality? Sir Thomas Jones Woodward OBE is a Welsh singer. 
+What year was Tom Jones born? Thomas Jones Woodward was born in Pontypridd, South Wales, Great Britain on June 7, 1940
 >>>>>>
 Prediction:
-Led(The 2012 World Champion Pittsburgh Penguins, Sidney Crosby) is True because Sidney Crosby is a Canadian professional ice hockey player. He is the captain of the Pittsburgh Penguins of the National Hockey League (NHL).
-Coach(The 2012 World Champion Pittsburgh Penguins, Dan Bylsma) is True because Dan Bylsma is an American professional ice hockey coach and former player. He is the current head coach of the Pittsburgh Penguins of the National Hockey League (NHL).
-Led(The 2012 World Champion Pittsburgh Penguins, Sidney Crosby) && Coach(The 2012 World Champion Pittsburgh Penguins, Dan Bylsma) is True.
+Born(Tom Jones, Pontypridd) is True because Thomas Jones Woodward was born in Pontypridd, South Wales, Great Britain on June 7, 1940
+Nationality(Tom Jones, Welsh) is True because Sir Thomas Jones Woodward OBE is a Welsh singer. 
+Born(Tom Jones, 1940) is True because Thomas Jones Woodward was born in Pontypridd, South Wales, Great Britain on June 7, 1940
+Born(Tom Jones, Pontypridd) && Nationality(Tom Jones, Welsh) && Born(Tom Jones, 1940) is True.
 The claim is [SUPPORTED].
 
 Explanation:
-Sidney Crosby is a Canadian professional ice hockey player. He is the captain of the Pittsburgh Penguins of the National Hockey League (NHL).
-Dan Bylsma is an American professional ice hockey coach and former player. He is the current head coach of the Pittsburgh Penguins
+Thomas Jones Woodward was born in Pontypridd, South Wales, Great Britain on June 7, 1940. He is a Welsh singer.
+------
+Question:
+Is it true that The singer and songwriter Tom Jones was born in Pontypridd, Wales in 1940.?
+
+Context:
+Born(Tom Jones, Pontypridd)
+Nationality(Tom Jones, Welsh)
+Born(Tom Jones, 1940)
+
+When was Tom Jones born? Thomas Jones Woodward was born in Pontypridd, South Wales, Great Britain on June 7, 1940
+What is Tome Jones nationality? Sir Thomas Jones Woodward OBE is a Welsh singer. 
+What year was Tom Jones born? Thomas Jones Woodward was born in Pontypridd, South Wales, Great Britain on June 7, 1940
+>>>>>>
+Prediction:
+Born(Tom Jones, Pontypridd) is True because Thomas Jones Woodward was born in Pontypridd, South Wales, Great Britain on June 7, 1940
+Nationality(Tom Jones, Welsh) is True because Sir Thomas Jones Woodward OBE is a Welsh singer. 
+Born(Tom Jones, 1940) is True because Thomas Jones Woodward was born in Pontypridd, South Wales, Great Britain on June 7, 1940
+Born(Tom Jones, Pontypridd) && Nationality(Tom Jones, Welsh) && Born(Tom Jones, 1940) is True.
+The claim is [SUPPORTED].
+
+Explanation:
+Thomas Jones Woodward was born in Pontypridd, South Wales, Great Britain on June 7, 1940. He is a Welsh singer.
+------
+Question:
+Is it true that The singer and songwriter Tom Jones was born in Pontypridd, Wales in 1940.?
+
+Context:
+Born(Tom Jones, Pontypridd)
+Nationality(Tom Jones, Welsh)
+Born(Tom Jones, 1940)
+
+When was Tom Jones born? Thomas Jones Woodward was born in Pontypridd, South Wales, Great Britain on June 7, 1940
+What is Tome Jones nationality? Sir Thomas Jones Woodward OBE is a Welsh singer. 
+What year was Tom Jones born? Thomas Jones Woodward was born in Pontypridd, South Wales, Great Britain on June 7, 1940
+>>>>>>
+Prediction:
+Born(Tom Jones, Pontypridd) is True because Thomas Jones Woodward was born in Pontypridd, South Wales, Great Britain on June 7, 1940
+Nationality(Tom Jones, Welsh) is True because Sir Thomas Jones Woodward OBE is a Welsh singer. 
+Born(Tom Jones, 1940) is True because Thomas Jones Woodward was born in Pontypridd, South Wales, Great Britain on June 7, 1940
+Born(Tom Jones, Pontypridd) && Nationality(Tom Jones, Welsh) && Born(Tom Jones, 1940) is True.
+The claim is [SUPPORTED].
+
+Explanation:
+Thomas Jones Woodward was born in Pontypridd, South Wales, Great Britain on June 7, 1940. He is a Welsh singer.
+------
+Question:
+Is it true that The singer and songwriter Tom Jones was born in Pontypridd, Wales in 1940.?
+
+Context:
+Born(Tom Jones, Pontypridd)
+Nationality(Tom Jones, Welsh)
+Born(Tom Jones, 1940)
+
+When was Tom Jones born? Thomas Jones Woodward was born in Pontypridd, South Wales, Great Britain on June 7, 1940
+What is Tome Jones nationality? Sir Thomas Jones Woodward OBE is a Welsh singer. 
+What year was Tom Jones born? Thomas Jones Woodward was born in Pontypridd, South Wales, Great Britain on June 7, 1940
+>>>>>>
+Prediction:
+Born(Tom Jones, Pontypridd) is True because Thomas Jones Woodward was born in Pontypridd, South Wales, Great Britain on June 7, 1940
+Nationality(Tom Jones, Welsh) is True because Sir Thomas Jones Woodward OBE is a Welsh singer. 
+Born(Tom Jones, 1940) is True because Thomas Jones Woodward was born in Pontypridd, South Wales, Great Britain on June 7, 1940
+Born(Tom Jones, Pontypridd) && Nationality(Tom Jones, Welsh) && Born(Tom Jones, 1940) is True.
+The claim is [SUPPORTED].
+
+Explanation:
+Thomas Jones Woodward was born in Pontypridd, South Wales, Great Britain on June 7, 1940. He is a Welsh singer.
+------
+Question:
+Is it true that The singer and songwriter Tom Jones was born in Pontypridd, Wales in 1940.?
+
+Context:
+Born(Tom Jones, Pontypridd)
+Nationality(Tom Jones, Welsh)
+Born(Tom Jones, 1940)
+
+When was Tom Jones born? Thomas Jones Woodward was born in Pontypridd, South Wales, Great Britain on June 7, 1940
+What is Tome Jones nationality? Sir Thomas Jones Woodward OBE is a Welsh singer. 
+What year was Tom Jones born? Thomas Jones Woodward was born in Pontypridd, South Wales, Great Britain on June 7, 1940
+>>>>>>
+Prediction:
+Born(Tom Jones, Pontypridd) is True because Thomas Jones Woodward was born in Pontypridd, South Wales, Great Britain on June 7, 1940
+Nationality(Tom Jones, Welsh) is True because Sir Thomas Jones Woodward OBE is a Welsh singer. 
+
 
 >>>>>>
 Prediction:
@@ -1092,76 +1774,165 @@ Deficiency(Autophagy, in the liver) && Protects(Autophagy deficiency in the live
 The claim is [SUPPORTED].
 
 Explanation:
-Deficiency of autophagy in the liver leads to protection from insulin resistance by inducing Fgf21 as a mitokine.
+Autophagy deficiency in the liver can lead to inflammation and fibrosis, which can contribute to the progression of simple steatosis to NASH and cirrhosis. 
+On the other hand, autophagy deficiency can also lead to protection from obesity and insulin resistance by inducing Fgf21 as a mitokine. 
+Therefore, it is possible that autophagy deficiency in the liver can protect from insulin resistance in some cases, but not in others.
 ------
 Question:
-Is it true that The singer of the song "Ain't No Sunshine" Bill Withers was born in 1938.?
+Is it true that The 2019 film Ad Astra was directed by James Gray and produced by Brad Pitt.?
 
-Context: 
-Born(Bill Withers, 1938)
-Singer(Bill Withers, the song "Ain't No Sunshine")
+Context:
+Directed(Ad Astra, James Gray) ::: Verify that the film Ad Astra was directed by James Gray
+Produced(Ad Astra, Brad Pitt) ::: Verify that the film Ad Astra was produced by Brad Pitt
 
-When was Bill Withers born? Bill Withers was born in 1938.
-Who is the singer of the song "Ain't No Sunshine"? Bill Withers is the singer of the song "Ain't No Sunshine".
+Who directed the 2019 film Ad Astra? James Gray directed the film Ad Astra.
+Who produced the 2019 film Ad Astra? Brad Pitt produced the 2019 film Ad Astra.
 >>>>>>
 Prediction:
-Born(Bill Withers, 1938) is True because Bill Withers was born in 1938.
-Singer(Bill Withers, the song "Ain't No Sunshine") is True because Bill Withers is the singer of the song "Ain't No Sunshine".
-Born(Bill Withers, 1938) && Singer(Bill Withers, the song "Ain't No Sunshine") is True.
+Directed(Ad Astra, James Gray) is True because James Gray directed the film Ad Astra.
+Produced(Ad Astra, Brad Pitt) is True because Brad Pitt produced the 2019 film Ad Astra.
+Directed(Ad Astra, James Gray) && Produced(Ad Astra, Brad Pitt) is True.
 The claim is [SUPPORTED].
 
 Explanation:
-Bill Withers was born in 1938 and is the singer of the song "Ain't No Sunshine".
+The 2019 film Ad Astra was directed by James Gray and produced by Brad Pitt.
 ------
 Question:
-Is it true that The singer of the song "Ain't No Sunshine" Bill Withers was born in 1938.?
+Is it true that The 2021 film The Last Duel was directed by Ridley Scott and produced by Matt Damon.?
 
-Context: 
-Born(Bill Withers, 1938)
-Singer(Bill Withers, the song "Ain't No Sunshine")
+Context:
+Directed(The Last Duel, Ridley Scott) ::: Verify that the film The Last Duel was directed by Ridley Scott
+Produced(The Last Duel, Matt Damon) ::: Verify that the film The Last Duel was produced by Matt Damon
 
-When was Bill Withers born? Bill Withers was born in 1938.
-Who is the singer of the song "Ain't No Sunshine"? Bill Withers is the singer of the song "Ain't No Sunshine".
+Who directed the 2021 film The Last Duel? Ridley Scott directed the 2021 film The Last Duel.
+Who produced the 2021 film The Last Duel? Matt Damon produced the 2021 film The Last Duel.
 >>>>>>
 Prediction:
-Born(Bill Withers, 1938) is True because Bill Withers was born in 1938.
-Singer(Bill Withers, the song "Ain't No Sunshine") is True because Bill Withers is the singer of the song "Ain't No Sunshine".
-Born(Bill Withers, 1938) && Singer(Bill Withers, the song "Ain't No Sunshine") is True.
+Directed(The Last Duel, Ridley Scott) is True because Ridley Scott directed the 2021 film The Last Duel.
+Produced(The Last Duel, Matt Damon) is True because Matt Damon produced the 2021 film The Last Duel.
+Directed(The Last Duel, Ridley Scott) && Produced(The Last Duel, Matt Damon) is True.
 The claim is [SUPPORTED].
 
 Explanation:
-Bill Withers was born in 1938 and is the singer of the song "Ain't No Sunshine".
+The 2021 film The Last Duel was directed by Ridley Scott and produced by Matt Damon.
 ------
 Question:
-Is it true that The singer of the song "Ain't No Sunshine" Bill Withers was born in 1938.?
+Is it true that The 2019 film Ad Astra was directed by James Gray and produced by Brad Pitt.?
 
-Context: 
-Born(Bill Withers, 1938)
-Singer(Bill Withers, the song "Ain't No Sunshine")
+Context:
+Directed(Ad Astra, James Gray) ::: Verify that the film Ad Astra was directed by James Gray
+Produced(Ad Astra, Brad Pitt) ::: Verify that the film Ad Astra was produced by Brad Pitt
 
-When was Bill Withers born? Bill Withers was born in 1938.
-Who is the singer of the song "Ain't No Sunshine"? Bill Withers is the singer of the song "Ain't No Sunshine".
+Who directed the 2019 film Ad Astra? James Gray directed the film Ad Astra.
+Who produced the 2019 film Ad Astra? Brad Pitt produced the 2019 film Ad Astra.
 >>>>>>
 Prediction:
-Born(Bill Withers, 1938) is True because Bill Withers was born in 1938.
-Singer(Bill Withers, the song "Ain't No Sunshine") is True because Bill Withers is the singer of the song "Ain't No Sunshine".
-Born(Bill Withers, 1938) && Singer(Bill Withers, the song "Ain't No Sunshine") is True.
+Directed(Ad Astra, James Gray) is True because James Gray directed the film Ad Astra.
+Produced(Ad Astra, Brad Pitt) is True because Brad Pitt produced the 2019 film Ad Astra.
+Directed(Ad Astra, James Gray) && Produced(Ad Astra, Brad Pitt) is True.
 The claim is [SUPPORTED].
 
 Explanation:
-Bill Withers was born in 1938 and is the singer of the song "Ain't No Sunshine".
+The 2019 film Ad Astra was directed by James Gray and produced by Brad Pitt.
 ------
 Question:
-Is it true that The singer of the song "Ain't No Sunshine" Bill Withers was born in 1938.?
+Is it true that The 2021 film The Last Duel was directed by Ridley Scott and produced by Matt Damon.?
 
-Context: 
-Born(Bill Withers, 1938)
-Singer(Bill Withers, the song "Ain't No Sunshine")
+Context:
+Directed(The Last Duel, Ridley Scott) ::: Verify that the film The Last Duel was directed by Ridley Scott
+Produced(The Last Duel, Matt Damon) ::: Verify that the film The Last Duel was produced by Matt Damon
 
-When was Bill Withers born? Bill Withers was born in 1938.
-Who is the singer of the song "Ain't No Sunshine"? Bill Withers is the singer of the song "Ain't No Sunshine".
+Who directed the 2021 film The Last Duel? Ridley Scott directed the 2021 film The Last Duel.
+Who produced the 2021 film The Last Duel? Matt Damon produced the 2021 film The Last Duel.
 >>>>>>
 Prediction:
-Born(Bill Withers, 1938) is True because Bill Withers was born in 1938.
-Singer(Bill Withers, the song "Ain't No Sunshine
+Directed(The Last Duel, Ridley Scott) is True because Ridley Scott directed the 2021 film The Last Duel.
+Produced(The Last Duel, Matt Damon) is True because Matt Damon produced the 2021 film The Last Duel.
+Directed(The Last Duel, Ridley Scott) && Produced(The Last Duel, Matt Damon) is True.
+The claim is [SUPPORTED].
+
+Explanation:
+The 2021 film The Last Duel was directed by Ridley Scott and produced by Matt Damon.
+------
+Question:
+Is it true that The 2021 film The Last Duel was directed by Ridley Scott and produced by Matt Damon.?
+
+Context:
+Directed(The Last Duel, Ridley Scott) ::: Verify that the film The Last Duel was directed by Ridley Scott
+Produced(The Last Duel, Matt Damon) ::: Verify that the film The Last Duel was produced by Matt Damon
+
+Who directed the 2021 film The Last Duel? Ridley Scott directed the 2021 film The Last Duel.
+Who produced the 2021 film The Last Duel? Matt Damon produced the 2021 film The Last Duel.
+>>>>>>
+Prediction:
+Directed(The Last Duel, Ridley Scott) is True because Ridley Scott directed the 2021 film The Last Duel.
+Produced(The Last Duel, Matt Damon) is True because Matt Damon produced the 2021 film The Last Duel.
+Directed(The Last Duel, Ridley Scott) && Produced(The Last Duel, Matt Damon) is True.
+The claim is [SUPPORTED].
+
+Explanation:
+The 2021 film The Last Duel was directed by Ridley Scott and produced by Matt Damon.
+------
+Question:
+Is it true that The 2019 film Ad Astra was directed by James Gray and produced by Brad Pitt.?
+
+Context:
+Directed(Ad Astra, James Gray) ::: Verify that the film Ad Astra was directed by James Gray
+Produced(Ad Astra, Brad Pitt) ::: Verify that the film Ad Astra was produced by Brad Pitt
+
+Who directed the 2019 film Ad Astra? James Gray directed the film Ad Astra.
+Who produced the 2019 film Ad Astra? Brad Pitt produced the 2019 film Ad Astra.
+>>>>>>
+Prediction:
+Directed(Ad Astra, James Gray) is True because James Gray directed the film Ad Astra.
+Produced(Ad Astra, Brad Pitt) is True because Brad Pitt produced the 2019 film Ad Astra.
+Directed(Ad Astra, James Gray) && Produced(Ad Astra, Brad Pitt) is True.
+The claim is [SUPPORTED].
+
+Explanation:
+The 2019 film Ad Astra was directed by James Gray and produced by Brad Pitt.
+------
+Question:
+Is it true that The 2021 film The Last Duel was directed by Ridley Scott and produced by Matt Damon.?
+
+Context:
+Directed(The Last Duel, Ridley Scott) ::: Verify that the film The Last Duel was directed by Ridley Scott
+Produced(The Last Duel, Matt Damon) ::: Verify that the film The Last Duel was produced by Matt Damon
+
+Who directed the 2021 film The Last Duel? Ridley Scott directed the 2021 film The Last Duel.
+Who produced the 2021 film The Last Duel? Matt Damon produced the 2021 film The Last Duel.
+>>>>>>
+Prediction:
+Directed(The Last Duel, Ridley Scott) is True because Ridley Scott directed the 2021 film The Last Duel.
+Produced(The Last Duel, Matt Damon) is True because Matt Damon produced the 2021 film The Last Duel.
+Directed(The Last Duel, Ridley Scott) && Produced(The Last Duel, Matt Damon) is True.
+The claim is [SUPPORTED].
+
+Explanation:
+The 2021 film The Last Duel was directed by Ridley Scott and produced by Matt Damon.
+------
+Question:
+Is it true that The 2021 film The Last Duel was directed by Ridley Scott and produced by Matt Damon.?
+
+Context:
+Directed(The Last Duel, Ridley Scott) ::: Verify that the film The Last Duel was directed by Ridley Scott
+Produced(The Last Duel, Matt Damon) ::: Verify that the film The Last Duel was produced by Matt Damon
+
+Who directed the 2021 film The Last Duel? Ridley Scott directed the 2021 film The Last Duel.
+Who produced the 2021 film The Last Duel? Matt Damon produced the 2021 film The Last Duel.
+>>>>>>
+Prediction:
+Directed(The Last Duel, Ridley Scott) is True because Ridley Scott directed the 2021 film The Last Duel.
+Produced(The Last Duel, Matt Damon) is True because Matt Damon produced the 2021 film The Last Duel.
+Directed(The Last Duel, Ridley Scott) && Produced(The Last Duel, Matt Damon) is True.
+The claim is [SUPPORTED].
+
+Explanation:
+The 2021 film The Last Duel was directed by Ridley Scott and produced by Matt Damon.
+------
+Question:
+Is it true that The 2019 film Ad Astra was directed by James Gray and produced by Brad Pitt.?
+
+Context:
+Directed(Ad Astra, James Gray) ::: Verify
 Finished aggregate using LLM!

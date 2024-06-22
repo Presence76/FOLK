@@ -94,6 +94,7 @@ def query_multiple(id_list, claim_list, label_list, context_list, full_prompt_li
             input = tokenizer(full_prompt, return_tensors="pt")
             input = input.to("cuda")
             input_ids = input.input_ids
+            print("uid")
             generation_output = model.generate(
                 input_ids=input_ids, max_new_tokens=args.max_token
             )
@@ -103,7 +104,7 @@ def query_multiple(id_list, claim_list, label_list, context_list, full_prompt_li
             
             response = output.split(context, 1)[-1]
             
-            print(response)
+            
         if args.model == "text-davinci":
             try:
                 completion = openai.Completion.create(

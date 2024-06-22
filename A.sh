@@ -15,5 +15,5 @@ python aggregate.py \
     --prompt_strategy "logic" \
     --model "llama-30b" \
     --version "Test_o" \
-    --max_token 1024 \
+    --max_token 2048 \
 
