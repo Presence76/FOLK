@@ -25,7 +25,7 @@ if args.model == "llama-13b":
         model_path, torch_dtype=torch.float16, device_map=args.device_map
     )
 if args.model == "llama-30b":
-    model_path = "meta-llama/Meta-Llama-3-8B-Instruct"
+    model_path = "meta-llama/Meta-Llama-3-8B"
     tokenizer = AutoTokenizer.from_pretrained(model_path)
     model = AutoModelForCausalLM.from_pretrained(
         model_path, device_map=args.device_map,torch_dtype=torch.float16
